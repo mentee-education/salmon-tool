@@ -10,8 +10,6 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
-const LOGO_ICON = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-logo-icon-a6Jv7dqXGFnfKyCGL3U3ym.webp";
-
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/journey", label: "The Journey" },
@@ -49,12 +47,6 @@ export default function Navbar() {
         {/* Logo — salmon icon + SALMON wordmark only */}
         <Link href="/">
           <div className="flex items-center gap-2.5 group transition-opacity hover:opacity-80">
-            <img
-              src={LOGO_ICON}
-              alt="SALMON"
-              className="h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-110"
-              style={{ filter: "drop-shadow(0 1px 3px oklch(0 0 0 / 0.3))" }}
-            />
             <span
               className="font-bold tracking-[0.18em] uppercase"
               style={{

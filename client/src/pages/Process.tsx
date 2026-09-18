@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/hero-river-jFiqYKQ7yNUPWb7kGDuMDK.webp";
+const HERO_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/hero-river.png";
 
 const steps = [
   {

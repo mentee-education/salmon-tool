@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const EGGS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-eggs-Y5M8FTGjXfSYVoyXr6NKox.webp";
-const FRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-fry-josjaC4G3a7qr4fD4ohHXY.webp";
-const SMOLT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-smolt-8M9yDX5qxFNg6LxcXjs8T3.webp";
-const ADULT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-adult-cm8pCGfrM3BKqAAoM5U54v.webp";
+const EGGS_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-eggs.png";
+const FRY_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-fry.png";
+const SMOLT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-smolt.png";
+const ADULT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-adult.png";
 
 const stages = [
   {

@@ -8,12 +8,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/hero-river-jFiqYKQ7yNUPWb7kGDuMDK.webp";
-const ARTWORK_IMG = "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663407421710/PvLfDDrvffoPzNek.jpg?Expires=1804740986&Signature=iFm70bbGoflzmMmwWzajF5iFYpFAii3OBexRO5rLNUliIZaa3Faua28dofyXnHapaXwz0bksq-oUvzMkmwOIBhBWZY9hvj4N0x4XkjWkChpxXEklSx5U7EHxqxEMi76baFi-RxHUQVD-0lZvbbBrzDVnAqekurCDJtQYHfnGKggagtUNdnNeOiarYyUNgBHdyhUppuDq8HynJuAspTpB6yt5uCPbUxVwEqkEPWCwH4iwgytKABVZIlnj-XkcQWiZpIpNBkO0CZA~k2XxDOcMgfkAkRSuvRUnfaMcxuCKkbegyAfIJ6cCG9OV4PQeGAmPRjSyhHtSqIETFzXFQsFPXw__&Key-Pair-Id=K2HSFNDJXOU9YS";
-const EGGS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-eggs-Y5M8FTGjXfSYVoyXr6NKox.webp";
-const FRY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-fry-josjaC4G3a7qr4fD4ohHXY.webp";
-const SMOLT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-smolt-8M9yDX5qxFNg6LxcXjs8T3.webp";
-const ADULT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/BfzmonpCNfX6LhoqyeJUGD/salmon-adult-cm8pCGfrM3BKqAAoM5U54v.webp";
+const HERO_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/hero-river.png";
+const ARTWORK_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-circle.png";
+const EGGS_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-eggs.png";
+const FRY_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-fry.png";
+const SMOLT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-smolt.png";
+const ADULT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-adult.png";
 
 const stages = [
   {
@@ -234,7 +234,7 @@ export default function Home() {
               >
                 <img
                   src={ARTWORK_IMG}
-                  alt="Indigenous formline salmon artwork"
+                  alt="Sockeye salmon swimming together during the spawning run"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
