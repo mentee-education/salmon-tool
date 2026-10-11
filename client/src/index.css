@@ -99,47 +99,6 @@
   --divider:                oklch(0.72 0.07 70 / 0.6);  /* tan divider */
 }
 
-/* ─── DARK THEME — Deep Crimson Night ─────────────────────────────── */
-.dark {
-  --background:             oklch(0.18 0.05 15);   /* very dark crimson-tinted */
-  --foreground:             oklch(0.94 0.02 80);   /* cream text */
-  --card:                   oklch(0.24 0.06 15);
-  --card-foreground:        oklch(0.94 0.02 80);
-  --popover:                oklch(0.24 0.06 15);
-  --popover-foreground:     oklch(0.94 0.02 80);
-  --primary:                oklch(0.50 0.15 15);   /* lighter crimson for dark bg */
-  --primary-foreground:     oklch(0.98 0 0);
-  --secondary:              oklch(0.28 0.06 15);
-  --secondary-foreground:   oklch(0.94 0.02 80);
-  --muted:                  oklch(0.30 0.06 15);
-  --muted-foreground:       oklch(0.70 0.03 80);
-  --accent:                 oklch(0.50 0.15 15);
-  --accent-foreground:      oklch(0.98 0 0);
-  --destructive:            oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border:                 oklch(1 0 0 / 0.1);
-  --input:                  oklch(1 0 0 / 0.12);
-  --ring:                   oklch(0.50 0.15 15);
-
-  --section-alt:            oklch(0.22 0.06 15);
-  --section-main:           oklch(0.18 0.05 15);
-  --section-dark:           oklch(0.14 0.05 15);
-  --nav-bg-scrolled:        oklch(0.14 0.05 15 / 0.97);
-  --nav-bg-top:             oklch(0.14 0.05 15 / 0.72);
-  --hero-overlay-start:     oklch(0.14 0.05 15 / 0.45);
-  --hero-overlay-end:       oklch(0.14 0.05 15 / 0.82);
-  --card-bg:                oklch(0.24 0.06 15);
-  --card-border:            oklch(0.50 0.15 15 / 0.3);
-  --text-body:              oklch(0.78 0.03 80);
-  --text-heading:           oklch(0.94 0.02 80);
-  --text-muted:             oklch(0.62 0.03 80);
-  --text-on-crimson:        oklch(0.98 0 0);
-  --divider:                oklch(0.50 0.15 15 / 0.4);
-  --tan:                    oklch(0.72 0.07 70);
-  --crimson:                oklch(0.50 0.15 15);
-  --crimson-mid:            oklch(0.55 0.15 15);
-  --cream:                  oklch(0.94 0.02 80);
-}
 
 @layer base {
   * {

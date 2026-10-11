@@ -7,8 +7,7 @@
  */
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -20,7 +19,6 @@ export default function Navbar() {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -29,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   const crimson = "var(--crimson-mid)";
-  const navTextColor = "var(--crimson-mid)"; // always crimson — visible on both light and dark
+  const navTextColor = scrolled ? "var(--crimson-mid)" : "oklch(0.95 0.015 80)"; // cream over the dark top bar, crimson once scrolled onto light
   const navActiveWeight = "600";
 
   return (
@@ -52,7 +50,7 @@ export default function Navbar() {
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "1.25rem",
-                color: crimson,
+                color: navTextColor,
                 letterSpacing: "0.18em",
                 lineHeight: 1,
               }}
@@ -88,20 +86,6 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200 hover:scale-110"
-            style={{
-              background: "oklch(from var(--crimson-mid) l c h / 0.12)",
-              border: "1px solid oklch(from var(--crimson-mid) l c h / 0.35)",
-              color: crimson,
-            }}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-          </button>
-
           <a
             href="/SALMON-Tool.pdf"
             target="_blank"
@@ -121,18 +105,6 @@ export default function Navbar() {
 
         {/* Mobile: theme toggle + hamburger */}
         <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="flex items-center justify-center w-8 h-8 rounded-full"
-            style={{
-              background: "oklch(from var(--crimson-mid) l c h / 0.12)",
-              border: "1px solid oklch(from var(--crimson-mid) l c h / 0.35)",
-              color: crimson,
-            }}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-          </button>
           <button
             className="p-2"
             onClick={() => setMenuOpen(!menuOpen)}
