@@ -23,21 +23,21 @@ const films = [
   {
     id: "EP5b48Weyrc",
     title: "Seabird Island Community School",
-    credit: "Film by Jason Bruce",
+    credit: "Produced by Jason Bruce",
     note: "The school where SALMON was created — classrooms, land, and language in one place.",
     featured: true,
   },
   {
     id: "H3yrPfDtOWQ",
     title: "FOR OUR CULTURE",
-    credit: "N'we Jinan Artists, recorded at Seabird Island Community School",
+    credit: "N'we Jinan Artists · recorded at Seabird Island Community School",
     note: "Students wrote and performed this anthem about carrying their culture forward.",
     featured: false,
   },
   {
     id: "GezZfWg4Irc",
     title: "A:yelexw Center for Hope and Healing",
-    credit: "Film by Jason Bruce",
+    credit: "Produced by Jason Bruce",
     note: "Healing and nurturing are community work — the same values SALMON brings to evaluation.",
     featured: false,
   },
@@ -128,7 +128,7 @@ function thumbMax(id: string) {
 function FilmCard({ film, large }: { film: (typeof films)[number]; large?: boolean }) {
   const [playing, setPlaying] = useState(false);
   return (
-    <figure className="m-0" style={{ border: "1px solid var(--card-border)", background: "var(--card-bg)" }}>
+    <figure className="m-0 h-full flex flex-col" style={{ border: "1px solid var(--card-border)", background: "var(--card-bg)" }}>
       <div className="relative aspect-video overflow-hidden">
         {playing ? (
           <iframe
@@ -172,7 +172,7 @@ function FilmCard({ film, large }: { film: (typeof films)[number]; large?: boole
           </button>
         )}
       </div>
-      <figcaption className="px-5 py-4">
+      <figcaption className="px-5 py-4 flex-1">
         <div
           className={large ? "text-xl mb-1" : "text-base mb-1"}
           style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "var(--text-heading)" }}
@@ -308,13 +308,12 @@ export default function Home() {
             src={thumbMax("EP5b48Weyrc")}
             alt=""
             className="w-full h-full object-cover"
-            style={{ opacity: 0.45 }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(100deg, oklch(0.20 0.09 15 / 0.96) 0%, oklch(0.20 0.09 15 / 0.82) 45%, oklch(0.20 0.09 15 / 0.35) 100%)",
+                "linear-gradient(95deg, oklch(0.18 0.09 15 / 0.96) 0%, oklch(0.18 0.09 15 / 0.86) 38%, oklch(0.18 0.09 15 / 0.30) 72%, oklch(0.18 0.09 15 / 0.12) 100%), linear-gradient(to top, oklch(0.16 0.08 15 / 0.85) 0%, transparent 30%)",
             }}
           />
         </div>
@@ -410,13 +409,36 @@ export default function Home() {
               className="mt-10 text-xs"
               style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.75 0.03 80)", letterSpacing: "0.04em" }}
             >
-              Seabird Island Band territory, Fraser Valley, British Columbia
+              Seabird Island Band territory, Fraser Valley, British Columbia · Self-reliance · Generosity · Honesty · Respect
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <ChevronDown size={20} style={{ color: "oklch(0.97 0.01 80 / 0.5)" }} />
+        {/* Acronym strip anchored to the hero floor */}
+        <div
+          className="relative z-10"
+          style={{ background: "oklch(0.15 0.07 15 / 0.88)", backdropFilter: "blur(6px)", borderTop: "1px solid oklch(0.97 0.01 80 / 0.14)" }}
+        >
+          <div className="container">
+            <div className="grid grid-cols-3 sm:grid-cols-6">
+              {acronym.map((item, i) => (
+                <div key={i} className="flex items-baseline justify-center gap-2 py-4 px-2">
+                  <span
+                    className="text-2xl leading-none"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "oklch(0.75 0.11 40)" }}
+                  >
+                    {item.letter}
+                  </span>
+                  <span
+                    className="text-[11px] leading-tight"
+                    style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.88 0.02 80)", letterSpacing: "0.05em" }}
+                  >
+                    {item.word}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -452,53 +474,6 @@ export default function Home() {
       )}
 
       <div ref={revealRef}>
-        {/* ── ACRONYM BREAKDOWN ── */}
-        <section className="py-16" style={{ background: "var(--section-alt)" }}>
-          <div className="container">
-            <div className="reveal mb-10">
-              <div
-                className="text-xs uppercase tracking-widest mb-3"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
-              >
-                The Framework
-              </div>
-              <h2
-                className="leading-tight"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                  fontWeight: 400,
-                  color: "var(--text-heading)",
-                }}
-              >
-                What does <em style={{ color: "var(--crimson-mid)" }}>SALMON</em> stand for?
-              </h2>
-            </div>
-
-            <div className="reveal grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px" style={{ background: "oklch(from var(--crimson-mid) l c h / 0.12)" }}>
-              {acronym.map((item, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center text-center py-6 px-3 gap-2"
-                  style={{ background: "var(--card-bg)", transitionDelay: `${i * 60}ms` }}
-                >
-                  <span
-                    className="text-4xl leading-none"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, color: "var(--crimson-mid)" }}
-                  >
-                    {item.letter}
-                  </span>
-                  <span
-                    className="text-xs leading-snug font-medium"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)", letterSpacing: "0.03em" }}
-                  >
-                    {item.word}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ── FOUR STAGES — stage cards ── */}
         <section className="py-24" style={{ background: "var(--section-main)" }}>
@@ -615,6 +590,74 @@ export default function Home() {
           </div>
         </section>
 
+
+        {/* ── WHAT SALMON ASSESSES — the tool's real key areas ── */}
+        <section className="py-24" style={{ background: "var(--section-alt)" }}>
+          <div className="container">
+            <div className="reveal mb-12">
+              <div
+                className="text-xs uppercase tracking-widest mb-4"
+                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+              >
+                Key Areas
+              </div>
+              <h2
+                className="leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 400, color: "var(--text-heading)" }}
+              >
+                What the tool assesses
+              </h2>
+              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+                Four areas, drawn from what the community said matters. Accountability runs both
+                ways: the last area is teachers evaluating their administrators.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {[
+                {
+                  t: "Cultural Integration, Family Collaboration & Community Engagement",
+                  items: ["Stó:lō cultural responsiveness & Halq'eméylem", "Communication & collaboration with families", "Community participation & engagement"],
+                },
+                {
+                  t: "Instructional Design, Classroom Management & Holistic Assessment",
+                  items: ["Curriculum planning, pacing & learning objectives", "Classroom management", "Holistic student assessment"],
+                },
+                {
+                  t: "Collaborative Growth & Leadership Development",
+                  items: ["Professional development plan", "Collaborative leadership", "Educator self-care routine"],
+                },
+                {
+                  t: "Educator Evaluation of Administrators",
+                  items: ["Facilitation of the evaluation process", "Transparency & professional growth", "Continuous dialogue in both directions"],
+                  flag: "Reciprocal by design",
+                },
+              ].map((area, i) => (
+                <div key={i} className="reveal p-7" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)", transitionDelay: `${i * 90}ms` }}>
+                  {area.flag && (
+                    <div
+                      className="inline-block text-[11px] uppercase tracking-widest mb-3 px-2.5 py-1"
+                      style={{ fontFamily: "'DM Sans', sans-serif", background: "oklch(from var(--crimson-mid) l c h / 0.12)", color: "var(--crimson-mid)", letterSpacing: "0.12em" }}
+                    >
+                      {area.flag}
+                    </div>
+                  )}
+                  <h3 className="text-xl mb-4 leading-snug" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "var(--text-heading)" }}>
+                    {area.t}
+                  </h3>
+                  <ul className="m-0 p-0 flex flex-col gap-2" style={{ listStyle: "none" }}>
+                    {area.items.map((it, j) => (
+                      <li key={j} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+                        <span className="mt-[7px] shrink-0" style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--crimson-mid)" }} />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── INSIDE THE TOOL — the real printed booklet ── */}
         <section id="inside-the-tool" className="py-24" style={{ background: "oklch(0.22 0.09 15)" }}>
           <div className="container">
@@ -724,7 +767,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {films.slice(1).map((f) => (
-                <div key={f.id} className="reveal">
+                <div key={f.id} className="reveal h-full">
                   <FilmCard film={f} />
                 </div>
               ))}
