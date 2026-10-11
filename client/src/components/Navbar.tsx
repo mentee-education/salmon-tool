@@ -13,6 +13,8 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/journey", label: "The Journey" },
   { href: "/process", label: "Our Process" },
+  { href: "/tool", label: "Read the Tool" },
+  { href: "/reflect", label: "Reflect" },
 ];
 
 export default function Navbar() {
@@ -99,7 +101,7 @@ export default function Navbar() {
               letterSpacing: "0.05em",
             }}
           >
-            View the Tool
+            Download PDF
           </a>
         </nav>
 
@@ -152,7 +154,7 @@ export default function Navbar() {
             }}
             onClick={() => setMenuOpen(false)}
           >
-            View the Tool
+            Download PDF
           </a>
         </div>
       )}

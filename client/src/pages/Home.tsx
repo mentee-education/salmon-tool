@@ -41,6 +41,13 @@ const films = [
     note: "Healing and nurturing are community work — the same values SALMON brings to evaluation.",
     featured: false,
   },
+  {
+    id: "2msHfey-8u0",
+    title: "Yummo Comes Home",
+    credit: "Outreach Canada",
+    note: "A short film about the Elder whose presence shaped daily life in the community.",
+    featured: false,
+  },
 ];
 
 const stages = [
@@ -303,7 +310,7 @@ export default function Home() {
       {/* ── HERO — cinematic lower-third over the school film ── */}
       <section className="relative overflow-hidden" style={{ background: "oklch(0.13 0.012 260)" }}>
         <div className="absolute inset-0">
-          <img src={thumbMax("EP5b48Weyrc")} alt="" className="w-full h-full object-cover" />
+          <img src="/hero.jpg" alt="" className="w-full h-full object-cover" />
           <div
             className="absolute inset-0"
             style={{
@@ -714,7 +721,7 @@ export default function Home() {
             <div className="reveal mb-6">
               <FilmCard film={films[0]} large />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {films.slice(1).map((f) => (
                 <div key={f.id} className="reveal h-full">
                   <FilmCard film={f} />

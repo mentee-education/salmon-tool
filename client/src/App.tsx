@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Journey from "./pages/Journey";
 import Process from "./pages/Process";
 import NotFound from "./pages/NotFound";
+import ReadTool from "./pages/ReadTool";
+import Reflect from "./pages/Reflect";
 
 function Router() {
   return (
@@ -14,6 +16,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/journey" component={Journey} />
       <Route path="/process" component={Process} />
+      <Route path="/tool" component={ReadTool} />
+      <Route path="/reflect" component={Reflect} />
       <Route component={NotFound} />
     </Switch>
   );
