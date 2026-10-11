@@ -1,126 +1,86 @@
 /*
- * Footer — Deep Water & Copper design (theme-aware)
- * Minimal footer with crimson rule, site links, and attribution
+ * Footer — Mentee house footer (matches mentee.ca Footer.tsx treatment):
+ * deep-blue gradient, white logo + tagline, frosted cards, dark bottom bar.
  */
-import { Link } from "wouter";
+const LOGO_WHITE = "https://pub-4a448707138147b3a6495c5a77cebd57.r2.dev/site/logoWhite.svg";
 
 export default function Footer() {
   return (
-    <footer
-      className="mt-auto pt-16 pb-10"
-      style={{
-        background: "var(--section-alt)",
-        borderTop: "1px solid oklch(from var(--crimson-mid) l c h / 0.2)",
-      }}
-    >
-      <div className="container">
-        <div className="crimson-rule mb-12" />
+    <footer className="relative overflow-hidden text-white" style={{ background: "#013F6C" }}>
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 12% 18%, rgba(255,255,255,0.16), transparent 30%), linear-gradient(135deg, #013F6C 0%, #0A5F97 55%, #4596D1 135%)",
+        }}
+      />
+      <div className="absolute inset-x-0 top-0 h-px bg-white/20" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-          {/* Brand */}
-          <div>
-            <div
-              className="text-2xl mb-3 italic"
-              style={{ fontFamily: "'Archivo', sans-serif", color: "var(--crimson-mid)", fontWeight: 800 }}
-            >
-              SALMON
-            </div>
-            <p
-              className="text-sm leading-relaxed mb-1"
-              style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
-            >
-              Seabird Assessment for Learning,<br />Mentorship &amp; Ongoing Nurturing
-            </p>
-            <p
-              className="text-xs mt-3"
-              style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
-            >
-              Developed in collaboration with the<br />Stó:lō Education Committee
+      <div className="relative container py-12 sm:py-16">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.7fr_0.7fr] lg:items-start">
+          <div className="max-w-md">
+            <img src={LOGO_WHITE} alt="Mentee" className="h-8 sm:h-9 w-auto mb-4" />
+            <p className="text-white/80 text-sm leading-7" style={{ fontFamily: "'Inter', sans-serif" }}>
+              The SALMON Tool is a Mentee project — created with the Stó:lō Education Committee
+              at Seabird Island Community School. Mentee partners with communities, organizations,
+              and institutions to co-design resources, digital tools, and storytelling projects.
             </p>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <div
-              className="text-xs uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
-            >
-              Navigate
-            </div>
-            <nav className="flex flex-col gap-2">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/journey", label: "The Journey" },
-                { href: "/process", label: "Our Process" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <span
-                    className="text-sm hover:opacity-80 transition-opacity"
-                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
-                  >
-                    {link.label}
-                  </span>
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <nav
+            className="rounded-2xl border border-white/15 bg-white/[0.08] p-5 backdrop-blur-sm"
+            style={{ boxShadow: "0 14px 34px rgba(0,0,0,0.16)" }}
+            aria-label="Explore SALMON"
+          >
+            <h4 className="font-bold text-xs mb-3 uppercase" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.16em" }}>
+              The SALMON Tool
+            </h4>
+            <ul className="space-y-2.5 m-0 p-0" style={{ listStyle: "none", fontFamily: "'Inter', sans-serif" }}>
+              <li><a href="/journey" className="text-white/80 hover:text-white text-sm transition-colors duration-200">The Journey</a></li>
+              <li><a href="/process" className="text-white/80 hover:text-white text-sm transition-colors duration-200">Our Process</a></li>
+              <li><a href="/SALMON-Tool.pdf" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white text-sm transition-colors duration-200">Download the tool (PDF)</a></li>
+            </ul>
+          </nav>
 
-          {/* Resources */}
-          <div>
-            <div
-              className="text-xs uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
-            >
-              Resources
+          <nav
+            className="rounded-2xl border border-white/15 bg-white/[0.08] p-5 backdrop-blur-sm"
+            style={{ boxShadow: "0 14px 34px rgba(0,0,0,0.16)" }}
+            aria-label="Legal links"
+          >
+            <h4 className="font-bold text-xs mb-3 uppercase" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.16em" }}>
+              Legal
+            </h4>
+            <ul className="space-y-2.5 m-0 p-0" style={{ listStyle: "none", fontFamily: "'Inter', sans-serif" }}>
+              <li><a href="https://www.mentee.ca/privacy-policy" className="text-white/80 hover:text-white text-sm transition-colors duration-200">Privacy Policy</a></li>
+              <li><a href="https://www.mentee.ca/terms-and-conditions" className="text-white/80 hover:text-white text-sm transition-colors duration-200">Terms &amp; Conditions</a></li>
+            </ul>
+          </nav>
+
+          <div
+            className="rounded-2xl border border-white/15 bg-white/[0.08] p-5 backdrop-blur-sm"
+            style={{ boxShadow: "0 14px 34px rgba(0,0,0,0.16)" }}
+          >
+            <h4 className="font-bold text-xs mb-3 uppercase" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.16em" }}>
+              Connect
+            </h4>
+            <div className="flex flex-col gap-2.5" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <a href="mailto:info@mentee.ca" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors duration-200">
+                <span className="h-2 w-2 rounded-full bg-white" aria-hidden="true" />
+                info@mentee.ca
+              </a>
+              <a href="https://www.mentee.ca" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors duration-200">
+                <span className="h-2 w-2 rounded-full bg-white" aria-hidden="true" />
+                www.mentee.ca
+              </a>
             </div>
-            <nav className="flex flex-col gap-2">
-              <a
-                href="/SALMON-Tool.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm hover:opacity-80 transition-opacity"
-                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
-              >
-                Download Sample Tool (PDF)
-              </a>
-              <a
-                href="https://www.seabirdisland.ca"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm hover:opacity-80 transition-opacity"
-                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
-              >
-                Seabird Island Community School
-              </a>
-            </nav>
           </div>
         </div>
+      </div>
 
-        <div className="crimson-rule mb-6" />
-
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-          <p
-            className="text-xs"
-            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
-          >
-            © 2025 SALMON Tool. Developed on the unceded territory of the Stó:lō peoples.
-          </p>
-          <p
-            className="text-xs"
-            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
-          >
-            Powered by{" "}
-            <a
-              href="https://mentee.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-              style={{ color: "var(--crimson-mid)" }}
-            >
-              Mentee
-            </a>
-          </p>
-        </div>
+      <div className="relative border-t border-white/15 py-3 text-center" style={{ background: "rgba(1,47,81,0.7)" }}>
+        <p className="text-white/70 text-xs sm:text-sm m-0" style={{ fontFamily: "'Inter', sans-serif" }}>
+          &copy; Copyright 2026 Mentee &ndash; All Rights Reserved
+        </p>
       </div>
     </footer>
   );

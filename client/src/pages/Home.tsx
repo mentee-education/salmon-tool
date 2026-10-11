@@ -300,103 +300,71 @@ export default function Home() {
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
       <Navbar />
 
-      {/* ── HERO — the real school, full bleed ── */}
-      <section className="relative overflow-hidden" style={{ background: "oklch(0.20 0.012 260)" }}>
-        {/* Film still of Seabird Island Community School (Jason Bruce's film) */}
+      {/* ── HERO — cinematic lower-third over the school film ── */}
+      <section className="relative overflow-hidden" style={{ background: "oklch(0.13 0.012 260)" }}>
         <div className="absolute inset-0">
-          <img
-            src={thumbMax("EP5b48Weyrc")}
-            alt=""
-            className="w-full h-full object-cover"
-          />
+          <img src={thumbMax("EP5b48Weyrc")} alt="" className="w-full h-full object-cover" />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(95deg, oklch(0.18 0.012 260 / 0.96) 0%, oklch(0.18 0.012 260 / 0.86) 38%, oklch(0.18 0.012 260 / 0.30) 72%, oklch(0.18 0.012 260 / 0.12) 100%), linear-gradient(to top, oklch(0.16 0.012 260 / 0.85) 0%, transparent 30%)",
+                "linear-gradient(to top, oklch(0.11 0.012 260 / 0.97) 0%, oklch(0.11 0.012 260 / 0.72) 34%, oklch(0.11 0.012 260 / 0.18) 62%, oklch(0.11 0.012 260 / 0.30) 100%)",
             }}
           />
         </div>
 
-        <div className="container relative z-10">
-          <div className="flex flex-col justify-center min-h-[92vh] max-w-3xl py-28">
-            <div
-              className="text-xs uppercase tracking-widest mb-5"
-              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.78 0.006 95)", letterSpacing: "0.22em" }}
-            >
-              An Evaluation Tool for Educational Leaders
-            </div>
+        <div className="container relative z-10 flex flex-col min-h-[94vh]">
+          {/* top meta row */}
+          <div className="flex items-center justify-between pt-24 text-xs" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.18em" }}>
+            <span className="uppercase" style={{ color: "oklch(0.92 0.004 95)" }}>An evaluation tool for educational leaders</span>
+            <span className="hidden sm:block uppercase text-right" style={{ color: "oklch(0.85 0.006 95)" }}>Seabird Island · Fraser Valley, BC</span>
+          </div>
 
-            <div
-              className="mb-3"
-              style={{
-                fontFamily: "'Archivo', sans-serif",
-                fontSize: "clamp(4rem, 10vw, 7.5rem)",
-                fontWeight: 700,
-                color: "oklch(0.985 0.002 95)",
-                lineHeight: 0.9,
-                letterSpacing: "-0.015em",
-              }}
-            >
-              SALMON:
-            </div>
+          <div className="flex-1" />
+
+          {/* lower third */}
+          <div className="pb-10">
+            <div className="mb-4" style={{ width: 64, height: 3, background: "oklch(0.60 0.19 30)" }} />
             <h1
-              className="mb-7"
+              className="m-0"
               style={{
                 fontFamily: "'Archivo', sans-serif",
-                fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
-                fontWeight: 700,
+                fontWeight: 900,
+                fontSize: "clamp(4.5rem, 13vw, 11rem)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.03em",
                 color: "oklch(0.985 0.002 95)",
-                lineHeight: 1.3,
               }}
             >
-              Seabird Assessment for Learning,<br />
-              Mentorship, and Ongoing Nurturing
+              SALMON
             </h1>
-
             <p
-              className="text-base leading-relaxed mb-10 max-w-lg"
-              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.82 0.006 95)" }}
+              className="mt-5 mb-8 max-w-2xl"
+              style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1.05rem, 2vw, 1.35rem)", fontWeight: 500, lineHeight: 1.45, color: "oklch(0.93 0.003 95)" }}
             >
-              A teacher evaluation model created with the Stó:lō Education Committee at
-              Seabird Island Community School — grounded in relational accountability,
-              community voice, and the life of the river behind it.
+              Seabird Assessment for Learning, Mentorship, and Ongoing Nurturing — a teacher
+              evaluation model created with the Stó:lō Education Committee at Seabird Island
+              Community School.
             </p>
-
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <button
                 type="button"
                 onClick={() => setHeroFilm(true)}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-90 cursor-pointer"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  background: "oklch(0.60 0.19 30)",
-                  color: "oklch(0.985 0.002 95)",
-                  letterSpacing: "0.06em",
-                  border: 0,
-                }}
+                className="inline-flex items-center gap-2.5 px-7 py-4 text-sm font-semibold transition-all duration-200 hover:opacity-90 cursor-pointer"
+                style={{ fontFamily: "'Inter', sans-serif", background: "oklch(0.60 0.19 30)", color: "white", letterSpacing: "0.04em", border: 0 }}
               >
-                <Play size={15} fill="currentColor" /> Watch the school's film
+                <Play size={15} fill="currentColor" /> Watch the school&apos;s film
               </button>
               <a
                 href="#inside-the-tool"
-                className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-80"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  border: "1px solid oklch(0.985 0.002 95 / 0.45)",
-                  color: "oklch(0.985 0.002 95)",
-                  letterSpacing: "0.06em",
-                }}
+                className="inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold transition-all duration-200 hover:bg-white/10"
+                style={{ fontFamily: "'Inter', sans-serif", border: "1px solid oklch(0.985 0.002 95 / 0.4)", color: "oklch(0.985 0.002 95)", letterSpacing: "0.04em" }}
               >
                 See inside the tool
               </a>
-            </div>
-
-            <div
-              className="mt-10 text-xs"
-              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.75 0.006 95)", letterSpacing: "0.04em" }}
-            >
-              Seabird Island Band territory, Fraser Valley, British Columbia · Self-reliance · Generosity · Honesty · Respect
+              <span className="hidden lg:block ml-auto text-xs" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.80 0.006 95)", letterSpacing: "0.08em" }}>
+                Self-reliance · Generosity · Honesty · Respect
+              </span>
             </div>
           </div>
         </div>
@@ -404,22 +372,16 @@ export default function Home() {
         {/* Acronym strip anchored to the hero floor */}
         <div
           className="relative z-10"
-          style={{ background: "oklch(0.15 0.012 260 / 0.88)", backdropFilter: "blur(6px)", borderTop: "1px solid oklch(0.985 0.002 95 / 0.14)" }}
+          style={{ background: "oklch(0.10 0.012 260 / 0.92)", backdropFilter: "blur(6px)", borderTop: "1px solid oklch(0.985 0.002 95 / 0.12)" }}
         >
           <div className="container">
             <div className="grid grid-cols-3 sm:grid-cols-6">
               {acronym.map((item, i) => (
                 <div key={i} className="flex items-baseline justify-center gap-2 py-4 px-2">
-                  <span
-                    className="text-2xl leading-none"
-                    style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "oklch(0.75 0.11 40)" }}
-                  >
+                  <span className="text-2xl leading-none" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, color: "oklch(0.66 0.18 30)" }}>
                     {item.letter}
                   </span>
-                  <span
-                    className="text-[11px] leading-tight"
-                    style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.88 0.006 95)", letterSpacing: "0.05em" }}
-                  >
+                  <span className="text-[11px] leading-tight" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.90 0.004 95)", letterSpacing: "0.05em" }}>
                     {item.word}
                   </span>
                 </div>
