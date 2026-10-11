@@ -75,7 +75,7 @@ export default function Footer() {
             </div>
             <nav className="flex flex-col gap-2">
               <a
-                href="https://salmontool.com/wp-content/uploads/2025/06/SALMON-Sample.pdf"
+                href="/SALMON-Tool.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:opacity-80 transition-opacity"

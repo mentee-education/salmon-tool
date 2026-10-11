@@ -103,7 +103,7 @@ export default function Navbar() {
           </button>
 
           <a
-            href="https://salmontool.com/wp-content/uploads/2025/06/SALMON-Sample.pdf"
+            href="/SALMON-Tool.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2 text-sm transition-all duration-200 hover:opacity-90"
@@ -168,7 +168,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://salmontool.com/wp-content/uploads/2025/06/SALMON-Sample.pdf"
+            href="/SALMON-Tool.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-5 py-2.5 text-sm text-center mt-1"

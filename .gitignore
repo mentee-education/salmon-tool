@@ -109,3 +109,4 @@ shared/
 .manus-logs/
 client/public/__manus__/
 client/src/components/ManusDialog.tsx
+.vercel

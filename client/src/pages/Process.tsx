@@ -241,7 +241,7 @@ export default function Process() {
                   educator growth in your community.
                 </p>
                 <a
-                  href="https://salmontool.com/wp-content/uploads/2025/06/SALMON-Sample.pdf"
+                  href="/SALMON-Tool.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-90"
