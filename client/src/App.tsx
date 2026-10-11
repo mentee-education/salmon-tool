@@ -9,8 +9,10 @@ import Process from "./pages/Process";
 import NotFound from "./pages/NotFound";
 import ReadTool from "./pages/ReadTool";
 import Reflect from "./pages/Reflect";
-import Course from "./pages/Course";
-import Lesson from "./pages/Lesson";
+import CourseOverview from "./pages/CourseOverview";
+import CourseLessons from "./pages/CourseLessons";
+import LessonPlayer from "./pages/LessonPlayer";
+import Certificate from "./pages/Certificate";
 import Resources from "./pages/Resources";
 
 function Router() {
@@ -21,8 +23,10 @@ function Router() {
       <Route path="/process" component={Process} />
       <Route path="/tool" component={ReadTool} />
       <Route path="/reflect" component={Reflect} />
-      <Route path="/course" component={Course} />
-      <Route path="/lessons/:slug" component={Lesson} />
+      <Route path="/course" component={CourseOverview} />
+      <Route path="/course/lessons" component={CourseLessons} />
+      <Route path="/lessons/:slug" component={LessonPlayer} />
+      <Route path="/certificate" component={Certificate} />
       <Route path="/resources" component={Resources} />
       <Route component={NotFound} />
     </Switch>
