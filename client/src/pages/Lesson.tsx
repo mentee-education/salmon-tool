@@ -4,11 +4,35 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useLocation } from "wouter";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { COURSE } from "@/data/course";
 import { PROGRESS_KEY, loadProgress } from "./Course";
 import { ArrowLeft, ArrowRight, CheckCircle2, Play } from "lucide-react";
+
+const GO_DEEPER: Record<string, { label: string; href: string }[]> = {
+  introduction: [
+    { label: "First Peoples Principles of Learning (FNESC)", href: "https://www.fnesc.ca/first-peoples-principles-of-learning/" },
+    { label: "NCCIE — National Centre for Collaboration in Indigenous Education", href: "https://www.nccie.ca/" },
+  ],
+  "the-lifecycle": [
+    { label: "Seabird Island Band", href: "https://www.seabirdisland.ca/" },
+  ],
+  "using-the-tool": [
+    { label: "Learning First Peoples classroom resources (FNESC)", href: "https://www.fnesc.ca/learningfirstpeoples/" },
+  ],
+  "cultural-integration": [
+    { label: "Halq'eméylem on FirstVoices", href: "https://www.firstvoices.com/halqemeylem" },
+    { label: "First Peoples' Cultural Council", href: "https://fpcc.ca/" },
+    { label: "First Peoples Principles of Learning (FNESC)", href: "https://www.fnesc.ca/first-peoples-principles-of-learning/" },
+  ],
+  "instruction-and-assessment": [
+    { label: "Learning First Peoples classroom resources (FNESC)", href: "https://www.fnesc.ca/learningfirstpeoples/" },
+  ],
+  "growth-and-reciprocity": [
+    { label: "NCCIE teaching resources", href: "https://www.nccie.ca/" },
+  ],
+};
 
 const STAGE_SUMMARY = [
   { name: "Spawning", sub: "Initiating Growth", d: "Laying the foundation — exploring, discovering, and building core skills with support and mentorship." },
@@ -51,31 +75,31 @@ export default function Lesson() {
   if (!lesson) {
     return (
       <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
-        <Navbar />
-        <div className="container pt-40 pb-20 text-center" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
+        <SiteHeader />
+        <div className="container pt-40 pb-20 text-center" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>
           Lesson not found. <Link href="/course"><span className="underline cursor-pointer">Back to the course</span></Link>
         </div>
-        <Footer />
+        <SiteFooter />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
-      <Navbar />
+      <SiteHeader />
 
       {/* Lesson header */}
-      <section className="pt-32 pb-12" style={{ background: "oklch(0.15 0.012 260)" }}>
+      <section className="pt-32 pb-12" style={{ background: "#171412" }}>
         <div className="container">
           <Link href="/course">
-            <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest mb-6 cursor-pointer hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.80 0.006 95)", letterSpacing: "0.14em" }}>
+            <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest mb-6 cursor-pointer hover:opacity-80" style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(253,252,249,0.78)", letterSpacing: "0.14em" }}>
               <ArrowLeft size={13} /> The SALMON Course
             </span>
           </Link>
-          <div className="text-xs uppercase tracking-widest mb-3" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.66 0.18 30)", letterSpacing: "0.2em" }}>
+          <div className="text-xs uppercase tracking-widest mb-3" style={{ fontFamily: "'DM Sans', sans-serif", color: "#c0616b", letterSpacing: "0.2em" }}>
             {lesson.eyebrow} · {lesson.minutes} min
           </div>
-          <h1 className="m-0 max-w-4xl" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.6rem)", letterSpacing: "-0.02em", lineHeight: 1.05, color: "oklch(0.985 0.002 95)" }}>
+          <h1 className="m-0 max-w-4xl" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.6rem)", letterSpacing: "-0.02em", lineHeight: 1.05, color: "#fdfcf9" }}>
             {lesson.title}
           </h1>
         </div>
@@ -84,7 +108,7 @@ export default function Lesson() {
       <section className="py-14 flex-1">
         <div className="container" style={{ maxWidth: 880 }}>
           {/* Intro */}
-          <p className="text-lg leading-relaxed mb-10" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-heading)", fontWeight: 450 }}>
+          <p className="text-lg leading-relaxed mb-10" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)", fontWeight: 450 }}>
             {lesson.intro}
           </p>
 
@@ -104,14 +128,14 @@ export default function Lesson() {
                 ) : (
                   <button type="button" onClick={() => setPlaying(true)} aria-label="Play film" className="group block w-full h-full relative cursor-pointer" style={{ border: 0, padding: 0, background: "none" }}>
                     <img src={`https://i.ytimg.com/vi/${lesson.video}/maxresdefault.jpg`} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy" />
-                    <span className="absolute inset-0" style={{ background: "linear-gradient(to top, oklch(0.13 0.012 260 / 0.5), transparent 55%)" }} />
-                    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110" style={{ width: 68, height: 68, background: "oklch(0.60 0.19 30 / 0.95)", boxShadow: "0 8px 30px oklch(0 0 0 / 0.35)" }}>
+                    <span className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(23,20,18,0.5), transparent 55%)" }} />
+                    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110" style={{ width: 68, height: 68, background: "rgba(155,35,53,0.95)", boxShadow: "0 8px 30px oklch(0 0 0 / 0.35)" }}>
                       <Play size={24} fill="white" color="white" style={{ marginLeft: 3 }} />
                     </span>
                   </button>
                 )}
               </div>
-              <figcaption className="px-4 py-3 text-xs" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)", background: "var(--card-bg)" }}>
+              <figcaption className="px-4 py-3 text-xs" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-muted)", background: "var(--card-bg)" }}>
                 Watch before you read — the lesson lands differently once you've seen the place.
               </figcaption>
             </figure>
@@ -122,11 +146,11 @@ export default function Lesson() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
               {STAGE_SUMMARY.map((s, i) => (
                 <div key={s.name} className="p-6" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)" }}>
-                  <div className="text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.14em" }}>
+                  <div className="text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.14em" }}>
                     Stage {i + 1} · {s.sub}
                   </div>
-                  <div className="text-xl mb-2" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, color: "var(--text-heading)" }}>{s.name}</div>
-                  <p className="m-0 text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>{s.d}</p>
+                  <div className="text-xl mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-heading)" }}>{s.name}</div>
+                  <p className="m-0 text-sm leading-relaxed" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>{s.d}</p>
                 </div>
               ))}
             </div>
@@ -139,12 +163,12 @@ export default function Lesson() {
                 const [head, ...rest] = s.split(":");
                 return (
                   <div key={i} className="flex gap-5 p-6" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)" }}>
-                    <span className="shrink-0 flex items-center justify-center w-10 h-10" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, color: "var(--crimson-mid)", background: "oklch(from var(--crimson-mid) l c h / 0.1)" }}>
+                    <span className="shrink-0 flex items-center justify-center w-10 h-10" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, color: "var(--crimson-mid)", background: "oklch(from var(--crimson-mid) l c h / 0.1)" }}>
                       {i + 1}
                     </span>
                     <div>
-                      <div className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, color: "var(--text-heading)" }}>{head.trim()}</div>
-                      <p className="m-0 text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>{rest.join(":").trim()}</p>
+                      <div className="mb-1" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-heading)" }}>{head.trim()}</div>
+                      <p className="m-0 text-sm leading-relaxed" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>{rest.join(":").trim()}</p>
                     </div>
                   </div>
                 );
@@ -155,22 +179,22 @@ export default function Lesson() {
           {/* Evaluation areas */}
           {lesson.areas.map((area: any) => (
             <div key={area.title} className="mb-10">
-              <h2 className="mb-3" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "1.35rem", letterSpacing: "-0.01em", color: "var(--text-heading)" }}>
+              <h2 className="mb-3" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.35rem", letterSpacing: "-0.01em", color: "var(--text-heading)" }}>
                 {area.title}
               </h2>
               {area.description && (
-                <p className="text-[15px] leading-relaxed mb-5" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
+                <p className="text-[15px] leading-relaxed mb-5" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>
                   {area.description}
                 </p>
               )}
               {area.questions.length > 0 && (
                 <div className="p-6" style={{ background: "var(--card-bg)", borderLeft: "3px solid var(--crimson-mid)", border: "1px solid var(--card-border)", borderLeftWidth: 3, borderLeftColor: "var(--crimson-mid)" }}>
-                  <div className="text-xs uppercase tracking-widest mb-3" style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.14em" }}>
+                  <div className="text-xs uppercase tracking-widest mb-3" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.14em" }}>
                     Guiding reflection questions
                   </div>
                   <ol className="m-0 pl-5 flex flex-col gap-2.5">
                     {area.questions.map((q: string, i: number) => (
-                      <li key={i} className="text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>{q}</li>
+                      <li key={i} className="text-sm leading-relaxed" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>{q}</li>
                     ))}
                   </ol>
                 </div>
@@ -178,11 +202,29 @@ export default function Lesson() {
             </div>
           ))}
 
+          {/* Go deeper */}
+          {GO_DEEPER[lesson.slug] && (
+            <div className="p-6 mb-4" style={{ background: "var(--section-alt)", border: "1px solid var(--card-border)" }}>
+              <div className="text-xs uppercase tracking-widest mb-3" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.14em" }}>
+                Go deeper
+              </div>
+              <ul className="m-0 p-0 flex flex-col gap-2" style={{ listStyle: "none" }}>
+                {GO_DEEPER[lesson.slug].map((r) => (
+                  <li key={r.href}>
+                    <a href={r.href} target="_blank" rel="noopener noreferrer" className="text-sm underline-offset-2 hover:underline" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)" }}>
+                      {r.label} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Complete / nav */}
           <div className="mt-14 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             {prev ? (
               <Link href={`/lessons/${prev.slug}`}>
-                <span className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", border: "1px solid var(--card-border)", color: "var(--text-body)" }}>
+                <span className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80" style={{ fontFamily: "'Source Serif 4', serif", border: "1px solid var(--card-border)", color: "var(--text-body)" }}>
                   <ArrowLeft size={15} /> {prev.eyebrow}
                 </span>
               </Link>
@@ -191,7 +233,7 @@ export default function Lesson() {
               type="button"
               onClick={markDone}
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-90"
-              style={{ fontFamily: "'Inter', sans-serif", background: "var(--crimson-mid)", color: "white", border: 0, letterSpacing: "0.03em" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", background: "var(--crimson-mid)", color: "white", border: 0, letterSpacing: "0.03em" }}
             >
               <CheckCircle2 size={16} /> {isDone ? "Completed" : "Mark complete"}{next ? " · next lesson" : " · finish course"} <ArrowRight size={15} />
             </button>
@@ -199,7 +241,7 @@ export default function Lesson() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

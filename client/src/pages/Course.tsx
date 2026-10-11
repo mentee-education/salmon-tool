@@ -3,8 +3,8 @@
  */
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { COURSE } from "@/data/course";
 import { ArrowRight, CheckCircle2, Circle, Clock } from "lucide-react";
 
@@ -32,24 +32,24 @@ export default function Course() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
-      <Navbar />
+      <SiteHeader />
 
       {/* Header on dark */}
-      <section className="pt-32 pb-14" style={{ background: "oklch(0.15 0.012 260)" }}>
+      <section className="pt-32 pb-14" style={{ background: "#171412" }}>
         <div className="container">
           <div
             className="text-xs uppercase tracking-widest mb-4"
-            style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.66 0.18 30)", letterSpacing: "0.2em" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#c0616b", letterSpacing: "0.2em" }}
           >
             The SALMON Course
           </div>
           <h1
             className="m-0 mb-5 max-w-3xl"
-            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: "clamp(2.4rem, 6vw, 4.2rem)", letterSpacing: "-0.02em", lineHeight: 1.02, color: "oklch(0.985 0.002 95)" }}
+            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "clamp(2.4rem, 6vw, 4.2rem)", letterSpacing: "-0.02em", lineHeight: 1.02, color: "#fdfcf9" }}
           >
             Learn the framework,<br />lesson by lesson
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed m-0 mb-8" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.84 0.005 95)" }}>
+          <p className="max-w-2xl text-base leading-relaxed m-0 mb-8" style={{ fontFamily: "'Source Serif 4', serif", color: "rgba(253,252,249,0.78)" }}>
             Six short lessons walk you through SALMON — where it comes from, how the lifecycle
             stages work, and what every evaluation area asks of educators and administrators.
             Your progress stays on this device.
@@ -57,10 +57,10 @@ export default function Course() {
 
           {/* progress */}
           <div className="flex items-center gap-4 max-w-md">
-            <div className="flex-1 h-2 overflow-hidden" style={{ background: "oklch(0.985 0.002 95 / 0.14)" }}>
-              <div className="h-full transition-all duration-500" style={{ width: `${pct}%`, background: "oklch(0.60 0.19 30)" }} />
+            <div className="flex-1 h-2 overflow-hidden" style={{ background: "rgba(253,252,249,0.14)" }}>
+              <div className="h-full transition-all duration-500" style={{ width: `${pct}%`, background: "#9B2335" }} />
             </div>
-            <span className="text-sm shrink-0" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.88 0.004 95)" }}>
+            <span className="text-sm shrink-0" style={{ fontFamily: "'Source Serif 4', serif", color: "rgba(253,252,249,0.78)" }}>
               {completed} of {total} complete
             </span>
           </div>
@@ -81,15 +81,15 @@ export default function Course() {
                   >
                     <span
                       className="hidden sm:flex items-center justify-center shrink-0 w-12 h-12"
-                      style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: "1.2rem", color: isDone ? "white" : "var(--crimson-mid)", background: isDone ? "var(--crimson-mid)" : "oklch(from var(--crimson-mid) l c h / 0.1)" }}
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "1.2rem", color: isDone ? "white" : "var(--crimson-mid)", background: isDone ? "var(--crimson-mid)" : "oklch(from var(--crimson-mid) l c h / 0.1)" }}
                     >
                       {i + 1}
                     </span>
                     <span className="flex-1 min-w-0">
-                      <span className="block text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)", letterSpacing: "0.12em" }}>
+                      <span className="block text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)", letterSpacing: "0.12em" }}>
                         {lesson.eyebrow} · <Clock size={11} style={{ display: "inline", verticalAlign: "-1px" }} /> {lesson.minutes} min
                       </span>
-                      <span className="block text-lg md:text-xl leading-snug" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, color: "var(--text-heading)", letterSpacing: "-0.01em" }}>
+                      <span className="block text-lg md:text-xl leading-snug" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-heading)", letterSpacing: "-0.01em" }}>
                         {lesson.title}
                       </span>
                     </span>
@@ -107,24 +107,24 @@ export default function Course() {
             })}
           </div>
 
-          <div className="mt-10 p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5" style={{ background: "oklch(0.16 0.012 260)" }}>
-            <p className="m-0 text-base max-w-xl" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.92 0.004 95)" }}>
+          <div className="mt-10 p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5" style={{ background: "#171412" }}>
+            <p className="m-0 text-base max-w-xl" style={{ fontFamily: "'Source Serif 4', serif", color: "#fdfcf9" }}>
               Prefer the document itself? Read all 24 pages of the tool, or open the Reflection
               Library and start writing.
             </p>
             <span className="flex gap-3 shrink-0">
               <Link href="/tool">
-                <span className="inline-flex px-5 py-3 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-90" style={{ fontFamily: "'Inter', sans-serif", background: "oklch(0.60 0.19 30)", color: "white" }}>Read the Tool</span>
+                <span className="inline-flex px-5 py-3 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-90" style={{ fontFamily: "'Source Serif 4', serif", background: "#9B2335", color: "white" }}>Read the Tool</span>
               </Link>
               <Link href="/reflect">
-                <span className="inline-flex px-5 py-3 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", border: "1px solid oklch(0.985 0.002 95 / 0.35)", color: "oklch(0.985 0.002 95)" }}>Reflect</span>
+                <span className="inline-flex px-5 py-3 text-sm font-semibold cursor-pointer transition-opacity hover:opacity-80" style={{ fontFamily: "'Source Serif 4', serif", border: "1px solid rgba(253,252,249,0.35)", color: "#fdfcf9" }}>Reflect</span>
               </Link>
             </span>
           </div>
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

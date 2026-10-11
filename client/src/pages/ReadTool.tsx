@@ -3,8 +3,8 @@
  * Keyboard arrows, click zones, thumbnail rail, download CTA.
  */
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 
 const PAGES = Array.from({ length: 24 }, (_, i) => `/booklet/p${String(i + 1).padStart(2, "0")}.jpg`);
@@ -36,8 +36,8 @@ export default function ReadTool() {
   }, [page]);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "oklch(0.15 0.012 260)" }}>
-      <Navbar />
+    <div className="min-h-screen flex flex-col" style={{ background: "#171412" }}>
+      <SiteHeader />
 
       <section className="pt-28 pb-8">
         <div className="container">
@@ -45,13 +45,13 @@ export default function ReadTool() {
             <div>
               <div
                 className="text-xs uppercase tracking-widest mb-3"
-                style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.66 0.18 30)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'DM Sans', sans-serif", color: "#c0616b", letterSpacing: "0.2em" }}
               >
                 Read the Tool
               </div>
               <h1
                 className="m-0"
-                style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.2rem)", letterSpacing: "-0.02em", color: "oklch(0.985 0.002 95)" }}
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.2rem)", letterSpacing: "-0.02em", color: "#fdfcf9" }}
               >
                 The SALMON Tool, page by page
               </h1>
@@ -61,7 +61,7 @@ export default function ReadTool() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-90"
-              style={{ fontFamily: "'Inter', sans-serif", background: "oklch(0.60 0.19 30)", color: "white", letterSpacing: "0.04em" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", background: "#9B2335", color: "white", letterSpacing: "0.04em" }}
             >
               <Download size={15} /> Download the PDF
             </a>
@@ -75,7 +75,7 @@ export default function ReadTool() {
               disabled={page === 0}
               aria-label="Previous page"
               className="hidden md:flex items-center justify-center w-12 h-12 rounded-full mr-5 transition-all duration-150 cursor-pointer disabled:opacity-25"
-              style={{ background: "oklch(0.985 0.002 95 / 0.1)", border: "1px solid oklch(0.985 0.002 95 / 0.25)", color: "oklch(0.985 0.002 95)" }}
+              style={{ background: "rgba(253,252,249,0.1)", border: "1px solid rgba(253,252,249,0.25)", color: "#fdfcf9" }}
             >
               <ChevronLeft size={22} />
             </button>
@@ -86,7 +86,7 @@ export default function ReadTool() {
                 src={PAGES[page]}
                 alt={`SALMON Tool, page ${page + 1} of 24`}
                 className="w-full h-auto block"
-                style={{ boxShadow: "0 30px 80px oklch(0 0 0 / 0.5)", border: "1px solid oklch(0.985 0.002 95 / 0.1)" }}
+                style={{ boxShadow: "0 30px 80px oklch(0 0 0 / 0.5)", border: "1px solid rgba(253,252,249,0.1)" }}
               />
               {/* click zones */}
               <button
@@ -111,13 +111,13 @@ export default function ReadTool() {
               disabled={page === PAGES.length - 1}
               aria-label="Next page"
               className="hidden md:flex items-center justify-center w-12 h-12 rounded-full ml-5 transition-all duration-150 cursor-pointer disabled:opacity-25"
-              style={{ background: "oklch(0.985 0.002 95 / 0.1)", border: "1px solid oklch(0.985 0.002 95 / 0.25)", color: "oklch(0.985 0.002 95)" }}
+              style={{ background: "rgba(253,252,249,0.1)", border: "1px solid rgba(253,252,249,0.25)", color: "#fdfcf9" }}
             >
               <ChevronRight size={22} />
             </button>
           </div>
 
-          <div className="text-center mt-5 text-sm" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.80 0.006 95)" }}>
+          <div className="text-center mt-5 text-sm" style={{ fontFamily: "'Source Serif 4', serif", color: "rgba(253,252,249,0.78)" }}>
             Page {page + 1} of {PAGES.length} · use arrow keys or tap the page edges
           </div>
 
@@ -131,7 +131,7 @@ export default function ReadTool() {
                   onClick={() => setPage(i)}
                   aria-label={`Go to page ${i + 1}`}
                   className="shrink-0 cursor-pointer transition-opacity"
-                  style={{ border: i === page ? "2px solid oklch(0.66 0.18 30)" : "1px solid oklch(0.985 0.002 95 / 0.15)", padding: 0, background: "none", opacity: i === page ? 1 : 0.55 }}
+                  style={{ border: i === page ? "2px solid #c0616b" : "1px solid rgba(253,252,249,0.15)", padding: 0, background: "none", opacity: i === page ? 1 : 0.55 }}
                 >
                   <img src={src} alt="" loading="lazy" style={{ width: 52, height: "auto", display: "block" }} />
                 </button>
@@ -142,7 +142,7 @@ export default function ReadTool() {
       </section>
 
       <div className="mt-auto">
-        <Footer />
+        <SiteFooter />
       </div>
     </div>
   );

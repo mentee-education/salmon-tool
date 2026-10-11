@@ -3,8 +3,8 @@
  * Shows the four community-led steps of SALMON Tool development
  */
 import { useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { ArrowRight } from "lucide-react";
 
 const HERO_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/hero-river.png";
@@ -82,7 +82,7 @@ export default function Process() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
-      <Navbar />
+      <SiteHeader />
 
       {/* Page header */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -97,14 +97,14 @@ export default function Process() {
         <div className="container relative z-10">
           <div
             className="text-xs uppercase tracking-widest mb-4"
-            style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
           >
             How It Was Built
           </div>
           <h1
             className="leading-none mb-6"
             style={{
-              fontFamily: "'Archivo', sans-serif",
+              fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(3rem, 8vw, 6rem)",
               fontWeight: 800,
               color: "var(--text-heading)",
@@ -116,7 +116,7 @@ export default function Process() {
           </h1>
           <p
             className="max-w-xl text-base leading-relaxed"
-            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
+            style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
           >
             The SALMON Tool was not designed in isolation. Every step of its development
             was guided by the voices, knowledge, and values of the Stó:lō community.
@@ -139,7 +139,7 @@ export default function Process() {
                   <div
                     className="text-7xl leading-none"
                     style={{
-                      fontFamily: "'Archivo', sans-serif",
+                      fontFamily: "'Playfair Display', serif",
                       fontWeight: 800,
                       color: "oklch(from var(--crimson-mid) l c h / 0.3)",
                     }}
@@ -156,14 +156,14 @@ export default function Process() {
                 <div className="lg:col-span-10">
                   <div
                     className="text-xs uppercase tracking-widest mb-2"
-                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
                   >
                     {step.subtitle}
                   </div>
                   <h2
                     className="mb-8 leading-tight"
                     style={{
-                      fontFamily: "'Archivo', sans-serif",
+                      fontFamily: "'Playfair Display', serif",
                       fontSize: "clamp(1.8rem, 4vw, 3rem)",
                       fontWeight: 700,
                       color: "var(--text-heading)",
@@ -178,7 +178,7 @@ export default function Process() {
                         <p
                           key={j}
                           className="text-base leading-relaxed"
-                          style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
+                          style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
                         >
                           {para}
                         </p>
@@ -195,7 +195,7 @@ export default function Process() {
                       >
                         <p
                           className="text-sm leading-relaxed italic"
-                          style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-heading)" }}
+                          style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)" }}
                         >
                           {step.highlight}
                         </p>
@@ -216,14 +216,14 @@ export default function Process() {
               <div>
                 <div
                   className="text-xs uppercase tracking-widest mb-4"
-                  style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
                 >
                   The Result
                 </div>
                 <h2
                   className="mb-6 leading-tight"
                   style={{
-                    fontFamily: "'Archivo', sans-serif",
+                    fontFamily: "'Playfair Display', serif",
                     fontSize: "clamp(2rem, 4vw, 3rem)",
                     fontWeight: 700,
                     color: "var(--text-heading)",
@@ -233,7 +233,7 @@ export default function Process() {
                 </h2>
                 <p
                   className="text-base leading-relaxed mb-8"
-                  style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
+                  style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
                 >
                   The result of this community-led process is a strengths-based, culturally
                   grounded evaluation framework that honours the full journey of an educator.
@@ -246,9 +246,9 @@ export default function Process() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-90"
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Source Serif 4', serif",
                     background: "var(--crimson-mid)",
-                    color: "oklch(0.985 0.002 95)",
+                    color: "#fdfcf9",
                     letterSpacing: "0.06em",
                   }}
                 >
@@ -266,7 +266,7 @@ export default function Process() {
                 >
                   <div
                     className="text-xs uppercase tracking-widest mb-6"
-                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
                   >
                     What the tool includes
                   </div>
@@ -290,7 +290,7 @@ export default function Process() {
                       </span>
                       <span
                         className="text-sm leading-relaxed"
-                        style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
+                        style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
                       >
                         {item}
                       </span>
@@ -303,7 +303,7 @@ export default function Process() {
         </section>
       </div>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
