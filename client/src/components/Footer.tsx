@@ -21,19 +21,19 @@ export default function Footer() {
           <div>
             <div
               className="text-2xl mb-3 italic"
-              style={{ fontFamily: "'Cormorant Garamond', serif", color: "var(--crimson-mid)", fontWeight: 300 }}
+              style={{ fontFamily: "'Archivo', sans-serif", color: "var(--crimson-mid)", fontWeight: 800 }}
             >
               SALMON
             </div>
             <p
               className="text-sm leading-relaxed mb-1"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
             >
               Seabird Assessment for Learning,<br />Mentorship &amp; Ongoing Nurturing
             </p>
             <p
               className="text-xs mt-3"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
             >
               Developed in collaboration with the<br />Stó:lō Education Committee
             </p>
@@ -43,7 +43,7 @@ export default function Footer() {
           <div>
             <div
               className="text-xs uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
             >
               Navigate
             </div>
@@ -56,7 +56,7 @@ export default function Footer() {
                 <Link key={link.href} href={link.href}>
                   <span
                     className="text-sm hover:opacity-80 transition-opacity"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
                   >
                     {link.label}
                   </span>
@@ -69,7 +69,7 @@ export default function Footer() {
           <div>
             <div
               className="text-xs uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
             >
               Resources
             </div>
@@ -79,7 +79,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:opacity-80 transition-opacity"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
               >
                 Download Sample Tool (PDF)
               </a>
@@ -88,7 +88,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:opacity-80 transition-opacity"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
               >
                 Seabird Island Community School
               </a>
@@ -101,13 +101,13 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
           <p
             className="text-xs"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)" }}
+            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
           >
             © 2025 SALMON Tool. Developed on the unceded territory of the Stó:lō peoples.
           </p>
           <p
             className="text-xs"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)" }}
+            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
           >
             Powered by{" "}
             <a

@@ -156,14 +156,14 @@ function FilmCard({ film, large }: { film: (typeof films)[number]; large?: boole
             />
             <span
               className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, oklch(0.18 0.06 15 / 0.55), transparent 55%)" }}
+              style={{ background: "linear-gradient(to top, oklch(0.18 0.012 260 / 0.55), transparent 55%)" }}
             />
             <span
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110"
               style={{
                 width: large ? 76 : 56,
                 height: large ? 76 : 56,
-                background: "oklch(0.42 0.15 15 / 0.92)",
+                background: "oklch(0.60 0.19 30 / 0.92)",
                 boxShadow: "0 8px 30px oklch(0 0 0 / 0.35)",
               }}
             >
@@ -175,17 +175,17 @@ function FilmCard({ film, large }: { film: (typeof films)[number]; large?: boole
       <figcaption className="px-5 py-4 flex-1">
         <div
           className={large ? "text-xl mb-1" : "text-base mb-1"}
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "var(--text-heading)" }}
+          style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "var(--text-heading)" }}
         >
           {film.title}
         </div>
         <div
           className="text-xs mb-1.5"
-          style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.04em" }}
+          style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.04em" }}
         >
           {film.credit}
         </div>
-        <p className="text-sm leading-relaxed m-0" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+        <p className="text-sm leading-relaxed m-0" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
           {film.note}
         </p>
       </figcaption>
@@ -233,10 +233,10 @@ function StageReflector() {
             onClick={() => setActive(s.name)}
             className="px-4 py-2.5 text-sm transition-all duration-150 cursor-pointer"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               letterSpacing: "0.04em",
               background: active === s.name ? "var(--crimson-mid)" : "transparent",
-              color: active === s.name ? "oklch(0.97 0.01 80)" : "var(--crimson-mid)",
+              color: active === s.name ? "oklch(0.985 0.002 95)" : "var(--crimson-mid)",
               border: "1px solid oklch(from var(--crimson-mid) l c h / 0.5)",
             }}
           >
@@ -253,14 +253,14 @@ function StageReflector() {
           <div key={col.label} className="p-5" style={{ border: "1px solid var(--card-border)" }}>
             <div
               className="text-xs uppercase tracking-widest mb-0.5"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
             >
               {col.label}
             </div>
-            <div className="text-xs mb-3" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)" }}>
+            <div className="text-xs mb-3" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}>
               {col.sub}
             </div>
-            <p className="text-sm leading-relaxed m-0" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+            <p className="text-sm leading-relaxed m-0" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
               {col.text}
             </p>
           </div>
@@ -301,7 +301,7 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO — the real school, full bleed ── */}
-      <section className="relative overflow-hidden" style={{ background: "oklch(0.20 0.08 15)" }}>
+      <section className="relative overflow-hidden" style={{ background: "oklch(0.20 0.012 260)" }}>
         {/* Film still of Seabird Island Community School (Jason Bruce's film) */}
         <div className="absolute inset-0">
           <img
@@ -313,29 +313,16 @@ export default function Home() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(95deg, oklch(0.18 0.09 15 / 0.96) 0%, oklch(0.18 0.09 15 / 0.86) 38%, oklch(0.18 0.09 15 / 0.30) 72%, oklch(0.18 0.09 15 / 0.12) 100%), linear-gradient(to top, oklch(0.16 0.08 15 / 0.85) 0%, transparent 30%)",
+                "linear-gradient(95deg, oklch(0.18 0.012 260 / 0.96) 0%, oklch(0.18 0.012 260 / 0.86) 38%, oklch(0.18 0.012 260 / 0.30) 72%, oklch(0.18 0.012 260 / 0.12) 100%), linear-gradient(to top, oklch(0.16 0.012 260 / 0.85) 0%, transparent 30%)",
             }}
           />
         </div>
-
-        {/* Formline border strip on right edge — from the printed tool */}
-        <div
-          className="absolute top-0 right-0 bottom-0 w-8 pointer-events-none"
-          style={{
-            backgroundImage: `repeating-linear-gradient(
-              to bottom,
-              oklch(0.42 0.12 15) 0px, oklch(0.42 0.12 15) 8px,
-              oklch(0.28 0.10 15) 8px, oklch(0.28 0.10 15) 16px
-            )`,
-            opacity: 0.7,
-          }}
-        />
 
         <div className="container relative z-10">
           <div className="flex flex-col justify-center min-h-[92vh] max-w-3xl py-28">
             <div
               className="text-xs uppercase tracking-widest mb-5"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.78 0.07 70)", letterSpacing: "0.22em" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.78 0.006 95)", letterSpacing: "0.22em" }}
             >
               An Evaluation Tool for Educational Leaders
             </div>
@@ -343,12 +330,12 @@ export default function Home() {
             <div
               className="mb-3"
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Archivo', sans-serif",
                 fontSize: "clamp(4rem, 10vw, 7.5rem)",
                 fontWeight: 700,
-                color: "oklch(0.97 0.01 80)",
+                color: "oklch(0.985 0.002 95)",
                 lineHeight: 0.9,
-                letterSpacing: "0.02em",
+                letterSpacing: "-0.015em",
               }}
             >
               SALMON:
@@ -356,10 +343,10 @@ export default function Home() {
             <h1
               className="mb-7"
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Archivo', sans-serif",
                 fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
-                fontWeight: 400,
-                color: "oklch(0.92 0.02 80)",
+                fontWeight: 700,
+                color: "oklch(0.985 0.002 95)",
                 lineHeight: 1.3,
               }}
             >
@@ -369,7 +356,7 @@ export default function Home() {
 
             <p
               className="text-base leading-relaxed mb-10 max-w-lg"
-              style={{ fontFamily: "'Lora', serif", color: "oklch(0.82 0.03 80)" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.82 0.006 95)" }}
             >
               A teacher evaluation model created with the Stó:lō Education Committee at
               Seabird Island Community School — grounded in relational accountability,
@@ -382,9 +369,9 @@ export default function Home() {
                 onClick={() => setHeroFilm(true)}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-90 cursor-pointer"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  background: "oklch(0.55 0.18 15)",
-                  color: "oklch(0.97 0.01 80)",
+                  fontFamily: "'Inter', sans-serif",
+                  background: "oklch(0.60 0.19 30)",
+                  color: "oklch(0.985 0.002 95)",
                   letterSpacing: "0.06em",
                   border: 0,
                 }}
@@ -395,9 +382,9 @@ export default function Home() {
                 href="#inside-the-tool"
                 className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-80"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  border: "1px solid oklch(0.97 0.01 80 / 0.45)",
-                  color: "oklch(0.97 0.01 80)",
+                  fontFamily: "'Inter', sans-serif",
+                  border: "1px solid oklch(0.985 0.002 95 / 0.45)",
+                  color: "oklch(0.985 0.002 95)",
                   letterSpacing: "0.06em",
                 }}
               >
@@ -407,7 +394,7 @@ export default function Home() {
 
             <div
               className="mt-10 text-xs"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.75 0.03 80)", letterSpacing: "0.04em" }}
+              style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.75 0.006 95)", letterSpacing: "0.04em" }}
             >
               Seabird Island Band territory, Fraser Valley, British Columbia · Self-reliance · Generosity · Honesty · Respect
             </div>
@@ -417,7 +404,7 @@ export default function Home() {
         {/* Acronym strip anchored to the hero floor */}
         <div
           className="relative z-10"
-          style={{ background: "oklch(0.15 0.07 15 / 0.88)", backdropFilter: "blur(6px)", borderTop: "1px solid oklch(0.97 0.01 80 / 0.14)" }}
+          style={{ background: "oklch(0.15 0.012 260 / 0.88)", backdropFilter: "blur(6px)", borderTop: "1px solid oklch(0.985 0.002 95 / 0.14)" }}
         >
           <div className="container">
             <div className="grid grid-cols-3 sm:grid-cols-6">
@@ -425,13 +412,13 @@ export default function Home() {
                 <div key={i} className="flex items-baseline justify-center gap-2 py-4 px-2">
                   <span
                     className="text-2xl leading-none"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "oklch(0.75 0.11 40)" }}
+                    style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "oklch(0.75 0.11 40)" }}
                   >
                     {item.letter}
                   </span>
                   <span
                     className="text-[11px] leading-tight"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.88 0.02 80)", letterSpacing: "0.05em" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.88 0.006 95)", letterSpacing: "0.05em" }}
                   >
                     {item.word}
                   </span>
@@ -446,7 +433,7 @@ export default function Home() {
       {heroFilm && (
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-10"
-          style={{ background: "oklch(0.12 0.04 15 / 0.92)" }}
+          style={{ background: "oklch(0.12 0.012 260 / 0.92)" }}
           onClick={() => setHeroFilm(false)}
           role="dialog"
           aria-label="Seabird Island Community School film"
@@ -456,7 +443,7 @@ export default function Home() {
             onClick={() => setHeroFilm(false)}
             aria-label="Close film"
             className="absolute top-5 right-5 flex items-center justify-center w-11 h-11 rounded-full cursor-pointer"
-            style={{ background: "oklch(0.97 0.01 80 / 0.12)", border: "1px solid oklch(0.97 0.01 80 / 0.3)", color: "oklch(0.97 0.01 80)" }}
+            style={{ background: "oklch(0.985 0.002 95 / 0.12)", border: "1px solid oklch(0.985 0.002 95 / 0.3)", color: "oklch(0.985 0.002 95)" }}
           >
             <X size={20} />
           </button>
@@ -481,16 +468,16 @@ export default function Home() {
             <div className="reveal mb-12">
               <div
                 className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 The Lifecycle
               </div>
               <h2
                 className="leading-tight"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 400,
+                  fontWeight: 700,
                   color: "var(--text-heading)",
                 }}
               >
@@ -498,7 +485,7 @@ export default function Home() {
               </h2>
               <p
                 className="mt-4 max-w-xl text-base leading-relaxed"
-                style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
               >
                 Just as the salmon journeys through distinct phases of life, educators move through
                 stages of growth — each one building on the last, in a continuous cycle of learning.
@@ -524,7 +511,7 @@ export default function Home() {
                     />
                     <div
                       className="absolute top-3 right-4 text-5xl leading-none"
-                      style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, color: "oklch(0.97 0.01 80 / 0.25)" }}
+                      style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, color: "oklch(0.985 0.002 95 / 0.25)" }}
                     >
                       {stage.number}
                     </div>
@@ -532,17 +519,17 @@ export default function Home() {
                   <div className="p-6" style={{ background: "var(--card-bg)" }}>
                     <div
                       className="text-xs uppercase tracking-widest mb-1.5"
-                      style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+                      style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
                     >
                       {stage.subtitle}
                     </div>
                     <h3
                       className="text-2xl mb-2.5"
-                      style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, color: "var(--text-heading)" }}
+                      style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, color: "var(--text-heading)" }}
                     >
                       {stage.name}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+                    <p className="text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                       {stage.description}
                     </p>
                   </div>
@@ -554,17 +541,17 @@ export default function Home() {
             <div className="reveal mt-14 p-7 md:p-10" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)" }}>
               <div
                 className="text-xs uppercase tracking-widest mb-2"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 Try it
               </div>
               <h3
                 className="mb-2"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, fontSize: "clamp(1.5rem, 3vw, 2.1rem)", color: "var(--text-heading)" }}
+                style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, fontSize: "clamp(1.5rem, 3vw, 2.1rem)", color: "var(--text-heading)" }}
               >
                 Where are you in the cycle?
               </h3>
-              <p className="text-sm leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+              <p className="text-sm leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                 Pick the stage that feels most like your practice right now. The questions are in the
                 same spirit as the tool's own reflection pages — answer them honestly, then bring them
                 to a conversation, not a verdict.
@@ -577,7 +564,7 @@ export default function Home() {
                 <span
                   className="inline-flex items-center gap-2 px-7 py-3.5 text-sm transition-all duration-200 hover:opacity-80"
                   style={{
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     border: "1px solid oklch(from var(--crimson-mid) l c h / 0.5)",
                     color: "var(--crimson-mid)",
                     letterSpacing: "0.06em",
@@ -597,17 +584,17 @@ export default function Home() {
             <div className="reveal mb-12">
               <div
                 className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 Key Areas
               </div>
               <h2
                 className="leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 400, color: "var(--text-heading)" }}
+                style={{ fontFamily: "'Archivo', sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, color: "var(--text-heading)" }}
               >
                 What the tool assesses
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                 Four areas, drawn from what the community said matters. Accountability runs both
                 ways: the last area is teachers evaluating their administrators.
               </p>
@@ -636,17 +623,17 @@ export default function Home() {
                   {area.flag && (
                     <div
                       className="inline-block text-[11px] uppercase tracking-widest mb-3 px-2.5 py-1"
-                      style={{ fontFamily: "'DM Sans', sans-serif", background: "oklch(from var(--crimson-mid) l c h / 0.12)", color: "var(--crimson-mid)", letterSpacing: "0.12em" }}
+                      style={{ fontFamily: "'Inter', sans-serif", background: "oklch(from var(--crimson-mid) l c h / 0.12)", color: "var(--crimson-mid)", letterSpacing: "0.12em" }}
                     >
                       {area.flag}
                     </div>
                   )}
-                  <h3 className="text-xl mb-4 leading-snug" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, color: "var(--text-heading)" }}>
+                  <h3 className="text-xl mb-4 leading-snug" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "var(--text-heading)" }}>
                     {area.t}
                   </h3>
                   <ul className="m-0 p-0 flex flex-col gap-2" style={{ listStyle: "none" }}>
                     {area.items.map((it, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+                      <li key={j} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                         <span className="mt-[7px] shrink-0" style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--crimson-mid)" }} />
                         {it}
                       </li>
@@ -659,35 +646,35 @@ export default function Home() {
         </section>
 
         {/* ── INSIDE THE TOOL — the real printed booklet ── */}
-        <section id="inside-the-tool" className="py-24" style={{ background: "oklch(0.22 0.09 15)" }}>
+        <section id="inside-the-tool" className="py-24" style={{ background: "oklch(0.22 0.012 260)" }}>
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
               <div className="lg:col-span-2">
                 <div className="reveal">
                   <div
                     className="text-xs uppercase tracking-widest mb-4"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.72 0.07 70)", letterSpacing: "0.2em" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.72 0.006 95)", letterSpacing: "0.2em" }}
                   >
                     Inside the Tool
                   </div>
                   <h2
                     className="leading-tight mb-6"
                     style={{
-                      fontFamily: "'Cormorant Garamond', serif",
+                      fontFamily: "'Archivo', sans-serif",
                       fontSize: "clamp(2rem, 4vw, 3rem)",
-                      fontWeight: 400,
-                      color: "oklch(0.97 0.01 80)",
+                      fontWeight: 700,
+                      color: "oklch(0.985 0.002 95)",
                     }}
                   >
                     A real, working document — not a concept
                   </h2>
-                  <p className="text-base leading-relaxed mb-5" style={{ fontFamily: "'Lora', serif", color: "oklch(0.84 0.03 80)" }}>
+                  <p className="text-base leading-relaxed mb-5" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.84 0.006 95)" }}>
                     Twenty-four pages educators actually write in. Every evaluation area pairs
                     guiding reflection questions with three columns: self-evaluation,
                     administrator feedback, and coactive goal-setting — so growth is a
                     conversation, never a verdict.
                   </p>
-                  <p className="text-base leading-relaxed mb-8" style={{ fontFamily: "'Lora', serif", color: "oklch(0.84 0.03 80)" }}>
+                  <p className="text-base leading-relaxed mb-8" style={{ fontFamily: "'Inter', sans-serif", color: "oklch(0.84 0.006 95)" }}>
                     The artwork running through it is Stó:lō formline salmon — the same
                     lifecycle the framework follows.
                   </p>
@@ -697,9 +684,9 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium transition-all duration-200 hover:opacity-90"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      background: "oklch(0.55 0.18 15)",
-                      color: "oklch(0.97 0.01 80)",
+                      fontFamily: "'Inter', sans-serif",
+                      background: "oklch(0.60 0.19 30)",
+                      color: "oklch(0.985 0.002 95)",
                       letterSpacing: "0.06em",
                     }}
                   >
@@ -723,7 +710,7 @@ export default function Home() {
                         transform: `rotate(${s.rotate}deg) translateY(${i === 1 ? -14 : 6}px)`,
                         marginLeft: i === 0 ? 0 : "-4%",
                         boxShadow: "0 24px 60px oklch(0 0 0 / 0.45), 0 2px 10px oklch(0 0 0 / 0.3)",
-                        border: "1px solid oklch(0.97 0.01 80 / 0.12)",
+                        border: "1px solid oklch(0.985 0.002 95 / 0.12)",
                         zIndex: i === 1 ? 2 : 1,
                         position: "relative",
                       }}
@@ -741,22 +728,22 @@ export default function Home() {
             <div className="reveal mb-12">
               <div
                 className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 Films from the Community
               </div>
               <h2
                 className="leading-tight"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 400,
+                  fontWeight: 700,
                   color: "var(--text-heading)",
                 }}
               >
                 The people and place behind the framework
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                 SALMON wasn't written about a community — it was written with one. These films
                 show the school, the students, and the values that shape every page.
               </p>
@@ -781,22 +768,22 @@ export default function Home() {
             <div className="reveal mb-14">
               <div
                 className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 How It Was Built
               </div>
               <h2
                 className="leading-tight"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 400,
+                  fontWeight: 700,
                   color: "var(--text-heading)",
                 }}
               >
                 A Community-Led Process
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+              <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                 The SALMON Tool was not designed in isolation. Every step of its development
                 was guided by the voices, knowledge, and values of the Stó:lō community.
               </p>
@@ -813,7 +800,7 @@ export default function Home() {
                     <div
                       className="hidden md:flex absolute left-0 top-0 w-12 h-12 items-center justify-center text-sm font-medium"
                       style={{
-                        fontFamily: "'DM Sans', sans-serif",
+                        fontFamily: "'Inter', sans-serif",
                         background: "var(--section-main)",
                         border: "1px solid oklch(from var(--crimson-mid) l c h / 0.5)",
                         color: "var(--crimson-mid)",
@@ -825,17 +812,17 @@ export default function Home() {
                     <div className="p-6" style={{ background: "var(--card-bg)", border: "1px solid var(--card-border)" }}>
                       <div
                         className="text-xs uppercase tracking-widest mb-2 md:hidden"
-                        style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
+                        style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.15em" }}
                       >
                         Step {step.num}
                       </div>
                       <h3
                         className="text-xl mb-2"
-                        style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, color: "var(--text-heading)" }}
+                        style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, color: "var(--text-heading)" }}
                       >
                         {step.title}
                       </h3>
-                      <p className="text-sm leading-relaxed" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+                      <p className="text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                         {step.body}
                       </p>
                     </div>
@@ -849,7 +836,7 @@ export default function Home() {
                 <span
                   className="inline-flex items-center gap-2 px-7 py-3.5 text-sm transition-all duration-200 hover:opacity-80"
                   style={{
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     border: "1px solid oklch(from var(--crimson-mid) l c h / 0.5)",
                     color: "var(--crimson-mid)",
                     letterSpacing: "0.06em",
@@ -870,16 +857,16 @@ export default function Home() {
               <h2
                 className="mb-6 leading-tight"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                  fontWeight: 300,
+                  fontWeight: 800,
                   color: "var(--text-heading)",
                 }}
               >
                 Ready to explore the{" "}
                 <em style={{ color: "var(--primary)", fontStyle: "italic" }}>SALMON</em> framework?
               </h2>
-              <p className="text-base leading-relaxed mb-10" style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}>
+              <p className="text-base leading-relaxed mb-10" style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}>
                 Download the evaluation tool and see how the SALMON framework can support
                 culturally responsive educator growth in your community.
               </p>
@@ -890,9 +877,9 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium transition-all duration-200 hover:opacity-90"
                   style={{
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     background: "var(--primary)",
-                    color: "oklch(0.97 0.01 80)",
+                    color: "oklch(0.985 0.002 95)",
                     letterSpacing: "0.06em",
                   }}
                 >
@@ -902,7 +889,7 @@ export default function Home() {
                   <span
                     className="inline-flex items-center gap-2 px-8 py-4 text-sm transition-all duration-200 hover:opacity-80"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Inter', sans-serif",
                       border: "1px solid oklch(from var(--crimson-mid) l c h / 0.4)",
                       color: "var(--text-heading)",
                       letterSpacing: "0.06em",

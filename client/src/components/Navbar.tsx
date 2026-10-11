@@ -27,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   const crimson = "var(--crimson-mid)";
-  const navTextColor = scrolled ? "var(--crimson-mid)" : "oklch(0.95 0.015 80)"; // cream over the dark top bar, crimson once scrolled onto light
+  const navTextColor = scrolled ? "var(--crimson-mid)" : "oklch(0.985 0.002 95)"; // cream over the dark top bar, crimson once scrolled onto light
   const navActiveWeight = "600";
 
   return (
@@ -48,7 +48,7 @@ export default function Navbar() {
             <span
               className="font-bold tracking-[0.18em] uppercase"
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Archivo', sans-serif",
                 fontSize: "1.25rem",
                 color: navTextColor,
                 letterSpacing: "0.18em",
@@ -67,7 +67,7 @@ export default function Navbar() {
               <span
                 className="text-sm relative group"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   color: navTextColor,
                   fontWeight: location === link.href ? navActiveWeight : "400",
                   letterSpacing: "0.04em",
@@ -92,9 +92,9 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="px-5 py-2 text-sm transition-all duration-200 hover:opacity-90"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               background: crimson,
-              color: "oklch(0.97 0.01 80)",
+              color: "oklch(0.985 0.002 95)",
               fontWeight: "500",
               letterSpacing: "0.05em",
             }}
@@ -129,7 +129,7 @@ export default function Navbar() {
               <span
                 className="block py-2 text-base"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   color: navTextColor,
                   fontWeight: location === link.href ? "600" : "400",
                 }}
@@ -145,9 +145,9 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="inline-block px-5 py-2.5 text-sm text-center mt-1"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               background: crimson,
-              color: "oklch(0.97 0.01 80)",
+              color: "oklch(0.985 0.002 95)",
               fontWeight: "500",
             }}
             onClick={() => setMenuOpen(false)}

@@ -108,16 +108,16 @@ export default function Journey() {
         <div className="container">
           <div
             className="text-xs uppercase tracking-widest mb-4"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+            style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
           >
             The SALMON Journey
           </div>
           <h1
             className="leading-none mb-6"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: "clamp(3rem, 8vw, 6rem)",
-              fontWeight: 300,
+              fontWeight: 800,
               color: "var(--text-heading)",
             }}
           >
@@ -126,7 +126,7 @@ export default function Journey() {
           </h1>
           <p
             className="max-w-xl text-base leading-relaxed"
-            style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}
+            style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
           >
             The SALMON model mirrors the lifecycle of the Pacific salmon — a journey of
             growth, challenge, and return. Each stage honours where an educator is, while
@@ -152,7 +152,7 @@ export default function Journey() {
                 onClick={() => scrollToStage(stage.id)}
                 className="px-6 py-4 text-sm transition-all duration-200 relative whitespace-nowrap"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   color: activeStage === stage.id ? "var(--crimson-mid)" : "var(--text-muted)",
                   fontWeight: activeStage === stage.id ? "500" : "400",
                   borderBottom: activeStage === stage.id ? "2px solid var(--crimson-mid)" : "2px solid transparent",
@@ -160,7 +160,7 @@ export default function Journey() {
               >
                 <span
                   className="text-xs mr-2"
-                  style={{ color: "var(--crimson-mid)", opacity: 0.6, fontFamily: "'Cormorant Garamond', serif" }}
+                  style={{ color: "var(--crimson-mid)", opacity: 0.6, fontFamily: "'Archivo', sans-serif" }}
                 >
                   {stage.number}
                 </span>
@@ -196,9 +196,9 @@ export default function Journey() {
                     <div
                       className="absolute bottom-4 right-5 text-8xl leading-none"
                       style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontWeight: 300,
-                        color: "oklch(0.97 0.01 80 / 0.15)",
+                        fontFamily: "'Archivo', sans-serif",
+                        fontWeight: 800,
+                        color: "oklch(0.985 0.002 95 / 0.15)",
                       }}
                     >
                       {stage.number}
@@ -210,16 +210,16 @@ export default function Journey() {
                 <div className={i % 2 === 1 ? "lg:order-1" : ""}>
                   <div
                     className="text-xs uppercase tracking-widest mb-3"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
                   >
                     Stage {stage.number} — {stage.subtitle}
                   </div>
                   <h2
                     className="mb-6 leading-none"
                     style={{
-                      fontFamily: "'Cormorant Garamond', serif",
+                      fontFamily: "'Archivo', sans-serif",
                       fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                      fontWeight: 400,
+                      fontWeight: 700,
                       color: "var(--text-heading)",
                     }}
                   >
@@ -231,7 +231,7 @@ export default function Journey() {
                       <p
                         key={j}
                         className="text-base leading-relaxed"
-                        style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}
+                        style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
                       >
                         {para}
                       </p>
@@ -242,7 +242,7 @@ export default function Journey() {
                   <div>
                     <div
                       className="text-xs uppercase tracking-widest mb-3"
-                      style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)", letterSpacing: "0.15em" }}
+                      style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)", letterSpacing: "0.15em" }}
                     >
                       Key Qualities
                     </div>
@@ -252,7 +252,7 @@ export default function Journey() {
                           key={j}
                           className="px-3 py-1.5 text-xs"
                           style={{
-                            fontFamily: "'DM Sans', sans-serif",
+                            fontFamily: "'Inter', sans-serif",
                             background: "oklch(from var(--crimson-mid) l c h / 0.1)",
                             border: "1px solid oklch(from var(--crimson-mid) l c h / 0.3)",
                             color: "var(--text-heading)",
@@ -275,16 +275,16 @@ export default function Journey() {
             <div className="reveal max-w-3xl mx-auto text-center">
               <div
                 className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
               >
                 Guiding the Journey
               </div>
               <h2
                 className="mb-6 leading-tight"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 400,
+                  fontWeight: 700,
                   color: "var(--text-heading)",
                 }}
               >
@@ -292,7 +292,7 @@ export default function Journey() {
               </h2>
               <p
                 className="text-base leading-relaxed mb-8"
-                style={{ fontFamily: "'Lora', serif", color: "var(--text-body)" }}
+                style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-body)" }}
               >
                 The foundation of this study was rooted in deep relationships — with people,
                 with place, and with the teachings carried by those who have long served their
@@ -323,7 +323,7 @@ export default function Journey() {
                     style={{
                       background: "oklch(from var(--crimson-mid) l c h / 0.15)",
                       border: "1px solid oklch(from var(--crimson-mid) l c h / 0.4)",
-                      fontFamily: "'Cormorant Garamond', serif",
+                      fontFamily: "'Archivo', sans-serif",
                       color: "var(--crimson-mid)",
                       fontWeight: 500,
                     }}
@@ -332,13 +332,13 @@ export default function Journey() {
                   </div>
                   <div
                     className="text-sm font-medium mb-1"
-                    style={{ fontFamily: "'Lora', serif", color: "var(--text-heading)" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-heading)" }}
                   >
                     {person.name}
                   </div>
                   <div
                     className="text-xs"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)" }}
+                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-muted)" }}
                   >
                     {person.role}
                   </div>
