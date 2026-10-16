@@ -4,7 +4,6 @@
  * Illustrations live in R2 (salmon-tool/lifecycle). Images are shown whole, never cropped by CSS.
  */
 const RED = "#9B2335";
-const DEEP = "#5d131e";
 const INK = "#1a1a18";
 const BODY = "#3d3d39";
 const RULE = "#d4cfc6";
@@ -20,65 +19,43 @@ export const STAGES = [
 function Card({ s, href }: { s: (typeof STAGES)[number]; href?: string }) {
   const body = (
     <>
-      <img src={s.img} alt={s.alt} width={1600} height={1020} loading="lazy" className="w-full h-auto block" style={{ borderBottom: `1px solid ${RULE}` }} />
-      <div className="p-5 sm:p-6">
-        <p className="m-0 mb-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: RED }}>
-          Stage {s.n} &middot; {s.sub}
-        </p>
-        <h3 className="m-0 mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 24, color: INK, lineHeight: 1.2 }}>{s.name}</h3>
-        <p className="m-0" style={{ fontFamily: "'Source Serif 4', serif", fontSize: 15.5, color: BODY, lineHeight: 1.65 }}>{s.desc}</p>
+      <div className="overflow-hidden" style={{ border: `1px solid ${RULE}` }}>
+        <img src={s.img} alt={s.alt} width={1600} height={1020} loading="lazy" className="photo-zoom w-full h-auto block" style={{ opacity: 0.92 }} />
       </div>
+      <p className="m-0 mt-4 mb-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11.5, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: RED }}>
+        Stage {s.n} &middot; {s.sub}
+      </p>
+      <h3 className="m-0 mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 22, color: INK, lineHeight: 1.2 }}>{s.name}</h3>
+      <p className="m-0" style={{ fontFamily: "'Source Serif 4', serif", fontSize: 15.5, color: BODY, lineHeight: 1.65 }}>{s.desc}</p>
     </>
   );
-  const style = { background: "#ffffff", border: `1px solid ${RULE}`, boxShadow: "0 1px 4px rgba(0,0,0,0.04)" };
-  return href ? (
-    <a href={href} className="block h-full no-underline transition-shadow duration-200 hover:shadow-md" style={style}>{body}</a>
-  ) : (
-    <div className="h-full" style={style}>{body}</div>
-  );
+  return href ? <a href={href} className="card-lift block no-underline">{body}</a> : <div className="card-lift">{body}</div>;
 }
 
-function Arrow({ dir }: { dir: "right" | "down" | "left" | "up" }) {
-  const rot = { right: 0, down: 90, left: 180, up: 270 }[dir];
-  return (
-    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true" style={{ transform: `rotate(${rot}deg)`, display: "block" }}>
-      <circle cx="22" cy="22" r="21" fill={RED} />
-      <path d="M13 22 H29 M23 15 L30 22 L23 29" stroke="#fff" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-/** linkTo: when set (e.g. "/journey"), each card links to that page's stage section. */
-export default function Lifecycle({ linkTo, bg = "#efeae1" }: { linkTo?: string; bg?: string }) {
-  const [s1, s2, s3, s4] = STAGES;
+/** A quiet row of four stages; the last returns to the first. linkTo is kept for compatibility. */
+export default function Lifecycle({ linkTo }: { linkTo?: string; bg?: string }) {
   const href = (id: string) => (linkTo ? `${linkTo}#${id}` : undefined);
   return (
     <div>
-      {/* Desktop: a true clockwise cycle, Spawning top left, Fry top right, Smolt bottom right, Returning adult bottom left */}
-      <div className="hidden lg:block relative">
-        <ol className="list-none m-0 p-0 grid grid-cols-2" style={{ columnGap: 112, rowGap: 96 }}>
-          <li><Card s={s1} href={href(s1.id)} /></li>
-          <li><Card s={s2} href={href(s2.id)} /></li>
-          <li style={{ gridColumn: 2, gridRow: 2 }}><Card s={s3} href={href(s3.id)} /></li>
-          <li style={{ gridColumn: 1, gridRow: 2 }}><Card s={s4} href={href(s4.id)} /></li>
-        </ol>
-        <div className="absolute" style={{ left: "50%", top: "22%", transform: "translate(-50%, -50%)" }}><Arrow dir="right" /></div>
-        <div className="absolute" style={{ left: "75%", top: "50%", transform: "translate(-50%, -50%)" }}><Arrow dir="down" /></div>
-        <div className="absolute" style={{ left: "50%", top: "78%", transform: "translate(-50%, -50%)" }}><Arrow dir="left" /></div>
-        <div className="absolute" style={{ left: "25%", top: "50%", transform: "translate(-50%, -50%)" }}><Arrow dir="up" /></div>
-        <div className="absolute flex items-center justify-center text-center" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: 168, height: 168, borderRadius: "50%", background: DEEP, boxShadow: `0 0 0 10px ${bg}` }}>
-          <p className="m-0 px-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 19, lineHeight: 1.25, color: "#ffffff" }}>Growth is a cycle, not a ladder</p>
-        </div>
-      </div>
-
-      {/* Phones and tablets: the same cycle as a sequence that returns to the start */}
-      <ol className="lg:hidden list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-5">
-        {STAGES.map((s) => (
-          <li key={s.id}><Card s={s} href={href(s.id)} /></li>
+      {/* wide: four stages with arrow columns in the gaps */}
+      <ol className="list-none m-0 p-0 hidden xl:grid items-start" style={{ gridTemplateColumns: "minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr)" }}>
+        {STAGES.map((s, i) => (
+          <li key={s.id} className="contents">
+            <div><Card s={s} href={href(s.id)} /></div>
+            {i < 3 && (
+              <span aria-hidden="true" className="flex items-center justify-center" style={{ color: RED, height: 120 }}>
+                <svg width="24" height="24" viewBox="0 0 28 28"><path d="M4 14 H22 M16 8 L22 14 L16 20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </span>
+            )}
+          </li>
         ))}
       </ol>
-      <p className="lg:hidden m-0 mt-5 flex items-center gap-3" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 18, color: INK }}>
-        <span aria-hidden="true" style={{ display: "inline-flex" }}><Arrow dir="up" /></span>
+      {/* narrower: a two-column grid with clear gutters */}
+      <ol className="list-none m-0 p-0 grid xl:hidden grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+        {STAGES.map((s) => <li key={s.id}><Card s={s} href={href(s.id)} /></li>)}
+      </ol>
+      <p className="m-0 mt-8 flex items-center gap-3" style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 19, color: INK }}>
+        <span aria-hidden="true" style={{ color: RED, fontStyle: "normal" }}>&#8634;</span>
         Growth is a cycle, not a ladder: returning adults mentor the next beginners.
       </p>
     </div>
