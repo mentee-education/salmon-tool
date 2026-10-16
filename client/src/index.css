@@ -319,3 +319,19 @@ html { scroll-behavior: smooth; }
 
 /* every section anchor clears the sticky bar: compact nav (60px) plus 16px */
 [id] { scroll-margin-top: 76px !important; }
+
+/* outlined numeral + solid copy: the solid copy wipes up from the baseline (whole glyph, no clipping) */
+.fillnum-solid { clip-path: inset(100% 0 0 0); transition: clip-path .4s ease-out; }
+.hv:is(:hover, :focus-within) .fillnum-solid,
+.theme-panel:is(:hover, :focus-within) .fillnum-solid,
+.fillnum.is-filled .fillnum-solid,
+.theme-panel.is-filled .fillnum-solid { clip-path: inset(0); }
+.theme-num { opacity: .4; transition: opacity .4s ease-out, transform .4s ease-out; }
+.theme-panel:is(:hover, :focus-within) .theme-num, .theme-panel.is-filled .theme-num { opacity: 1; transform: translateY(-4px) scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .fillnum-solid { transition: none; } }
+/* the process track: a fine crimson line from one step badge to the next (badges are 64px, centred at 32px) */
+.step-track { width: 2px; height: 64px; margin: 0 0 28px 31px; background: linear-gradient(#9B2335, rgba(155,35,53,0.25)); }
+
+/* no lone word on a last line: balanced headings and labels, pretty body text */
+h1, h2, h3, h4, figcaption, blockquote p, dt { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }

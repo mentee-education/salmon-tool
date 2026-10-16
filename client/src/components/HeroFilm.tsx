@@ -6,7 +6,7 @@
  * is hidden, when it scrolls out of view, or when another film on the page starts.
  */
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
-import { Play, Volume2 } from "lucide-react";
+import { Play, Volume2, VolumeX } from "lucide-react";
 
 export type HeroFilmHandle = { play: () => void };
 
@@ -14,7 +14,7 @@ type Props = { id: string; poster: string; title: string; credit?: string; dark?
 
 const EVENT = "salmon:film-play";
 
-type YTPlayer = { playVideo(): void; mute(): void; unMute(): void; getPlayerState(): number; destroy(): void };
+type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; isMuted(): boolean; setVolume(v: number): void; getPlayerState(): number; destroy(): void };
 declare global {
   interface Window { YT?: { Player: new (el: HTMLElement, opts: unknown) => YTPlayer }; onYouTubeIframeAPIReady?: () => void }
 }
@@ -42,55 +42,100 @@ const HeroFilm = forwardRef<HeroFilmHandle, Props>(function HeroFilm({ id, poste
   const mountRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YTPlayer | null>(null);
   const timerRef = useRef<number | undefined>(undefined);
+  const readyRef = useRef(false);
+  const playingRef = useRef(false);
+  useEffect(() => { playingRef.current = playing; }, [playing]);
 
   const stop = () => {
     window.clearTimeout(timerRef.current);
-    try { playerRef.current?.destroy(); } catch { /* already gone */ }
-    playerRef.current = null;
+    try { playerRef.current?.pauseVideo(); } catch { /* not ready */ }
     setMuted(false);
     setPlaying(false);
     frameRef.current?.setAttribute("data-state", "cover");
   };
 
-  const start = () => {
-    window.dispatchEvent(new CustomEvent(EVENT, { detail: id }));
-    setPlaying(true);
+  const report = () => {
+    const p = playerRef.current;
+    if (!p || !frameRef.current) return;
+    try { frameRef.current.setAttribute("data-muted", String(p.isMuted())); } catch { /* not ready */ }
   };
 
-  // build the player once the mount point exists (right after the cover click)
-  useEffect(() => {
-    if (!playing || playerRef.current) return;
-    let cancelled = false;
-    loadApi().then(() => {
-      if (cancelled || !mountRef.current || !window.YT) return;
-      const host = document.createElement("div");
-      mountRef.current.appendChild(host);
-      playerRef.current = new window.YT.Player(host, {
-        videoId: id,
-        host: "https://www.youtube-nocookie.com",
-        width: "100%",
-        height: "100%",
-        playerVars: { autoplay: 1, playsinline: 1, rel: 0, modestbranding: 1 },
-        events: {
-          onReady: (e: { target: YTPlayer }) => {
-            e.target.playVideo();
-            timerRef.current = window.setTimeout(() => {
-              const p = playerRef.current;
-              if (p && p.getPlayerState() !== 1) { p.mute(); p.playVideo(); setMuted(true); }
-            }, 800);
-          },
-          onStateChange: (e: { data: number }) => { frameRef.current?.setAttribute("data-state", String(e.data)); },
+  // audible playback was refused: play muted, and restore sound on the very next interaction
+  const fallBack = () => {
+    const p = playerRef.current; if (!p) return;
+    p.mute(); p.playVideo(); setMuted(true); report();
+    const restore = () => { const q = playerRef.current; if (q) { q.unMute(); q.setVolume(100); setMuted(false); window.setTimeout(report, 50); } };
+    window.addEventListener("pointerdown", restore, { once: true });
+    window.addEventListener("keydown", restore, { once: true });
+  };
+
+  // build the player synchronously inside the click, so audible playback counts as a user gesture
+  const build = (autoplay = true) => {
+    if (playerRef.current || !mountRef.current || !window.YT?.Player) return false;
+    const host = document.createElement("div");
+    mountRef.current.innerHTML = "";
+    mountRef.current.appendChild(host);
+    playerRef.current = new window.YT.Player(host, {
+      videoId: id,
+      host: "https://www.youtube-nocookie.com",
+      width: "100%",
+      height: "100%",
+      playerVars: { autoplay: autoplay ? 1 : 0, playsinline: 1, rel: 0, modestbranding: 1, mute: 0 },
+      events: {
+        onReady: (e: { target: YTPlayer }) => {
+          readyRef.current = true;
+          if (!autoplay) return;
+          e.target.unMute(); e.target.setVolume(100); e.target.playVideo();
+          // safety net: if nothing has started after a few seconds, try muted playback
+          timerRef.current = window.setTimeout(() => { const p = playerRef.current; if (p && p.getPlayerState() === -1) fallBack(); }, 5000);
         },
-      });
-      const iframe = mountRef.current.querySelector("iframe");
-      if (iframe) { iframe.setAttribute("title", title); iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen"); }
+        // YouTube reports this when the browser refuses audible autoplay (Safari, strict settings)
+        onAutoplayBlocked: () => { frameRef.current?.setAttribute("data-blocked", "true"); fallBack(); },
+        onStateChange: (e: { data: number }) => { if (playingRef.current) { frameRef.current?.setAttribute("data-state", String(e.data)); report(); } },
+      },
     });
-    return () => { cancelled = true; };
-  }, [playing, id, title]);
+    const iframe = mountRef.current.querySelector("iframe");
+    if (iframe) { iframe.setAttribute("title", title); iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen"); }
+    return true;
+  };
+
+  const start = () => {
+    window.dispatchEvent(new CustomEvent(EVENT, { detail: id }));
+    playingRef.current = true;
+    setPlaying(true);
+    const p = playerRef.current;
+    if (p && readyRef.current) {
+      // the player is already loaded: unmute and play inside the click itself (a user gesture)
+      p.unMute(); p.setVolume(100); p.playVideo();
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => { const q = playerRef.current; if (q && q.getPlayerState() === -1) fallBack(); }, 5000);
+      return;
+    }
+    if (!build(true)) loadApi().then(() => build(true));
+  };
+
+  const toggleSound = () => {
+    const p = playerRef.current; if (!p) return;
+    if (muted) { p.unMute(); p.setVolume(100); setMuted(false); } else { p.mute(); setMuted(true); }
+    window.setTimeout(report, 50);
+  };
 
   useImperativeHandle(ref, () => ({
     play: () => { frameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }); start(); },
   }));
+
+  useEffect(() => {
+    loadApi();
+    const el = frameRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      loadApi().then(() => { if (!playerRef.current) build(false); });
+    }, { rootMargin: "600px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const other = (e: Event) => { if ((e as CustomEvent).detail !== id && playerRef.current) stop(); };
@@ -122,9 +167,8 @@ const HeroFilm = forwardRef<HeroFilmHandle, Props>(function HeroFilm({ id, poste
   return (
     <div>
       <div ref={frameRef} data-film={id} data-state="cover" className="film-cover relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9", background: "#0f0f0d" }}>
-        {playing ? (
-          <div ref={mountRef} className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0" />
-        ) : (
+        <div ref={mountRef} className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0" />
+        {!playing && (
           <button type="button" onClick={start} aria-label={`Play the film: ${title}`} className="group absolute inset-0 w-full h-full cursor-pointer" style={{ border: 0, padding: 0, background: "none" }}>
             <img src={poster} alt="" width={1920} height={1080} className="film-poster absolute inset-0 w-full h-full object-cover" />
             <span className="film-sheen absolute inset-0" />
@@ -140,11 +184,9 @@ const HeroFilm = forwardRef<HeroFilmHandle, Props>(function HeroFilm({ id, poste
         </p>
         {playing && (
           <div className="flex gap-2 shrink-0">
-            {muted && (
-              <button type="button" onClick={() => { playerRef.current?.unMute(); setMuted(false); }} className="btn-lift inline-flex items-center gap-2 cursor-pointer" style={small}>
-                <Volume2 size={14} /> Tap for sound
-              </button>
-            )}
+            <button type="button" aria-pressed={muted} onClick={toggleSound} className="btn-lift inline-flex items-center gap-2 cursor-pointer" style={small}>
+              {muted ? <><Volume2 size={14} /> Sound on</> : <><VolumeX size={14} /> Sound off</>}
+            </button>
             <button type="button" onClick={stop} className="btn-lift cursor-pointer" style={small}>Back to photo</button>
           </div>
         )}

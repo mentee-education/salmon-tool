@@ -11,8 +11,8 @@ export const PRIMARY = [
   { id: "committee", label: "The Committee" },
   { id: "process", label: "How It Was Built" },
   { id: "findings", label: "What We Found" },
-  { id: "tool", label: "The Tool" },
   { id: "films", label: "Films" },
+  { id: "tool", label: "The Tool" },
   { id: "materials", label: "Research Materials" },
 ];
 export const MORE = [
@@ -23,10 +23,10 @@ export const MORE = [
 ];
 // page order, for scroll-spy and the full menu (Title Case everywhere in navigation)
 export const SECTIONS = [
-  { id: "films", label: "Films" }, { id: "committee", label: "The Committee" }, { id: "process", label: "How It Was Built" },
-  { id: "findings", label: "What We Found" }, { id: "cycle", label: "Growth Cycle" }, { id: "tool", label: "The Tool" },
-  { id: "questions", label: "Guiding Questions" }, { id: "materials", label: "Research Materials" }, { id: "faq", label: "About the Research" },
-  { id: "learn", label: "Learn More" },
+  { id: "committee", label: "The Committee" }, { id: "process", label: "How It Was Built" },
+  { id: "findings", label: "What We Found" }, { id: "cycle", label: "Growth Cycle" }, { id: "films", label: "Films" },
+  { id: "tool", label: "The Tool" }, { id: "questions", label: "Guiding Questions" }, { id: "materials", label: "Research Materials" },
+  { id: "faq", label: "About the Research" }, { id: "learn", label: "Learn More" },
 ];
 
 const RED = "#9B2335";

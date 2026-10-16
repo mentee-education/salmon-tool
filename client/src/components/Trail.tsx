@@ -20,14 +20,16 @@ const STEPS = [
 ];
 
 function Text({ i, t }: { i: number; t: string }) {
-  if (i === 0) return <p className="m-0" style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "clamp(20px, 1.9vw, 24px)", lineHeight: 1.35, color: INK }}>&ldquo;{t}&rdquo;</p>;
+  // one family, one size; the progression shows only through colour and a single emphasis
+  const base: React.CSSProperties = { fontFamily: "'Source Serif 4', serif", fontSize: 17, lineHeight: 1.5, fontWeight: 400 };
+  if (i === 0) return <p className="m-0" style={{ ...base, fontStyle: "italic", color: BODY }}>&ldquo;{t}&rdquo;</p>;
   if (i === 3) return (
     <div>
-      <p className="m-0" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "clamp(18px, 1.7vw, 21px)", lineHeight: 1.3, color: RED }}>{t}</p>
+      <p className="m-0" style={{ ...base, color: RED }}>{t}</p>
       <span aria-hidden="true" className="block mt-3" style={{ width: 40, height: 2, background: RED }} />
     </div>
   );
-  return <p className="m-0" style={{ fontFamily: "'Source Serif 4', serif", fontSize: i === 1 ? 17 : 15.5, letterSpacing: i === 2 ? "0.01em" : undefined, lineHeight: 1.45, color: i === 1 ? BODY : INK, fontWeight: i === 2 ? 600 : 400 }}>{t}</p>;
+  return <p className="m-0" style={{ ...base, color: INK }}>{t}</p>;
 }
 
 function Label({ k }: { k: string }) {
@@ -42,7 +44,7 @@ function Marker({ i }: { i: number }) {
 export default function Trail() {
   return (
     <figure className="m-0">
-      <figcaption className="mb-6" style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 20, color: INK }}>One trail, from interview to theme</figcaption>
+      <figcaption className="mb-6" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 22, color: INK }}>One Trail, From Interview to Theme</figcaption>
 
       {/* wide */}
       <div className="hidden md:block relative">

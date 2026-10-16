@@ -2,13 +2,13 @@
  * Background sequence (adjacent sections never share a background; only two dark bands):
  *   hero (headline + school film)                        PARCH2 #efe4d0
  *   research in brief (question, definition, numbers)    OX    #3a0c14   dark band 1
- *   films (tone: song + educator's words)                 WARM
  *   committee                                             PARCH #f3ece0
  *   who did what                                          WARM
  *   process (interlude band inside: WARM)                 PARCH
  *   photographs                                           SLATE #dde3df
  *   findings                                              WARM
  *   growth cycle                                          PARCH
+ *   films (For Our Culture, full width)                   WARM
  *   the tool                                              DEEP  #5d131e   dark band 2
  *   guiding questions                                     PARCH
  *   research materials                                    SLATE
@@ -36,7 +36,7 @@ import Materials from "@/components/Materials";
 import People from "@/components/People";
 import HeroFilm, { type HeroFilmHandle } from "@/components/HeroFilm";
 import GuidingQuestions from "@/components/GuidingQuestions";
-import { COMMITTEE, R2_BASE } from "@/data/committee";
+import { COMMITTEE, PAIR_PHOTO, R2_BASE } from "@/data/committee";
 import { glance, structure, participants, themes, areas, GUIDE, QUESTIONNAIRE, PHASES, CONSENT } from "@/data/research";
 import { ChevronLeft, ChevronRight, Download, Play } from "lucide-react";
 
@@ -114,7 +114,6 @@ function Section({ id, bg, children, className = "" }: { id?: string; bg: string
   );
 }
 
-/* Members who share one photo URL (a photo of them together) become one wide card with both names. */
 function CommitteeGrid() {
   const cards: { members: typeof COMMITTEE; photo: string }[] = [];
   for (const m of COMMITTEE) {
@@ -278,6 +277,30 @@ function CountUp({ to, light = false }: { to: number; light?: boolean }) {
   return <span ref={ref} aria-hidden="true" className="block" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(44px, 4.4vw, 64px)", color: light ? PINK : RED, lineHeight: 1 }}>{n}</span>;
 }
 
+/* An outlined numeral with a solid copy laid over it; hover, focus or (on touch) scrolling into view wipes the
+   solid copy up from the baseline with clip-path, so the whole glyph fills, bowls and overhangs included. */
+function FillNum({ children, size, className = "", style }: { children: React.ReactNode; size: string; className?: string; style?: React.CSSProperties }) {
+  const glyph: React.CSSProperties = { fontFamily: display, fontWeight: 800, fontSize: size, lineHeight: 1.15, display: "block", padding: "0 0.06em 0.08em" };
+  return (
+    <span aria-hidden="true" className={`fillnum ${className}`} style={{ position: "relative", display: "inline-block", ...style }}>
+      <span className="fillnum-outline" style={{ ...glyph, color: "transparent", WebkitTextStroke: "1.4px #9B2335" }}>{children}</span>
+      <span className="fillnum-solid" style={{ ...glyph, position: "absolute", inset: 0, color: "#9B2335" }}>{children}</span>
+    </span>
+  );
+}
+
+function GalleryImage({ src, alt, cap }: { src: string; alt: string; cap: string }) {
+  return (
+    <figure className="m-0">
+      <div className="overflow-hidden" style={{ aspectRatio: "16 / 9" }}><img src={`${R2_BASE}/stills/${src}.jpg`} alt={alt} width={1600} height={900} loading="lazy" className="photo-zoom block w-full h-full object-cover" /></div>
+      <figcaption className="mt-2.5 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.45 }}>
+        <span aria-hidden="true" style={{ display: "inline-block", width: 20, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
+        <span>{cap}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 function StepHead({ n, title, lede }: { n: string; title: string; lede: string }) {
   return (
     <div className="grid grid-cols-[auto_1fr] gap-5 sm:gap-8 items-start mb-8">
@@ -369,7 +392,7 @@ export default function OnePage() {
   useEffect(() => {
     if (!window.matchMedia("(hover: none)").matches) return;
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("is-filled"); }), { threshold: 0.6 });
-    document.querySelectorAll(".num-fill").forEach((el) => io.observe(el));
+    document.querySelectorAll(".fillnum").forEach((el) => io.observe(el));
     document.querySelectorAll(".theme-panel").forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
@@ -427,10 +450,10 @@ export default function OnePage() {
                         &ldquo;What does effective teaching, and fair evaluation of it, look like here?&rdquo;
                       </p>
                     </blockquote>
-                    <p className="m-0 mt-5" style={{ fontFamily: sans, fontSize: 13.5, color: "rgba(253,252,249,0.78)", letterSpacing: "0.02em" }}>
-                      <span className="sr-only">SALMON stands for Seabird Assessment for Learning, Mentorship and Ongoing Nurturing.</span>
+                    <p className="m-0 mt-6" style={{ fontFamily: sans, fontSize: 13.5, color: "rgba(253,252,249,0.8)", letterSpacing: "0.02em", textWrap: "balance" }}>
+                      <span className="block mb-1" style={{ fontWeight: 700, color: "#fdfcf9", letterSpacing: "0.14em", fontSize: 12 }}>SALMON</span>
+                      <span className="sr-only">stands for Seabird Assessment for Learning, Mentorship and Ongoing Nurturing.</span>
                       <span aria-hidden="true">
-                        <span style={{ fontWeight: 700, color: "#fdfcf9", letterSpacing: "0.08em" }}>SALMON</span>{" "}&middot;{" "}
                         {[["S", "eabird"], ["A", "ssessment for"], ["L", "earning,"], ["M", "entorship and"], ["O", "ngoing"], ["N", "urturing"]].map(([x, y], i) => (
                           <span key={x}>{i ? " " : ""}<span className="whitespace-nowrap"><span style={{ color: PINK }}>{x}</span>{y}</span></span>
                         ))}
@@ -454,39 +477,37 @@ export default function OnePage() {
             </div>
         </section>
 
-        {/* ===== TONE: the song recorded at the school, beside an educator's own words (dark band) ===== */}
-        <section id="films" className="px-4 sm:px-6 py-14 sm:py-20 scroll-mt-24" style={{ backgroundColor: WARM }}>
-          <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)] gap-10 lg:gap-16 items-center">
+
+{/* ===== COMMITTEE: the committee photo from the tool, beside the intro and a typographic roster ===== */}
+        <Section id="committee" bg={PARCH}>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
             <FadeIn>
               <figure className="m-0">
-                <blockquote className="m-0">
-                  <p className="m-0 quote-mark" style={{ fontFamily: display, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(24px, 2.6vw, 34px)", color: INK, lineHeight: 1.3 }}>
-                    We need to come together and really be on the same page and strive to achieve the vision of the Elders
-                    that first created the school.
-                  </p>
-                </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3" style={{ fontFamily: sans, fontSize: 13, color: MUTED }}>
-                  <span aria-hidden="true" style={{ display: "inline-block", width: 32, height: 1, background: RED }} />
-                  An educator at the school, interviewed for the research
+                <div className="overflow-hidden" style={{ boxShadow: "0 18px 50px rgba(29,23,20,0.14)" }}>
+                  <img src={PAIR_PHOTO} alt="Kweláxtelot (Karla) Kay, left, and Siyámíya (Dianna) Kay, right, in woven hats and blankets" width={889} height={768} loading="lazy" className="photo-zoom block w-full h-auto" />
+                </div>
+                <figcaption className="mt-3 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: MUTED, lineHeight: 1.5 }}>
+                  <span aria-hidden="true" style={{ display: "inline-block", width: 24, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
+                  <span>Kweláxtelot (Karla) Kay, left, and Siyámíya (Dianna) Kay, right. From the SALMON tool.</span>
                 </figcaption>
               </figure>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <HeroFilm id="H3yrPfDtOWQ" poster={`https://i.ytimg.com/vi/H3yrPfDtOWQ/maxresdefault.jpg`} title="For Our Culture" credit="N'we Jinan Artists, recorded at Seabird Island Community School" contained />
+              <H2>The Stó:lō Education Committee</H2>
+              <Lede className="mb-8 dropcap">
+                Four respected Stó:lō educators guided the work from the start. They shaped the interview questions, kept the
+                project accountable to community values and reviewed the drafts before anything was final.
+              </Lede>
+              <ul className="list-none m-0 p-0" style={{ borderBottom: `1px solid ${RULE}` }}>
+                {COMMITTEE.map((m) => (
+                  <li key={m.name} className="hv py-4" style={{ borderTop: `1px solid ${RULE}` }}>
+                    <p className="hv-title m-0" style={{ fontFamily: display, fontWeight: 700, fontSize: 21, color: INK, lineHeight: 1.3 }}>{m.name}</p>
+                    <p className="m-0 mt-0.5" style={{ fontFamily: serif, fontSize: 15.5, color: MUTED }}>{m.role}</p>
+                  </li>
+                ))}
+              </ul>
             </FadeIn>
           </div>
-        </section>
-
-{/* ===== COMMITTEE ===== */}
-        <Section id="committee" bg={PARCH}>
-          <FadeIn>
-            <H2>The Stó:lō Education Committee</H2>
-            <Lede className="mb-10 dropcap">
-              Four respected Stó:lō educators guided the work from the start. They shaped the interview questions, kept the
-              project accountable to community values and reviewed the drafts before anything was final.
-            </Lede>
-          </FadeIn>
-          <CommitteeGrid />
         </Section>
 
         {/* ===== WHO DID WHAT: a calm sequence on a light ground ===== */}
@@ -526,6 +547,7 @@ export default function OnePage() {
               ]} />
             </div>
 
+            <div aria-hidden="true" className="step-track" />
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-8 lg:gap-12 items-start mb-16">
               <FadeIn><StepHead n="02" title="Gathering voices" lede="Every educator with at least one year at the school was invited by email. Those who took part gave consent, filled in a short background form and sat for a one-to-one, semi-structured interview, most held online during COVID-19 and one in person. The guide was not shared in advance, so answers were people's own rather than rehearsed. Families and Elders were part of the conversation too." /></FadeIn>
               <People />
@@ -533,21 +555,25 @@ export default function OnePage() {
 
             <Interlude text="The person's not there judging you; they're there trying to help you get better. Don't you want to get better?" />
 
+            <div aria-hidden="true" className="step-track" />
             <FadeIn><StepHead n="03" title="Making sense of what people said" lede="Transcribing and coding began while the interviews were still under way, so each conversation informed the next. The codes were mapped visually to see how ideas connected, grouped into fourteen sub-themes, and then into four themes. Every theme can be traced back to the words of the people interviewed." /></FadeIn>
             <div className="mb-14"><Trail /></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+            <div className="mb-4 p-5 sm:p-8" style={{ background: "rgba(255,255,255,0.5)", border: `1px solid ${RULE}` }}>
+              <p className="m-0 mb-1" style={{ fontFamily: sans, fontSize: 12.5, fontWeight: 600, color: MUTED }}>Inside Step 03</p>
+              <h4 className="m-0 mb-6" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(24px, 2.6vw, 30px)", color: INK }}>The Four Themes</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {themes.map((th, i) => {
                 const panel = [
                   { bg: "#ffffff", h: INK, b: BODY, k: RED, r: RULE },
-                  { bg: WARM, h: INK, b: BODY, k: RED, r: "#e3dacb" },
                   { bg: SLATE, h: INK, b: "#33403b", k: "#7d1b2a", r: "#c4ceca" },
-                  { bg: LTINT, h: INK, b: BODY, k: RED, r: "#ead6d4" },
+                  { bg: PARCH2, h: INK, b: BODY, k: "#7d1b2a", r: "#dccfb6" },
+                  { bg: TINT, h: INK, b: "#3a2a2c", k: "#7d1b2a", r: "#e6c3c8" },
                 ][i];
                 return (
                   <div key={th.n} className="theme-panel hv-lift relative overflow-hidden p-7 sm:p-8 h-full" style={{ background: panel.bg, borderTop: `1px solid ${INK}` }}>
-                    <span aria-hidden="true" className="theme-num num-fill absolute select-none" style={{ right: 18, top: -14, fontFamily: display, fontWeight: 800, fontSize: 140, lineHeight: 1 }}>{th.n}</span>
+                    <FillNum className="theme-num select-none" size="110px" style={{ position: "absolute", right: 14, top: -14 }}>{th.n}</FillNum>
                     <p className="m-0 mb-2 uppercase relative" style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", color: panel.k }}>Theme {th.n}</p>
-                    <h4 className="m-0 mb-5 relative" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(21px, 2.1vw, 25px)", lineHeight: 1.25, color: panel.h }}>{th.t}</h4>
+                    <h4 className="m-0 mb-5 relative pr-20" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(21px, 2.1vw, 25px)", lineHeight: 1.25, color: panel.h }}>{th.t}</h4>
                     <ol className="m-0 p-0 list-none relative">
                       {th.subs.map((s, j) => (
                         <li key={s} className="sub-row grid grid-cols-[38px_1fr] gap-2 py-2.5" style={{ fontFamily: serif, fontSize: 15.5, color: panel.b, borderTop: `1px solid ${panel.r}`, lineHeight: 1.5 }}>
@@ -559,7 +585,9 @@ export default function OnePage() {
                 );
               })}
             </div>
+            </div>
 
+            <div aria-hidden="true" className="step-track" />
             <FadeIn><StepHead n="04" title="Checking it with the community" lede="Findings were not final until the community had seen them. Members of the Stó:lō Education Committee reviewed the drafts, so the themes and the framework were checked against Stó:lō educators' own understanding before they were finished." /></FadeIn>
             <div className="mb-16">
               <FlowRow bp="md" items={[
@@ -576,32 +604,31 @@ export default function OnePage() {
               )} />
             </div>
 
+            <div aria-hidden="true" className="step-track" />
             <FadeIn><StepHead n="05" title="What it became" lede="The four themes became the SALMON tool: ten areas educators reflect on, four lifecycle stages that describe growth, and three columns on every page for self-evaluation, administrator feedback and goals set together. Accountability runs both ways: the last area is teachers evaluating their administrators." /></FadeIn>
           </div>
         </Section>
 
-        {/* ===== PHOTOGRAPHS: everyday school life, stills from the school film (Jason Bruce). Shown whole,
-             set apart with clear gutters, staggered, each captioned. No text on photos. ===== */}
+        {/* ===== PHOTOGRAPHS: a school day in four different scenes from the school film (Jason Bruce).
+             Heading row on top, then an even 2 x 2 grid: equal cells, one gutter, one caption baseline. ===== */}
         <section className="px-4 sm:px-6 py-16 sm:py-20" style={{ backgroundColor: SLATE }}>
           <div className="max-w-[1180px] mx-auto">
-            <FadeIn><H2 className="mb-10">A school day at Seabird Island</H2></FadeIn>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-x-7 gap-y-10 items-start">
+            <FadeIn>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-3 items-end mb-8">
+                <div className="lg:col-span-7"><H2 className="mb-0">A School Day at Seabird Island</H2></div>
+                <p className="lg:col-span-5 m-0" style={{ fontFamily: serif, fontSize: 17, color: "#33403b", lineHeight: 1.65 }}>
+                  Everyday school life, the setting the framework was built for. Stills from the school film.
+                </p>
+              </div>
+            </FadeIn>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { src: "lesson-table", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table.", span: "md:col-span-7" },
-                { src: "be-the-change", alt: "Students raising their hands in a classroom, a hand drum in the foreground", cap: "Hands up in a classroom, a hand drum close by.", span: "md:col-span-5 md:mt-24" },
-                { src: "classroom-morning", alt: "Students and staff gathering at the start of a class", cap: "The start of a class.", span: "md:col-span-4" },
-                { src: "sewing", alt: "Hands guiding fabric through a sewing machine", cap: "Making, by hand.", span: "md:col-span-4 md:mt-12" },
-                { src: "school-path", alt: "Students running along the path into the school, past carved posts", cap: "The path into school.", span: "md:col-span-4" },
+                { src: "lesson-table", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table." },
+                { src: "classroom-morning", alt: "Students and staff gathering at the start of a class", cap: "The start of a class." },
+                { src: "swings-mountains", alt: "Children on the school swings beneath the mountains", cap: "Recess beneath the mountains." },
+                { src: "school-path", alt: "Students running along the path into the school, past carved posts", cap: "The path into school." },
               ].map((ph, i) => (
-                <FadeIn key={ph.src} delay={(i % 2) * 0.08} className={ph.span}>
-                  <figure className="m-0">
-                    <div className="overflow-hidden"><img src={`${R2_BASE}/stills/${ph.src}.jpg`} alt={ph.alt} width={1600} height={900} loading="lazy" className="photo-zoom block w-full h-auto" /></div>
-                    <figcaption className="mt-3 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.5 }}>
-                      <span aria-hidden="true" style={{ display: "inline-block", width: 24, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
-                      <span>{ph.cap} <span style={{ color: "#4d5a55" }}>Still from the school film.</span></span>
-                    </figcaption>
-                  </figure>
-                </FadeIn>
+                <FadeIn key={ph.src} delay={(i % 2) * 0.06}><GalleryImage {...ph} /></FadeIn>
               ))}
             </div>
           </div>
@@ -620,7 +647,7 @@ export default function OnePage() {
               {FINDINGS.map((f, i) => (
                 <li key={f.n}><FadeIn delay={i * 0.05}>
                   <div className="hv grid grid-cols-[72px_1fr] sm:grid-cols-[100px_1fr] gap-4 py-7" style={{ borderTop: `1px solid ${RULE}` }}>
-                    <span aria-hidden="true" className="hv-num num-fill" style={{ fontFamily: display, fontWeight: 800, fontSize: "clamp(42px, 4.6vw, 62px)", lineHeight: 0.95 }}>{f.n}</span>
+                    <FillNum className="hv-num" size="clamp(42px, 4.6vw, 62px)">{f.n}</FillNum>
                     <div>
                       <h3 className="hv-title m-0 mb-2" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(21px, 2.2vw, 26px)", color: INK, lineHeight: 1.25 }}>{f.t}<span className="hv-arrow" aria-hidden="true"> &#8594;</span></h3>
                       <p className="m-0" style={{ fontFamily: serif, fontSize: 17, color: BODY, lineHeight: 1.75 }}>{f.d}</p>
@@ -644,10 +671,30 @@ export default function OnePage() {
           <Lifecycle bg={WARM} />
         </Section>
 
-        {/* ===== LAND: a full-bleed still, shown whole, no text on it ===== */}
-        <figure className="m-0" style={{ backgroundColor: "#1d1714" }}>
-          <img src={`${R2_BASE}/stills/swings-mountains.jpg`} alt="Children on the school swings beneath the mountains" width={1600} height={900} loading="lazy" className="block w-full h-auto mx-auto" style={{ maxWidth: 1600 }} />
-        </figure>
+        {/* ===== FILMS: the song recorded at the school, a full-width 16:9 film moment ===== */}
+        <section id="films" className="px-4 sm:px-6 py-16 sm:py-20" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1100px] mx-auto">
+            <FadeIn>
+              <figure className="m-0 mb-8 max-w-[820px]">
+                <blockquote className="m-0">
+                  <p className="m-0" style={{ fontFamily: display, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(22px, 2.4vw, 30px)", color: INK, lineHeight: 1.32 }}>
+                    <span aria-hidden="true" style={{ color: RED }}>&ldquo;</span>We need to come together and really be on the same page and strive to achieve the vision of the Elders
+                    that first created the school.<span aria-hidden="true" style={{ color: RED }}>&rdquo;</span>
+                  </p>
+                </blockquote>
+                <figcaption className="mt-4 flex items-center gap-3" style={{ fontFamily: sans, fontSize: 13, color: MUTED }}>
+                  <span aria-hidden="true" style={{ display: "inline-block", width: 28, height: 1, background: RED }} />
+                  An educator at the school, interviewed for the research
+                </figcaption>
+              </figure>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <div className="hero-frame">
+                <HeroFilm id="H3yrPfDtOWQ" poster={`https://i.ytimg.com/vi/H3yrPfDtOWQ/maxresdefault.jpg`} title="For Our Culture" credit="N'we Jinan Artists, recorded at Seabird Island Community School" contained />
+              </div>
+            </FadeIn>
+          </div>
+        </section>
 
         {/* ===== THE TOOL ===== */}
         <Section id="tool" bg={DEEP}>
