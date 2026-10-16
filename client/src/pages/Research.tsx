@@ -44,10 +44,10 @@ const participants = [
 ];
 
 const themes = [
-  { n: "1", t: "Growth mindset and lifelong learning", subs: ["Embracing a growth mindset", "Formative evaluation for continuous improvement", "A shared vision of decolonization and growth", "Reflective practice as a path to growth"] },
-  { n: "2", t: "Supportive and transparent evaluation", subs: ["Building a culture of support", "Creating transparent expectations", "Useful feedback after observations"] },
-  { n: "3", t: "Effective instruction, classroom management and holistic assessment", subs: ["Classroom management as the foundation", "Purpose-driven instruction and detailed planning", "Holistic, student-centred assessment", "Confidence, engagement and emotional well-being"] },
-  { n: "4", t: "Cultural responsiveness, community engagement and family communication", subs: ["Integrating Stó:lō culture and knowledge", "Fostering community engagement", "Trust and collaboration with families"] },
+  { n: "1", t: "Fostering a growth mindset and commitment to lifelong learning", subs: ["Embracing a growth mindset", "Formative evaluation for continuous improvement", "Collaborative, unified vision of decolonization and growth", "Reflective practice as a path to growth"] },
+  { n: "2", t: "Supportive and transparent evaluation processes", subs: ["Building a culture of support", "Creating transparent expectations", "Effective post-observation feedback"] },
+  { n: "3", t: "Effective instruction, classroom management and holistic assessment", subs: ["Classroom management as the foundation of effective instruction", "Purpose-driven instruction and detailed planning", "Holistic and student-centred assessments", "Fostering confidence, engagement and emotional well-being"] },
+  { n: "4", t: "Cultural responsiveness, community engagement and family communication", subs: ["Integrating Stó:lō culture and knowledge", "Fostering community engagement", "Building trust and collaborative relationships with families"] },
 ];
 
 const areas = [
@@ -63,11 +63,87 @@ const areas = [
   "Educator evaluation of administrators",
 ];
 
+
+const GUIDE = [
+  { h: "Opening questions", q: [
+    "Tell me about how you came to the Seabird Island Community School (SICS).",
+    "Do you think that the school culture at Seabird Island Community School has changed since you first started teaching there? If so, how?",
+    "Who, if anyone, has been your primary mentor at SICS? Tell me about how they influenced you. How have they been helpful?",
+  ] },
+  { h: "Assessment, pedagogy and relationship building", q: [
+    "How do you assess your students in terms of their knowledge and skills?",
+    "How do your students demonstrate a meaningful understanding of the material?",
+    "How do you work to support students' growth and success in and out of school?",
+    "How do you interact with your students, their families, and their communities?",
+  ] },
+  { h: "Experiences with teacher evaluation at SICS", q: [
+    "How has teaching practice been evaluated in your experience at SICS? What was it like? Do you think it helped you improve your teaching skills? If yes, why do you say that? If no, why do you say that?",
+    "What do you think are the most important methods to evaluate teacher performance at SICS?",
+    "What criteria should be included in a teacher evaluation at SICS?",
+    "Have your views about evaluation changed since you have been evaluated? If so, how?",
+  ] },
+  { h: "Developing an effective, culturally and community-based teacher evaluation tool", q: [
+    "Should teaching evaluations incorporate Stó:lō ways of knowing and teaching? If yes, how can they be incorporated?",
+    "Can the ability to link Stó:lō community resources to the lived experiences of students (e.g. bringing in community members to share teachings) be part of teacher evaluation? If yes, how can it be done?",
+    "Should community engagement (e.g., participation in community events and activities) be part of teacher evaluations? If yes, how can it be done?",
+    "Should interactions with students' families be part of teacher evaluations? If yes, how can they be included? Should teachers be required to co-create expectations with students' families? If yes, how can it be done?",
+  ] },
+  { h: "Closing questions", q: [
+    "What is the most important advice you would give to an administrator conducting evaluations?",
+    "Is there anything else that occurred to you during this interview that would help me better understand your experience at SICS?",
+    "Is there anything you would like to ask me?",
+  ] },
+];
+
+const QUESTIONNAIRE = [
+  "Position",
+  "Do you identify as Stó:lō, Indigenous (non-Stó:lō) or non-Indigenous?",
+  "What grades/subjects have you taught at the Seabird Island Community School?",
+  "How many years have you taught at the Seabird Island Community School?",
+  "Please list 3 dates/times that could potentially work for you to participate in an interview lasting roughly one hour.",
+];
+
+const PHASES = [
+  "Permission to carry out the research with Seabird Island Community School",
+  "A Seabird Island Research Review certificate",
+  "Research proposal reviewed and approved at Trent University",
+  "Ethics approval from the Trent University Research Ethics Board",
+  "Participants identified and interviews booked",
+  "Questionnaires and interviews completed",
+  "Analysis of what people said",
+  "Drafts reviewed by members of the Stó:lō Education Committee, then the final report",
+];
+
+const CONSENT = [
+  "Taking part was voluntary and involved two steps: a questionnaire of about five minutes and a one-to-one interview of about an hour.",
+  "Participants could withdraw at any stage, and anything they had shared would then not be reported.",
+  "Participants chose whether the interview was recorded and how they could be quoted, including the option to confirm wording first.",
+  "Only the researcher and supervisor reviewed transcripts, and quotes use pseudonyms so comments are not attributable to individuals.",
+  "Recordings and data were encrypted, stored securely and set for destruction by April 30, 2025.",
+  "Results were shared with the Seabird Island Band and Seabird Island Community School.",
+];
+
 function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
     <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: light ? "#f0c4ca" : RED }}>
       {children}
     </p>
+  );
+}
+
+
+function Material({ title, note, children }: { title: string; note: string; children: React.ReactNode }) {
+  return (
+    <details className="group" style={{ borderTop: `1px solid ${RULE}` }}>
+      <summary className="flex items-start justify-between gap-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+        <span>
+          <span className="block" style={{ fontFamily: display, fontWeight: 700, fontSize: 21, color: INK, lineHeight: 1.3 }}>{title}</span>
+          <span className="block mt-1" style={{ fontFamily: serif, fontSize: 15, color: MUTED }}>{note}</span>
+        </span>
+        <span aria-hidden="true" className="shrink-0 transition-transform duration-200 group-open:rotate-45" style={{ color: RED, fontSize: 26, lineHeight: 1 }}>+</span>
+      </summary>
+      <div className="pb-8">{children}</div>
+    </details>
   );
 }
 
@@ -225,9 +301,9 @@ export default function Research() {
               <p className="m-0 mb-3" style={{ fontFamily: sans, fontSize: 14, fontWeight: 700, color: INK }}>One trail, from interview to theme</p>
               <Strip dark={3} items={[
                 { k: "1. What people said", t: "Ongoing self-improvement, openness to feedback, flexibility in teaching methods" },
-                { k: "2. Code group", t: "Modelling a growth mindset for students" },
+                { k: "2. Code group", t: "Modelling growth mindset for students" },
                 { k: "3. Sub-theme", t: "Embracing a growth mindset" },
-                { k: "4. Theme", t: "Growth mindset and lifelong learning" },
+                { k: "4. Theme", t: "Fostering a growth mindset and commitment to lifelong learning" },
               ]} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16">
@@ -279,6 +355,78 @@ export default function Research() {
           </div>
         </section>
 
+        {/* ===== RESEARCH MATERIALS ===== */}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1100px] mx-auto">
+            <Eyebrow>Research materials</Eyebrow>
+            <h2 className="m-0 mb-3" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 40px)", color: INK, lineHeight: 1.15 }}>The questions and the process, in full</h2>
+            <p className="m-0 mb-8 max-w-[760px]" style={{ fontFamily: serif, fontSize: 17, color: BODY, lineHeight: 1.75 }}>
+              The instruments behind the findings, as used. Consent forms, names and transcripts stay private.
+            </p>
+            <div style={{ borderBottom: `1px solid ${RULE}` }}>
+              <Material title="Interview guide" note="Eighteen questions: opening and closing questions around the three main parts, reviewed and shaped by the Stó:lō Education Committee">
+                {(() => { let n = 0; return GUIDE.map((g) => (
+                  <div key={g.h} className="mb-6">
+                    <h3 className="m-0 mb-3" style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: RED }}>{g.h}</h3>
+                    <ol className="m-0 p-0 list-none">
+                      {g.q.map((q) => { n += 1; return (
+                        <li key={q} className="grid grid-cols-[34px_1fr] gap-2 py-2.5" style={{ borderTop: `1px solid ${RULE}`, fontFamily: serif, fontSize: 16, color: INK, lineHeight: 1.6 }}>
+                          <span style={{ fontFamily: display, fontWeight: 700, color: RED }}>{n}</span><span>{q}</span>
+                        </li>
+                      ); })}
+                    </ol>
+                  </div>
+                )); })()}
+              </Material>
+              <Material title="Pre-interview questionnaire" note="A short background form returned before each interview, used to schedule interviews and confirm at least one year at the school">
+                <ol className="m-0 p-0 list-none">
+                  {QUESTIONNAIRE.map((q, i) => (
+                    <li key={q} className="grid grid-cols-[34px_1fr] gap-2 py-2.5" style={{ borderTop: `1px solid ${RULE}`, fontFamily: serif, fontSize: 16, color: INK, lineHeight: 1.6 }}>
+                      <span style={{ fontFamily: display, fontWeight: 700, color: RED }}>{i + 1}</span><span>{q}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Material>
+              <Material title="Recruitment and consent" note="How educators were invited, and what they agreed to">
+                <p className="m-0 mb-4" style={{ fontFamily: serif, fontSize: 16, color: BODY, lineHeight: 1.7 }}>
+                  Educators were first contacted by email. The researcher then visited the school in person to hand out
+                  consent forms and questionnaires together, and two committee members delivered and collected them for
+                  anyone not there that day.
+                </p>
+                <ul className="m-0 p-0 list-none">
+                  {CONSENT.map((c) => (
+                    <li key={c} className="py-2.5" style={{ borderTop: `1px solid ${RULE}`, fontFamily: serif, fontSize: 16, color: INK, lineHeight: 1.6 }}>{c}</li>
+                  ))}
+                </ul>
+              </Material>
+              <Material title="Approvals and phases" note="Community permission came first, then university ethics approval">
+                <ol className="m-0 p-0 list-none">
+                  {PHASES.map((p, i) => (
+                    <li key={p} className="grid grid-cols-[34px_1fr] gap-2 py-2.5" style={{ borderTop: `1px solid ${RULE}`, fontFamily: serif, fontSize: 16, color: INK, lineHeight: 1.6 }}>
+                      <span style={{ fontFamily: display, fontWeight: 700, color: RED }}>{i + 1}</span><span>{p}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Material>
+              <Material title="Themes and sub-themes" note="The full coding structure: four themes, fourteen sub-themes">
+                <div className="overflow-hidden" style={{ border: `1px solid ${RULE}` }}>
+                  <table className="w-full" style={{ borderCollapse: "collapse" }}>
+                    <thead><tr><th scope="col" className="px-3 py-3 text-[13px]" style={th}>Theme</th><th scope="col" className="px-3 py-3 text-[13px]" style={th}>Sub-themes</th></tr></thead>
+                    <tbody>
+                      {themes.map((tm) => (
+                        <tr key={tm.n}>
+                          <th scope="row" className="px-3 py-3 text-[15px] align-top" style={{ ...td, fontWeight: 600, color: INK, textAlign: "left", width: "40%" }}>{tm.n}. {tm.t}</th>
+                          <td className="px-3 py-3 text-[15px]" style={td}>{tm.subs.map((s, j) => <span key={s} className="block">{tm.n}.{j + 1} {s}</span>)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Material>
+            </div>
+          </div>
+        </section>
+
         {/* ===== REPORT ===== */}
         <section className="px-4 sm:px-6 py-12" style={{ backgroundColor: SAND }}>
           <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
@@ -286,8 +434,7 @@ export default function Research() {
               <Eyebrow>Research report</Eyebrow>
               <p className="m-0" style={{ fontFamily: serif, fontSize: 17, color: BODY, lineHeight: 1.7 }}>
                 <em>Totí:lthometel: Weaving Educators&rsquo; Perspectives into a Teacher Evaluation Tool at Seabird Island
-                Community School</em> (Trent University, 2025). The full report, with the interview guide and the coding
-                tables behind each theme, is available on request.
+                Community School</em> (Trent University, 2025). The full report, including the detailed coding tables behind each theme, is available on request.
               </p>
             </div>
             <SalmonButton href="/SALMON-Tool.pdf" external>Download the tool (PDF)</SalmonButton>

@@ -23,17 +23,16 @@ export default function Resources() {
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
       <SiteHeader />
 
-      <section className="pt-32 pb-14" style={{ background: "var(--section-alt)" }}>
+      <section className="pt-14 sm:pt-20 pb-14" style={{ background: "var(--section-alt)" }}>
         <div className="container">
           <div className="text-xs uppercase tracking-widest mb-4" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}>
             Resources
           </div>
           <h1 className="m-0 mb-5 max-w-3xl" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "clamp(2.4rem, 6vw, 4.2rem)", letterSpacing: "-0.02em", lineHeight: 1.02, color: "var(--text-heading)" }}>
-            Everything you need<br />to bring SALMON home
+            The tool, the research<br />and where to learn more
           </h1>
           <p className="max-w-2xl text-base leading-relaxed m-0" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>
-            The tool, the research, the guiding questions and the films, plus what the
-            community taught us along the way.
+            Everything the research produced, the four findings that shaped the tool, and trusted places to keep learning about Stó:lō language and First Peoples education.
           </p>
         </div>
       </section>

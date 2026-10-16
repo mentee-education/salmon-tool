@@ -40,7 +40,7 @@ export default function Reflect() {
     <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
       <SiteHeader />
 
-      <section className="pt-32 pb-12" style={{ background: "var(--section-alt)" }}>
+      <section className="pt-14 sm:pt-20 pb-12" style={{ background: "var(--section-alt)" }}>
         <div className="container">
           <div
             className="text-xs uppercase tracking-widest mb-4"
@@ -52,13 +52,11 @@ export default function Reflect() {
             className="m-0 mb-5"
             style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "clamp(2.4rem, 6vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1.02, color: "var(--text-heading)" }}
           >
-            Every guiding question,<br />
+            The guiding questions,<br />
             <em style={{ color: "var(--crimson-mid)" }}>ready for a conversation</em>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed m-0" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>
-            The {totalAreas} evaluation areas of the SALMON Tool, with the exact reflection
-            questions educators and administrators sit down with. Jot your thoughts (they stay
-            on your device), then print the page or bring it to your next growth conversation.
+            The {totalAreas} areas of the SALMON tool, with the exact reflection questions educators and administrators work through together. Each area grew out of the four themes educators named in the research. Notes you type stay on this device; print them for a growth conversation.
           </p>
           <div className="flex flex-wrap gap-3 mt-7 print:hidden">
             <button

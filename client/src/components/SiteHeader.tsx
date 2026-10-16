@@ -41,7 +41,7 @@ export default function SiteHeader() {
       >
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.25rem", height: "100%", display: "flex", alignItems: "center" }}>
           <Link href="/" aria-label="SALMON research project, home" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
-            <img src="/salmon-mark.png" alt="" width={40} height={40} style={{ width: 40, height: 40, borderRadius: "50%", display: "block", boxShadow: "0 0 0 1px #e2ddd5" }} />
+            <img src="https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/brand/salmon-mark.png" alt="" width={40} height={40} style={{ width: 40, height: 40, borderRadius: "50%", display: "block", boxShadow: "0 0 0 1px #e2ddd5" }} />
             <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
               <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "1.2rem", color: "#9B2335", letterSpacing: "0.02em" }}>SALMON</span>
               <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6rem", color: "#5f5f58", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 3 }}>Seabird Island Community School</span>

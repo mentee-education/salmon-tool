@@ -39,7 +39,7 @@ export default function ReadTool() {
     <div className="min-h-screen flex flex-col" style={{ background: "#171412" }}>
       <SiteHeader />
 
-      <section className="pt-28 pb-8">
+      <section className="pt-12 sm:pt-16 pb-12">
         <div className="container">
           <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
             <div>
@@ -55,6 +55,11 @@ export default function ReadTool() {
               >
                 The SALMON Tool, page by page
               </h1>
+              <p className="m-0 mt-3 max-w-[640px]" style={{ fontFamily: "'Source Serif 4', serif", fontSize: 16, lineHeight: 1.7, color: "rgba(253,252,249,0.82)" }}>
+                The 24-page tool the research produced. Every area pairs guiding questions with three columns:
+                self-evaluation, administrator feedback and goals set together.{" "}
+                <a href="/research" style={{ color: "#f0c4ca", textDecoration: "underline", textUnderlineOffset: 3 }}>See how it was built</a>
+              </p>
             </div>
             <a
               href="/SALMON-Tool.pdf"
@@ -118,7 +123,7 @@ export default function ReadTool() {
           </div>
 
           <div className="text-center mt-5 text-sm" style={{ fontFamily: "'Source Serif 4', serif", color: "rgba(253,252,249,0.78)" }}>
-            Page {page + 1} of {PAGES.length} · use arrow keys or tap the page edges
+            Page {page + 1} of {PAGES.length}. Use the arrow keys or tap the page edges.
           </div>
 
           {/* Thumbnail rail */}

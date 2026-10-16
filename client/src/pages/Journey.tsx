@@ -1,349 +1,142 @@
 /*
- * Journey Page — Deep Water & Copper design (theme-aware)
- * Shows all four SALMON lifecycle stages with detailed descriptions
- * Alternating image-text layout, sticky stage nav
+ * SALMON — The growth journey. The four lifecycle stages educators and administrators use to name
+ * where someone is, each with its qualities, plus the Stó:lō Education Committee who guided the work.
+ * Illustrations are watercolour studies of real salmon life stages (R2: salmon-tool/lifecycle).
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import SalmonButton from "@/components/SalmonButton";
+import Lifecycle, { STAGES } from "@/components/Lifecycle";
 
-const EGGS_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-eggs.png";
-const FRY_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-fry.png";
-const SMOLT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-smolt.png";
-const ADULT_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/salmon-adult.png";
+const RED = "#9B2335";
+const INK = "#1a1a18";
+const BODY = "#3d3d39";
+const MUTED = "#5f5f58";
+const WARM = "#fdfcf9";
+const SAND = "#efeae1";
+const RULE = "#d4cfc6";
+const serif = "'Source Serif 4', serif";
+const display = "'Playfair Display', serif";
+const sans = "'DM Sans', sans-serif";
 
-const stages = [
-  {
-    id: "spawning",
-    number: "01",
-    name: "Spawning",
-    subtitle: "Initiating Growth",
-    image: EGGS_IMG,
-    description: [
-      "The Spawning stage represents the very beginning of a teacher's growth journey. Just like salmon eggs full of potential, teachers in this stage are laying the foundation for future development.",
-      "It is a time of exploration and discovery, where teachers are building their core skills and starting to integrate new strategies and cultural knowledge into their practice. This stage is about nurturing early efforts, with a focus on support, mentorship, and building confidence for the path ahead.",
-      "It's the stage of promise, where teachers begin to realize their capacity for growth.",
+const DETAIL: Record<string, { text: string[]; qualities: string[] }> = {
+  spawning: {
+    text: [
+      "Like salmon eggs full of potential, educators at this stage are laying the foundation: building core skills and starting to bring new strategies and cultural knowledge into their practice.",
+      "The focus is on nurturing early efforts through support, mentorship and growing confidence.",
     ],
-    qualities: ["Exploration & discovery", "Building core skills", "Cultural knowledge integration", "Mentorship & support"],
+    qualities: ["Exploration and discovery", "Building core skills", "Bringing in cultural knowledge", "Mentorship and support"],
   },
-  {
-    id: "fry",
-    number: "02",
-    name: "Fry",
-    subtitle: "Emerging Growth",
-    image: FRY_IMG,
-    description: [
-      "In the Fry stage, teachers are starting to find their flow. Like young salmon navigating a stream, they are gaining independence and actively applying the foundational skills they've developed.",
-      "This stage is marked by emerging confidence, with teachers building on their strengths and refining their practices. The focus here is on demonstrating progress and adapting to new challenges with support and feedback.",
-      "Teachers in this stage are moving from learning to leading in their classrooms, developing a clearer sense of direction.",
+  fry: {
+    text: [
+      "Like young salmon finding their way in the stream, educators are gaining independence and applying the skills they have built, with emerging confidence.",
+      "The focus is on showing progress and adapting to new challenges, with support and feedback close by.",
     ],
     qualities: ["Gaining independence", "Applying foundational skills", "Emerging confidence", "Adapting to challenges"],
   },
-  {
-    id: "smolt",
-    number: "03",
-    name: "Smolt",
-    subtitle: "Sustained Growth",
-    image: SMOLT_IMG,
-    description: [
-      "The Smolt stage reflects consistent and sustained growth. Teachers in this phase are confidently applying their skills, adapting fluidly to diverse classroom needs, and are culturally responsive in their daily practices.",
-      "Like smolt transitioning into deeper waters, teachers in this stage are preparing for broader challenges and greater responsibilities. The focus is on maintaining strong practices and continuing to evolve as educators, with opportunities for leadership and collaboration.",
-      "Teachers are no longer just applying strategies; they are mastering them.",
+  smolt: {
+    text: [
+      "Educators apply their skills with confidence, adapt to the needs of every classroom and are culturally responsive in daily practice.",
+      "Like smolt moving into deeper water, they are ready for wider responsibility, with chances to lead and collaborate.",
     ],
-    qualities: ["Confident skill application", "Cultural responsiveness", "Leadership opportunities", "Collaborative practice"],
+    qualities: ["Confident practice", "Cultural responsiveness", "Leadership opportunities", "Collaborative practice"],
   },
-  {
-    id: "returning-adult",
-    number: "04",
-    name: "Returning Adult",
-    subtitle: "Thriving & Leading",
-    image: ADULT_IMG,
-    description: [
-      "The Returning Adult stage represents teachers who are thriving in their roles and leading within their school and community. Just as salmon return to their home waters after a long journey, these teachers have completed a full cycle of growth.",
-      "They are now contributing their knowledge and experience to others as mentors, role models and leaders, helping to nurture the growth of students and colleagues.",
-      "At this stage, teachers are fully immersed in their practice, leading with confidence, cultural responsiveness, and a deep connection to the community.",
+  "returning-adult": {
+    text: [
+      "Educators are thriving and leading in their school and community. Like salmon returning to home waters, they have completed a full cycle of growth.",
+      "They give back as mentors and role models, nurturing the growth of students and colleagues, and the cycle begins again.",
     ],
-    qualities: ["Community leadership", "Mentoring others", "Deep cultural connection", "Full cycle of growth"],
+    qualities: ["Community leadership", "Mentoring others", "Deep cultural connection", "A full cycle of growth"],
   },
+};
+
+const COMMITTEE = [
+  { name: "Siyámíya (Dianna) Kay", role: "Language Curriculum Developer" },
+  { name: "Kweláxtelot (Karla) Kay", role: "Language Vitalist" },
+  { name: "Saylesh Wesley", role: "First Nations Resource Enhancement Teacher" },
+  { name: "Camielle Laslo", role: "Halq'eméylem Teacher" },
 ];
 
 export default function Journey() {
-  const [activeStage, setActiveStage] = useState("spawning");
-  const revealRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.location.hash) document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
+    else window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    const el = revealRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            const id = entry.target.getAttribute("data-stage");
-            if (id) setActiveStage(id);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    el.querySelectorAll(".reveal").forEach((e) => observer.observe(e));
-    el.querySelectorAll("[data-stage]").forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToStage = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "var(--section-main)" }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: WARM }}>
       <SiteHeader />
-
-      {/* Page header */}
-      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: "var(--section-alt)" }}>
-        <div className="container">
-          <div
-            className="text-xs uppercase tracking-widest mb-4"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
-          >
-            The SALMON Journey
+      <main className="flex-1">
+        {/* ===== HEADER ===== */}
+        <section className="px-4 sm:px-6 pt-14 sm:pt-20 pb-10" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1180px] mx-auto">
+            <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: RED }}>The growth journey</p>
+            <h1 className="m-0 mb-5 max-w-[860px]" style={{ fontFamily: display, fontWeight: 800, fontSize: "clamp(34px, 5vw, 56px)", color: INK, lineHeight: 1.06 }}>
+              Four stages of educator growth, named for the salmon
+            </h1>
+            <p className="m-0 max-w-[760px]" style={{ fontFamily: serif, fontSize: "clamp(16px, 1.8vw, 19px)", color: BODY, lineHeight: 1.75 }}>
+              Educators asked for evaluation that helps them keep growing rather than a verdict. The salmon lifecycle
+              gives educators and administrators shared words for where someone is and where they are heading, and it
+              honours returning, mentoring and beginning again.
+            </p>
           </div>
-          <h1
-            className="leading-none mb-6"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(3rem, 8vw, 6rem)",
-              fontWeight: 800,
-              color: "var(--text-heading)",
-            }}
-          >
-            Nurturing<br />
-            <em style={{ color: "var(--crimson-mid)", fontStyle: "italic" }}>Educator Growth</em>
-          </h1>
-          <p
-            className="max-w-xl text-base leading-relaxed"
-            style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
-          >
-            The SALMON model mirrors the lifecycle of the Pacific salmon: a journey of
-            growth, challenge, and return. Each stage honours where an educator is, while
-            pointing toward where they can go.
-          </p>
-        </div>
-      </section>
+        </section>
 
-      {/* Sticky stage navigator */}
-      <div
-        className="sticky top-[72px] z-40 overflow-x-auto"
-        style={{
-          background: "var(--nav-bg-scrolled)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid oklch(from var(--crimson-mid) l c h / 0.2)",
-        }}
-      >
-        <div className="container">
-          <div className="flex gap-0 min-w-max">
-            {stages.map((stage) => (
-              <button
-                key={stage.id}
-                onClick={() => scrollToStage(stage.id)}
-                className="px-6 py-4 text-sm transition-all duration-200 relative whitespace-nowrap"
-                style={{
-                  fontFamily: "'Source Serif 4', serif",
-                  color: activeStage === stage.id ? "var(--crimson-mid)" : "var(--text-muted)",
-                  fontWeight: activeStage === stage.id ? "500" : "400",
-                  borderBottom: activeStage === stage.id ? "2px solid var(--crimson-mid)" : "2px solid transparent",
-                }}
-              >
-                <span
-                  className="text-xs mr-2"
-                  style={{ color: "var(--crimson-mid)", opacity: 0.6, fontFamily: "'Playfair Display', serif" }}
-                >
-                  {stage.number}
-                </span>
-                {stage.name}
-              </button>
-            ))}
+        {/* ===== CYCLE ===== */}
+        <section className="px-4 sm:px-6 py-12 sm:py-16" style={{ backgroundColor: SAND }}>
+          <div className="max-w-[1180px] mx-auto">
+            <Lifecycle bg={SAND} />
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div ref={revealRef}>
-        {stages.map((stage, i) => (
-          <section
-            key={stage.id}
-            id={stage.id}
-            data-stage={stage.id}
-            className="py-24 reveal"
-            style={{ background: i % 2 === 0 ? "var(--section-main)" : "var(--section-alt)" }}
-          >
-            <div className="container">
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}>
-                {/* Image side */}
-                <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <div
-                    className="relative overflow-hidden"
-                    style={{ border: "1px solid var(--card-border)" }}
-                  >
-                    <img
-                      src={stage.image}
-                      alt={stage.name}
-                      className="w-full aspect-[4/3] object-cover"
-                    />
-                    <div
-                      className="absolute bottom-4 right-5 text-8xl leading-none"
-                      style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontWeight: 800,
-                        color: "rgba(253,252,249,0.15)",
-                      }}
-                    >
-                      {stage.number}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Text side */}
-                <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                  <div
-                    className="text-xs uppercase tracking-widest mb-3"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
-                  >
-                    Stage {stage.number}: {stage.subtitle}
-                  </div>
-                  <h2
-                    className="mb-6 leading-none"
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                      fontWeight: 700,
-                      color: "var(--text-heading)",
-                    }}
-                  >
-                    {stage.name}
-                  </h2>
-
-                  <div className="flex flex-col gap-4 mb-8">
-                    {stage.description.map((para, j) => (
-                      <p
-                        key={j}
-                        className="text-base leading-relaxed"
-                        style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
-                      >
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-
-                  {/* Qualities */}
-                  <div>
-                    <div
-                      className="text-xs uppercase tracking-widest mb-3"
-                      style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)", letterSpacing: "0.15em" }}
-                    >
-                      Key Qualities
-                    </div>
-                    <ul className="m-0 p-0 list-none">
-                      {stage.qualities.map((q, j) => (
-                        <li
-                          key={j}
-                          className="py-2 text-[15px]"
-                          style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)", borderTop: "1px solid var(--card-border)" }}
-                        >
-                          {q}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+        {/* ===== STAGES IN DETAIL ===== */}
+        {STAGES.map((s, i) => (
+          <section key={s.id} id={s.id} className="px-4 sm:px-6 py-14 sm:py-16 scroll-mt-20" style={{ backgroundColor: i % 2 ? SAND : WARM }}>
+            <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+              <figure className={`m-0 ${i % 2 ? "lg:order-2" : ""}`}>
+                <img src={s.img} alt={s.alt} width={1600} height={1020} loading="lazy" className="w-full h-auto block" style={{ border: `1px solid ${RULE}` }} />
+              </figure>
+              <div>
+                <p className="m-0 mb-2 uppercase" style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.16em", color: RED }}>Stage {s.n} &middot; {s.sub}</p>
+                <h2 className="m-0 mb-5" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(30px, 4vw, 46px)", color: INK, lineHeight: 1.05 }}>{s.name}</h2>
+                {DETAIL[s.id].text.map((p) => (
+                  <p key={p} className="m-0 mb-4" style={{ fontFamily: serif, fontSize: 17, color: BODY, lineHeight: 1.75 }}>{p}</p>
+                ))}
+                <p className="m-0 mt-6 mb-2" style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: INK }}>Qualities at this stage</p>
+                <ul className="m-0 p-0 list-none">
+                  {DETAIL[s.id].qualities.map((q) => (
+                    <li key={q} className="py-2" style={{ fontFamily: serif, fontSize: 15.5, color: INK, borderTop: `1px solid ${RULE}` }}>{q}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>
         ))}
 
-        {/* Committee section */}
-        <section className="py-24" style={{ background: "var(--section-alt)" }}>
-          <div className="container">
-            <div className="reveal max-w-3xl mx-auto text-center">
-              <div
-                className="text-xs uppercase tracking-widest mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
-              >
-                Guiding the Journey
-              </div>
-              <h2
-                className="mb-6 leading-tight"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 700,
-                  color: "var(--text-heading)",
-                }}
-              >
-                The Stó:lō Education Committee
-              </h2>
-              <p
-                className="text-base leading-relaxed mb-8"
-                style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
-              >
-                The foundation of this study was rooted in deep relationships: with people,
-                with place, and with the teachings carried by those who have long served their
-                communities. At the heart of this work was the Stó:lō Education Committee (SEC):
-                four respected Stó:lō educators who brought their lived experience, cultural
-                knowledge, and commitment to community into every phase of this journey.
-              </p>
-              <div className="crimson-rule" />
-            </div>
-
-            <div className="reveal grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {[
-                { name: "Siyámíya (Dianna) Kay", role: "Language Curriculum Developer" },
-                { name: "Kweláxtelot (Karla) Kay", role: "Language Vitalist" },
-                { name: "Saylesh Wesley", role: "First Nations Resource Enhancement Teacher" },
-                { name: "Camielle Laslo", role: "Halq'emeylem Teacher" },
-              ].map((person, i) => (
-                <div
-                  key={i}
-                  className="p-5 text-center"
-                  style={{
-                    background: "var(--card-bg)",
-                    border: "1px solid var(--card-border)",
-                  }}
-                >
-                  <div
-                    className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center text-lg"
-                    style={{
-                      background: "oklch(from var(--crimson-mid) l c h / 0.15)",
-                      border: "1px solid oklch(from var(--crimson-mid) l c h / 0.4)",
-                      fontFamily: "'Playfair Display', serif",
-                      color: "var(--crimson-mid)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {person.name.charAt(0)}
-                  </div>
-                  <div
-                    className="text-sm font-medium mb-1"
-                    style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)" }}
-                  >
-                    {person.name}
-                  </div>
-                  <div
-                    className="text-xs"
-                    style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-muted)" }}
-                  >
-                    {person.role}
-                  </div>
-                </div>
+        {/* ===== COMMITTEE ===== */}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1180px] mx-auto">
+            <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: RED }}>Guiding the journey</p>
+            <h2 className="m-0 mb-4" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 40px)", color: INK, lineHeight: 1.15 }}>The Stó:lō Education Committee</h2>
+            <p className="m-0 mb-8 max-w-[760px]" style={{ fontFamily: serif, fontSize: 17, color: BODY, lineHeight: 1.75 }}>
+              Four respected Stó:lō educators guided the work from the start. They shaped the interview questions,
+              kept the project accountable to community values and reviewed the drafts before anything was final.
+            </p>
+            <ul className="list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ border: `1px solid ${RULE}`, background: "#ffffff" }}>
+              {COMMITTEE.map((c, i) => (
+                <li key={c.name} className={`p-6 border-[#d4cfc6] ${i ? "border-t sm:border-t-0" : ""} ${i % 2 ? "sm:border-l" : ""} ${i >= 2 ? "sm:border-t lg:border-t-0" : ""} ${i === 2 ? "lg:border-l" : ""}`}>
+                  <p className="m-0 mb-1" style={{ fontFamily: display, fontWeight: 700, fontSize: 19, color: INK, lineHeight: 1.3 }}>{c.name}</p>
+                  <p className="m-0" style={{ fontFamily: serif, fontSize: 15, color: MUTED }}>{c.role}</p>
+                </li>
               ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <SalmonButton href="/research">See how the research was done</SalmonButton>
             </div>
           </div>
         </section>
-      </div>
-
+      </main>
       <SiteFooter />
     </div>
   );

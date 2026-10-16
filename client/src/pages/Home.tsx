@@ -9,7 +9,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SalmonButton from "@/components/SalmonButton";
 import FadeIn from "@/components/FadeIn";
-import LifecycleDiagram from "@/components/LifecycleDiagram";
+import Lifecycle from "@/components/Lifecycle";
 import { Play } from "lucide-react";
 
 const RED = "#9B2335";
@@ -216,7 +216,7 @@ export default function Home() {
             <h2 className="m-0 mb-9 max-w-[760px]" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 42px)", color: INK, lineHeight: 1.15 }}>
               Four stages of educator growth, named for the salmon
             </h2>
-            <LifecycleDiagram />
+            <Lifecycle linkTo="/journey" />
             <div className="mt-8">
               <SalmonButton href="/journey">Explore the full journey</SalmonButton>
             </div>
