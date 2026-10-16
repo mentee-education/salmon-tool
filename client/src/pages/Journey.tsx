@@ -48,7 +48,7 @@ const stages = [
     description: [
       "The Smolt stage reflects consistent and sustained growth. Teachers in this phase are confidently applying their skills, adapting fluidly to diverse classroom needs, and are culturally responsive in their daily practices.",
       "Like smolt transitioning into deeper waters, teachers in this stage are preparing for broader challenges and greater responsibilities. The focus is on maintaining strong practices and continuing to evolve as educators, with opportunities for leadership and collaboration.",
-      "Teachers are no longer just applying strategies — they are mastering them.",
+      "Teachers are no longer just applying strategies; they are mastering them.",
     ],
     qualities: ["Confident skill application", "Cultural responsiveness", "Leadership opportunities", "Collaborative practice"],
   },
@@ -60,7 +60,7 @@ const stages = [
     image: ADULT_IMG,
     description: [
       "The Returning Adult stage represents teachers who are thriving in their roles and leading within their school and community. Just as salmon return to their home waters after a long journey, these teachers have completed a full cycle of growth.",
-      "They are now contributing their knowledge and experience to others — mentors, role models, and leaders, helping to nurture the growth of students and colleagues.",
+      "They are now contributing their knowledge and experience to others as mentors, role models and leaders, helping to nurture the growth of students and colleagues.",
       "At this stage, teachers are fully immersed in their practice, leading with confidence, cultural responsiveness, and a deep connection to the community.",
     ],
     qualities: ["Community leadership", "Mentoring others", "Deep cultural connection", "Full cycle of growth"],
@@ -128,7 +128,7 @@ export default function Journey() {
             className="max-w-xl text-base leading-relaxed"
             style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
           >
-            The SALMON model mirrors the lifecycle of the Pacific salmon — a journey of
+            The SALMON model mirrors the lifecycle of the Pacific salmon: a journey of
             growth, challenge, and return. Each stage honours where an educator is, while
             pointing toward where they can go.
           </p>
@@ -212,7 +212,7 @@ export default function Journey() {
                     className="text-xs uppercase tracking-widest mb-3"
                     style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--crimson-mid)", letterSpacing: "0.2em" }}
                   >
-                    Stage {stage.number} — {stage.subtitle}
+                    Stage {stage.number}: {stage.subtitle}
                   </div>
                   <h2
                     className="mb-6 leading-none"
@@ -242,26 +242,21 @@ export default function Journey() {
                   <div>
                     <div
                       className="text-xs uppercase tracking-widest mb-3"
-                      style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-muted)", letterSpacing: "0.15em" }}
+                      style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-body)", letterSpacing: "0.15em" }}
                     >
                       Key Qualities
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <ul className="m-0 p-0 list-none">
                       {stage.qualities.map((q, j) => (
-                        <span
+                        <li
                           key={j}
-                          className="px-3 py-1.5 text-xs"
-                          style={{
-                            fontFamily: "'Source Serif 4', serif",
-                            background: "oklch(from var(--crimson-mid) l c h / 0.1)",
-                            border: "1px solid oklch(from var(--crimson-mid) l c h / 0.3)",
-                            color: "var(--text-heading)",
-                          }}
+                          className="py-2 text-[15px]"
+                          style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-heading)", borderTop: "1px solid var(--card-border)" }}
                         >
                           {q}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -294,7 +289,7 @@ export default function Journey() {
                 className="text-base leading-relaxed mb-8"
                 style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}
               >
-                The foundation of this study was rooted in deep relationships — with people,
+                The foundation of this study was rooted in deep relationships: with people,
                 with place, and with the teachings carried by those who have long served their
                 communities. At the heart of this work was the Stó:lō Education Committee (SEC):
                 four respected Stó:lō educators who brought their lived experience, cultural

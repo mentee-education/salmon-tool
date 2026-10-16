@@ -57,8 +57,8 @@ export default function Reflect() {
           </h1>
           <p className="max-w-2xl text-base leading-relaxed m-0" style={{ fontFamily: "'Source Serif 4', serif", color: "var(--text-body)" }}>
             The {totalAreas} evaluation areas of the SALMON Tool, with the exact reflection
-            questions educators and administrators sit down with. Jot your thoughts — they stay
-            on your device — then print the page or bring it to your next growth conversation.
+            questions educators and administrators sit down with. Jot your thoughts (they stay
+            on your device), then print the page or bring it to your next growth conversation.
           </p>
           <div className="flex flex-wrap gap-3 mt-7 print:hidden">
             <button

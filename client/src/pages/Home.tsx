@@ -1,56 +1,55 @@
 /*
- * SALMON — Home. Editorial design in the Mentee house course-site language:
- * Playfair Display / Source Serif 4 / DM Sans, warm white, crimson accents,
- * full-bleed imagery with fades, FadeIn reveals.
+ * SALMON — Home. A community research project at Seabird Island Community School:
+ * the question, who guided it, how voices were gathered and analysed, what was found,
+ * and the tool it became. Playfair Display / Source Serif 4 / DM Sans, warm white, crimson.
  */
 import { useState } from "react";
+import { Link } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SalmonButton from "@/components/SalmonButton";
 import FadeIn from "@/components/FadeIn";
+import LifecycleDiagram from "@/components/LifecycleDiagram";
 import { Play } from "lucide-react";
 
 const RED = "#9B2335";
+const DEEP = "#5d131e";
 const INK = "#1a1a18";
+const BODY = "#3d3d39";
 const WARM = "#fdfcf9";
-const SAND = "#E8E3DA";
+const SAND = "#efeae1";
+const RULE = "#d4cfc6";
+const serif = "'Source Serif 4', serif";
+const display = "'Playfair Display', serif";
+const sans = "'DM Sans', sans-serif";
 
-const HERO_IMG = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/hero-river.png";
-const CTA_IMG = "/hero.jpg";
-
-const quickNav = [
-  { title: "The Course", desc: "Six short lessons through the framework, at your own pace.", href: "/course" },
-  { title: "Read the Tool", desc: "All 24 pages of the printed booklet, page by page.", href: "/tool" },
-  { title: "Reflect", desc: "Every guiding question, with space for your own notes.", href: "/reflect" },
-  { title: "Resources", desc: "Downloads, findings, films, and links to go deeper.", href: "/resources" },
-  { title: "Our Process", desc: "How the community shaped SALMON, step by step.", href: "/process" },
+const glance = [
+  { n: "4", t: "Stó:lō educators guiding the work" },
+  { n: "19", t: "educators and staff interviewed" },
+  { n: "14", t: "sub-themes drawn from their words" },
+  { n: "4", t: "themes that became the tool" },
 ];
 
-const stages = [
-  { title: "Spawning — Initiating Growth", desc: "The beginning of the journey: exploring, discovering, and building core skills with support and mentorship close by." },
-  { title: "Fry — Emerging Growth", desc: "Finding the flow: gaining independence and actively applying the foundational skills teachers have developed." },
-  { title: "Smolt — Sustained Growth", desc: "Consistent, confident practice: adapting fluidly to diverse classroom needs, culturally responsive every day." },
-  { title: "Returning Adult — Thriving & Leading", desc: "Mentors and role models who nurture the growth of students and colleagues, completing a full cycle of growth." },
+const steps = [
+  { n: "01", t: "Guidance", d: "The Stó:lō Education Committee shaped the questions and kept the work accountable to community values." },
+  { n: "02", t: "Gathering", d: "One-to-one interviews with nineteen educators and staff, alongside families and Elders." },
+  { n: "03", t: "Analysis", d: "Interviews were coded as they happened, then grouped into fourteen sub-themes and four themes." },
+  { n: "04", t: "Checking back", d: "Committee members reviewed the drafts before anything was final." },
+  { n: "05", t: "The tool", d: "A 24-page framework the school uses for growth conversations." },
 ];
 
-const areas = [
-  "Stó:lō cultural responsiveness & Halq'eméylem integration",
-  "Communication & collaboration with families",
-  "Community participation & engagement",
-  "Curriculum planning, pacing & learning objectives",
-  "Classroom management",
-  "Holistic student assessment",
-  "Professional development plan",
-  "Collaborative leadership",
-  "Educator self-care routine",
-  "Educator evaluation of administrators",
+const themes = [
+  { n: "1", t: "Growth mindset and lifelong learning", d: "Educators asked for evaluation that helps them keep learning: frequent, formative and reflective." },
+  { n: "2", t: "Supportive and transparent evaluation", d: "Clear expectations, a culture of support and useful feedback after every observation." },
+  { n: "3", t: "Instruction, classroom management and holistic assessment", d: "Purposeful planning and assessment that sees the whole student, including confidence and well-being." },
+  { n: "4", t: "Culture, community and families", d: "Stó:lō culture and knowledge inside the criteria, and trust built with families and the community." },
 ];
 
 const faqItems = [
-  { q: "What is the SALMON Tool?", a: "SALMON — Seabird Assessment for Learning, Mentorship, and Ongoing Nurturing — is a teacher evaluation and growth tool created with the Stó:lō Education Committee at Seabird Island Community School. It replaces verdict-style performance reviews with reflection, feedback, and goals set together." },
-  { q: "Who is it for?", a: "Teachers, administrators, and education leaders — especially in First Nations and community schools — who want evaluation to nurture growth, honour culture, and build trust between educators and leadership." },
-  { q: "How was it developed?", a: "Through a community-led process: an advisory committee of four respected Stó:lō educators, an environmental scan of local documents, and focus groups with more than 20 educators and staff. Community insights were synthesized into the framework, in close collaboration with those who shaped its vision." },
-  { q: "How do I start using it?", a: "Take the short course to learn the framework, read the tool page by page, or open the Reflection Library and sit with the guiding questions. When you're ready, download the PDF and bring it to your next growth conversation." },
+  { q: "What is SALMON?", a: "SALMON stands for Seabird Assessment for Learning, Mentorship and Ongoing Nurturing. It is a teacher evaluation and growth framework built with the Stó:lō Education Committee and the educators of Seabird Island Community School. It replaces verdict-style reviews with reflection, feedback and goals set together." },
+  { q: "Who shaped it?", a: "Four respected Stó:lō educators on the Stó:lō Education Committee guided the work and reviewed the drafts. Nineteen educators and staff were interviewed one to one: ten teachers, seven educational assistants, the Halq'eméylem curriculum developer and the vice-principal. Families and Elders were part of the conversation too." },
+  { q: "How were the findings reached?", a: "Interviews were transcribed and coded as they happened, the codes were mapped to see how ideas connected, and they were grouped into fourteen sub-themes and four themes. Each theme can be traced back to what people said." },
+  { q: "Can another school use it?", a: "The framework belongs to Seabird Island Community School and reflects Stó:lō values. Other schools can read it, and download the tool, as an example of how a community can build evaluation around its own values." },
 ];
 
 function Accordion({ items }: { items: { q: string; a: string }[] }) {
@@ -127,163 +126,124 @@ export default function Home() {
       <SiteHeader />
 
       <main className="flex-1">
-        {/* ===== HERO ===== */}
-        <section className="relative w-full overflow-hidden" style={{ minHeight: "min(88vh, 720px)" }}>
-          <div className="absolute inset-0" style={{ backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center 55%" }} />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(15,15,13,0.5) 0%, rgba(15,15,13,0.62) 55%, rgba(15,15,13,0.8) 100%)" }} />
-          <div className="relative z-10 flex flex-col items-center justify-center text-center px-5 sm:px-8" style={{ minHeight: "min(88vh, 720px)" }}>
-            <FadeIn delay={0.1}>
-              <p className="uppercase font-semibold mb-4" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(10px, 1.2vw, 12px)", letterSpacing: "0.24em", color: "rgba(255,255,255,0.75)" }}>
-                An Evaluation Tool for Educational Leaders
+        {/* ===== HERO (text beside the photo, never on it) ===== */}
+        <section className="px-4 sm:px-6 pt-10 sm:pt-14 pb-12 sm:pb-16" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-12 items-center">
+            <div>
+              <p className="uppercase font-semibold m-0 mb-4" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.22em", color: RED }}>
+                Community research &middot; Seabird Island Community School
               </p>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <h1 className="font-bold leading-[1.06] mb-5 max-w-[920px] mx-auto" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px, 5.8vw, 68px)", color: "#ffffff" }}>
-                Teacher evaluation that nurtures, the way a river raises salmon
+              <h1 className="m-0 mb-5" style={{ fontFamily: display, fontWeight: 800, fontSize: "clamp(34px, 4.6vw, 56px)", color: INK, lineHeight: 1.06 }}>
+                A school community rebuilt teacher evaluation around its own values
               </h1>
-            </FadeIn>
-            <FadeIn delay={0.32}>
-              <p className="mx-auto max-w-[660px] mb-9" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(15px, 2vw, 19px)", color: "rgba(255,255,255,0.82)", lineHeight: 1.7 }}>
-                SALMON — Seabird Assessment for Learning, Mentorship, and Ongoing Nurturing —
-                was created with the Stó:lō Education Committee at Seabird Island Community
-                School, where growth is a cycle, not a scoreboard.
+              <p className="m-0 mb-7" style={{ fontFamily: serif, fontSize: "clamp(16px, 1.8vw, 19px)", color: BODY, lineHeight: 1.75 }}>
+                SALMON (Seabird Assessment for Learning, Mentorship and Ongoing Nurturing) is the result: a framework
+                guided by the Stó:lō Education Committee, built from the voices of the school&rsquo;s educators, staff,
+                families and Elders, and used by the school today.
               </p>
-            </FadeIn>
-            <FadeIn delay={0.44}>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <SalmonButton href="/course">Start the Course</SalmonButton>
-                <SalmonButton href="/tool" light>Read the Tool</SalmonButton>
+              <div className="flex flex-wrap gap-4">
+                <SalmonButton href="/research">See how it was built</SalmonButton>
+                <Link href="/tool"><span className="inline-block" style={{ fontFamily: sans, fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", padding: "14px 30px", color: RED, border: `1px solid ${RED}`, cursor: "pointer" }}>Read the tool</span></Link>
               </div>
-            </FadeIn>
+            </div>
+            <figure className="m-0">
+              <img src="/hero.jpg" alt="Students and staff in a drum circle in the Seabird Island Community School gym" width={1920} height={1080} className="w-full h-auto block" style={{ boxShadow: "0 18px 50px rgba(0,0,0,0.16)" }} />
+              <figcaption className="mt-2" style={{ fontFamily: sans, fontSize: 12, color: "#5f5f58" }}>Seabird Island Community School. Still from the school film.</figcaption>
+            </figure>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-20" style={{ background: `linear-gradient(to bottom, transparent, ${WARM})` }} />
         </section>
 
-        {/* ===== QUICK NAV ===== */}
-        <section className="px-4 sm:px-6 py-10 sm:py-14" style={{ backgroundColor: WARM }}>
-          <div className="max-w-[1100px] mx-auto">
-            <FadeIn>
-              <p className="text-center uppercase tracking-[0.2em] mb-8 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: RED }}>
-                Explore SALMON
-              </p>
-            </FadeIn>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-5">
-              {quickNav.map((r, i) => (
-                <FadeIn key={r.title} delay={i * 0.08}>
-                  <a href={r.href} className="block h-full no-underline">
-                    <div
-                      className="text-center p-4 sm:p-5 h-full transition-shadow duration-200 hover:shadow-md flex flex-col"
-                      style={{ borderRadius: 2, border: "1px solid #d4cfc6", background: "#ffffff", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
-                    >
-                      <h3 className="mb-1" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(14px, 1.4vw, 17px)", fontWeight: 700, color: INK, lineHeight: 1.3 }}>{r.title}</h3>
-                      <p className="flex-1" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(12px, 1.2vw, 14px)", color: "#6b6b65", lineHeight: 1.5 }}>{r.desc}</p>
-                    </div>
-                  </a>
-                </FadeIn>
+        {/* ===== AT A GLANCE ===== */}
+        <section className="px-4 sm:px-6 pb-14" style={{ backgroundColor: WARM }}>
+          <dl className="max-w-[1180px] mx-auto grid grid-cols-2 md:grid-cols-4 m-0" style={{ borderTop: `2px solid ${INK}` }}>
+            {glance.map((g, i) => (
+              <div key={g.t} className={`py-6 pr-4 border-[#d4cfc6] ${i % 2 === 1 ? "border-l pl-5" : i === 2 ? "pl-0 md:border-l md:pl-5" : "pl-0"} ${i >= 2 ? "border-t md:border-t-0" : ""}`}>
+                <dt className="sr-only">{g.t}</dt>
+                <dd className="m-0">
+                  <span className="block" style={{ fontFamily: display, fontWeight: 800, fontSize: "clamp(40px, 5vw, 60px)", color: RED, lineHeight: 1 }}>{g.n}</span>
+                  <span className="block mt-2" style={{ fontFamily: serif, fontSize: 15, color: BODY, lineHeight: 1.45 }}>{g.t}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* ===== PROCESS ===== */}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: SAND }}>
+          <div className="max-w-[1180px] mx-auto">
+            <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: RED }}>How it was built</p>
+            <h2 className="m-0 mb-9 max-w-[760px]" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 42px)", color: INK, lineHeight: 1.15 }}>
+              Five steps, each one led or checked by the community
+            </h2>
+            <ol className="list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ border: `1px solid ${RULE}`, background: "#ffffff" }}>
+              {steps.map((s, i) => (
+                <li key={s.n} className="p-6" style={{ borderTop: i ? `1px solid ${RULE}` : undefined, borderLeft: `1px solid ${RULE}`, marginLeft: -1, marginTop: i ? -1 : 0 }}>
+                  <span aria-hidden="true" className="block mb-3" style={{ fontFamily: display, fontWeight: 800, fontSize: 32, color: RED, lineHeight: 1 }}>{s.n}</span>
+                  <h3 className="m-0 mb-2" style={{ fontFamily: display, fontWeight: 700, fontSize: 19, color: INK }}>{s.t}</h3>
+                  <p className="m-0" style={{ fontFamily: serif, fontSize: 15, color: BODY, lineHeight: 1.6 }}>{s.d}</p>
+                </li>
               ))}
+            </ol>
+            <div className="mt-8">
+              <SalmonButton href="/research">Walk through the research</SalmonButton>
             </div>
           </div>
         </section>
 
-        {/* ===== ABOUT ===== */}
-        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: SAND }}>
-          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
-            <FadeIn>
-              <div className="flex justify-center">
-                <img
-                  src="/booklet/p01.jpg"
-                  alt="The printed SALMON tool — cover with Stó:lō formline salmon artwork"
-                  className="w-full h-auto block"
-                  style={{ maxWidth: 400, boxShadow: "0 24px 60px rgba(0,0,0,0.25)", transform: "rotate(-1.5deg)" }}
-                />
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <div>
-                <p className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: RED }}>
-                  A Real, Working Document
-                </p>
-                <h2 className="font-bold mb-5" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(24px, 3vw, 38px)", color: INK, lineHeight: 1.15 }}>
-                  Born at Seabird Island, built to be written in
-                </h2>
-                <p className="mb-4" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(15px, 1.6vw, 17px)", color: "#3d3d39", lineHeight: 1.8 }}>
-                  SALMON is a 24-page evaluation and nurturing tool educators actually write in.
-                  Every area pairs guiding reflection questions with three columns — self-evaluation,
-                  administrator feedback, and coactive goal-setting — so growth is a conversation,
-                  never a verdict.
-                </p>
-                <p className="mb-7" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(15px, 1.6vw, 17px)", color: "#3d3d39", lineHeight: 1.8 }}>
-                  It was developed collaboratively with the language and culture team, teachers,
-                  educational assistants, and school leadership — grounded in the values the school
-                  teaches its students: self-reliance, generosity, honesty, and respect.
-                </p>
-                <SalmonButton href="/tool">See Inside the Tool</SalmonButton>
-              </div>
-            </FadeIn>
+        {/* ===== FINDINGS ===== */}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: WARM }}>
+          <div className="max-w-[1180px] mx-auto">
+            <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: RED }}>What people said</p>
+            <h2 className="m-0 mb-9 max-w-[760px]" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 42px)", color: INK, lineHeight: 1.15 }}>
+              Four themes from the interviews
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {themes.map((t) => (
+                <div key={t.n} className="p-6 h-full" style={{ background: "#ffffff", border: `1px solid ${RULE}`, borderLeft: `4px solid ${RED}` }}>
+                  <p className="m-0 mb-1 uppercase" style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", color: RED }}>Theme {t.n}</p>
+                  <h3 className="m-0 mb-2" style={{ fontFamily: display, fontWeight: 700, fontSize: 20, color: INK, lineHeight: 1.3 }}>{t.t}</h3>
+                  <p className="m-0" style={{ fontFamily: serif, fontSize: 15, color: BODY, lineHeight: 1.65 }}>{t.d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ===== LIFECYCLE ===== */}
-        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: WARM }}>
-          <div className="max-w-[1100px] mx-auto">
-            <FadeIn>
-              <div className="text-center mb-10">
-                <p className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: RED }}>
-                  The Lifecycle
-                </p>
-                <h2 className="font-bold" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px, 3.5vw, 44px)", color: INK }}>
-                  Four Stages of Educator Growth
-                </h2>
-              </div>
-            </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {stages.map((p, i) => (
-                <FadeIn key={p.title} delay={i * 0.08}>
-                  <div className="p-6 h-full" style={{ background: "#ffffff", borderLeft: `4px solid ${RED}`, boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
-                    <h3 className="mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(16px, 1.6vw, 19px)", fontWeight: 700, color: INK, lineHeight: 1.3 }}>{p.title}</h3>
-                    <p style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(13px, 1.3vw, 15px)", color: "#5a5a55", lineHeight: 1.7 }}>{p.desc}</p>
-                  </div>
-                </FadeIn>
-              ))}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: SAND }}>
+          <div className="max-w-[1180px] mx-auto">
+            <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: RED }}>The growth cycle</p>
+            <h2 className="m-0 mb-9 max-w-[760px]" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 42px)", color: INK, lineHeight: 1.15 }}>
+              Four stages of educator growth, named for the salmon
+            </h2>
+            <LifecycleDiagram />
+            <div className="mt-8">
+              <SalmonButton href="/journey">Explore the full journey</SalmonButton>
             </div>
-            <FadeIn delay={0.2}>
-              <div className="text-center mt-9">
-                <SalmonButton href="/journey">Explore the Full Journey</SalmonButton>
-              </div>
-            </FadeIn>
           </div>
         </section>
 
-        {/* ===== WHAT IT ASSESSES ===== */}
-        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: "#5d131e" }}>
-          <div className="max-w-[900px] mx-auto text-center">
-            <FadeIn>
-              <p className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: "#e4a1aa" }}>
-                Ten Areas, One Framework
-              </p>
-              <h2 className="font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px, 3.5vw, 44px)", color: "#ffffff" }}>
-                What the Tool Assesses
+        {/* ===== THE TOOL ===== */}
+        <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: DEEP }}>
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 md:gap-14 items-center">
+            <img src="/booklet/p01.jpg" alt="Cover of the printed SALMON tool, with Stó:lō formline salmon artwork" width={850} height={1100} className="w-full h-auto block mx-auto" style={{ maxWidth: 300, boxShadow: "0 24px 60px rgba(0,0,0,0.35)" }} />
+            <div>
+              <p className="uppercase font-semibold m-0 mb-3" style={{ fontFamily: sans, fontSize: 12, letterSpacing: "0.2em", color: "#f0c4ca" }}>What it became</p>
+              <h2 className="m-0 mb-5" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.2vw, 40px)", color: "#ffffff", lineHeight: 1.15 }}>
+                A 24-page tool educators write in
               </h2>
-              <p className="mx-auto max-w-[620px] mb-8" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(15px, 1.6vw, 17px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>
-                Drawn from what the community said matters — and accountability runs both ways:
-                the last area is teachers evaluating their administrators.
+              <p className="m-0 mb-4" style={{ fontFamily: serif, fontSize: 17, color: "rgba(255,255,255,0.9)", lineHeight: 1.75 }}>
+                Ten areas, each with guiding questions and three columns: self-evaluation, administrator feedback and
+                goals set together. Accountability runs both ways: the last area is teachers evaluating their administrators.
               </p>
-            </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[760px] mx-auto text-left">
-              {areas.map((item, i) => (
-                <FadeIn key={i} delay={i * 0.04}>
-                  <div className="flex items-start gap-3 py-2" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(14px, 1.5vw, 16px)", color: "rgba(255,255,255,0.86)", lineHeight: 1.6 }}>
-                    <span className="shrink-0 mt-0.5" style={{ color: "#e4a1aa", fontSize: "1.1em" }}>&#8594;</span>
-                    <span>{item}</span>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-            <FadeIn delay={0.3}>
-              <div className="mt-10">
-                <SalmonButton href="/reflect" light>Open the Reflection Library</SalmonButton>
+              <p className="m-0 mb-7" style={{ fontFamily: serif, fontSize: 17, color: "rgba(255,255,255,0.9)", lineHeight: 1.75 }}>
+                It is grounded in the values the school teaches its students: self-reliance, generosity, honesty and respect.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <SalmonButton href="/tool" light>Read the tool</SalmonButton>
+                <SalmonButton href="/reflect" light>Open the guiding questions</SalmonButton>
               </div>
-            </FadeIn>
+            </div>
           </div>
         </section>
 
@@ -313,44 +273,11 @@ export default function Home() {
 
         {/* ===== FAQ ===== */}
         <section className="px-4 sm:px-6 py-14 sm:py-20" style={{ backgroundColor: SAND }}>
-          <div className="max-w-[700px] mx-auto">
-            <FadeIn>
-              <p className="text-center uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: RED }}>
-                Learn More
-              </p>
-              <h2 className="font-bold text-center mb-8 sm:mb-10" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(26px, 3.5vw, 44px)", color: INK }}>
-                Frequently Asked Questions
-              </h2>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <Accordion items={faqItems} />
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* ===== CTA ===== */}
-        <section className="relative w-full overflow-hidden" style={{ minHeight: 560 }}>
-          <div className="absolute inset-0" style={{ backgroundImage: `url(${CTA_IMG})`, backgroundSize: "cover", backgroundPosition: "center 35%" }} />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(15,15,13,0.84) 0%, rgba(15,15,13,0.6) 50%, rgba(15,15,13,0.28) 100%)" }} />
-          <div className="relative z-10 flex items-center px-5 sm:px-8 py-20" style={{ minHeight: 560 }}>
-            <div className="max-w-[1100px] mx-auto w-full">
-              <FadeIn>
-                <div className="max-w-[560px]">
-                  <p className="uppercase tracking-[0.2em] mb-2 text-[11px] sm:text-[12px] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif", color: "#e4a1aa" }}>
-                    Begin the Cycle
-                  </p>
-                  <h2 className="font-bold mb-5 leading-[1.1]" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 52px)", color: "#ffffff" }}>
-                    Let's make evaluation something teachers look forward to.
-                  </h2>
-                  <p className="mb-7" style={{ fontFamily: "'Source Serif 4', serif", fontSize: "clamp(14px, 1.5vw, 17px)", color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>
-                    SALMON grew from the voices of more than twenty educators and staff, guided by
-                    four respected Stó:lō educators — and it's ready for your school's next growth
-                    conversation.
-                  </p>
-                  <SalmonButton href="/course">Start the Course</SalmonButton>
-                </div>
-              </FadeIn>
-            </div>
+          <div className="max-w-[760px] mx-auto">
+            <h2 className="m-0 mb-8" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(26px, 3.4vw, 40px)", color: INK }}>
+              Questions about the research
+            </h2>
+            <Accordion items={faqItems} />
           </div>
         </section>
       </main>
