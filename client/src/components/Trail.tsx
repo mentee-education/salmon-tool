@@ -36,7 +36,7 @@ function Label({ k }: { k: string }) {
 
 function Marker({ i }: { i: number }) {
   const last = i === STEPS.length - 1;
-  return <span aria-hidden="true" className="block rounded-full" style={{ width: last ? 18 : 12, height: last ? 18 : 12, background: last ? RED : "#fdfcf9", border: `2px solid ${last ? RED : i === 0 ? INK : RED}` }} />;
+  return <span aria-hidden="true" className="block rounded-full" style={{ width: last ? 18 : 12, height: last ? 18 : 12, background: last ? RED : "#fdfcf9", border: `2px solid ${RED}` }} />;
 }
 
 export default function Trail() {
@@ -46,9 +46,6 @@ export default function Trail() {
 
       {/* wide */}
       <div className="hidden md:block relative">
-        <svg aria-hidden="true" className="absolute left-0 right-0" style={{ top: 30, width: "100%", height: 150 }} viewBox="0 0 1000 150" preserveAspectRatio="none">
-          <path d="M0 0 L1000 62 L1000 88 L0 150 Z" fill={RED} opacity="0.06" />
-        </svg>
         <span aria-hidden="true" className="absolute left-0 right-0" style={{ top: 42, height: 1, background: TRACK }} />
         <ol className="list-none m-0 p-0 grid grid-cols-4 gap-8 relative">
           {STEPS.map((s, i) => (

@@ -130,8 +130,12 @@ function CommitteeGrid() {
           <li key={c.members[0].name} className={`flex ${pair ? "sm:col-span-2" : ""}`}>
             <FadeIn delay={i * 0.06} className="flex w-full">
               <figure className="m-0 flex flex-col w-full" style={{ background: "#ffffff", border: `1px solid ${RULE}` }}>
-                {c.photo ? (
-                  <img src={c.photo} alt={`${c.members.map((m) => m.name).join(" and ")}${pair ? ", pictured together" : ""}`} width={889} height={768} loading="lazy" className="block w-full h-auto" />
+                {c.photo && pair ? (
+                  <div className="overflow-hidden"><img src={c.photo} alt={`${c.members.map((m) => m.name).join(" and ")}, pictured together`} width={889} height={768} loading="lazy" className="photo-zoom block w-full h-auto" /></div>
+                ) : c.photo ? (
+                  <div className="relative flex-1 overflow-hidden" style={{ minHeight: 320 }}>
+                    <img src={c.photo} alt={`Portrait of ${c.members[0].name}`} width={600} height={1000} loading="lazy" className="photo-zoom absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "50% 22%" }} />
+                  </div>
                 ) : (
                   <div className="flex-1 flex items-center justify-center" style={{ background: DEEP, minHeight: 220 }}>
                     <span aria-hidden="true" className="flex items-center justify-center" style={{ width: 112, height: 112, borderRadius: "50%", border: `1px solid ${PINK}`, fontFamily: display, fontWeight: 700, fontSize: 52, color: PINK }}>{c.members[0].name.charAt(0)}</span>
@@ -366,6 +370,7 @@ export default function OnePage() {
     if (!window.matchMedia("(hover: none)").matches) return;
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("is-filled"); }), { threshold: 0.6 });
     document.querySelectorAll(".num-fill").forEach((el) => io.observe(el));
+    document.querySelectorAll(".theme-panel").forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
@@ -383,7 +388,7 @@ export default function OnePage() {
              (it plays from its own still), then the research question and the numbers. ===== */}
         <section id="top" style={{ backgroundColor: PARCH2 }}>
           {/* words left, the school film right: both above the fold at 1280x800 */}
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 pt-6 sm:pt-8 lg:pt-6 pb-8 lg:pb-6 grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] gap-7 lg:gap-14 items-center lg:min-h-[calc(100svh-72px)] lg:max-h-[780px]">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 pt-6 sm:pt-8 lg:pt-12 pb-10 lg:pb-12 grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] gap-7 lg:gap-14 items-center">
             <FadeIn>
               <p className="m-0 mb-4" style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, letterSpacing: "0.04em", color: RED }}>Community Research &middot; Seabird Island</p>
               <h1 className="m-0 mb-5" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(34px, 4.3vw, 62px)", color: INK, lineHeight: 1.04, letterSpacing: "-0.012em", textWrap: "balance" }}>
@@ -533,20 +538,20 @@ export default function OnePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
               {themes.map((th, i) => {
                 const panel = [
-                  { bg: "#3a0c14", h: "#ffffff", b: "rgba(255,255,255,0.86)", k: PINK, r: "rgba(255,255,255,0.18)" },
-                  { bg: PARCH, h: INK, b: BODY, k: RED, r: "#ddd3c3" },
+                  { bg: "#ffffff", h: INK, b: BODY, k: RED, r: RULE },
+                  { bg: WARM, h: INK, b: BODY, k: RED, r: "#e3dacb" },
                   { bg: SLATE, h: INK, b: "#33403b", k: "#7d1b2a", r: "#c4ceca" },
-                  { bg: RED, h: "#ffffff", b: "rgba(255,255,255,0.92)", k: "#ffe3e7", r: "rgba(255,255,255,0.25)" },
+                  { bg: LTINT, h: INK, b: BODY, k: RED, r: "#ead6d4" },
                 ][i];
                 return (
-                  <div key={th.n} className="hv-lift relative overflow-hidden p-7 sm:p-8 h-full" style={{ background: panel.bg }}>
-                    <span aria-hidden="true" className="absolute select-none" style={{ right: 18, top: -18, fontFamily: display, fontWeight: 800, fontSize: 150, lineHeight: 1, color: panel.h, opacity: 0.09 }}>{th.n}</span>
+                  <div key={th.n} className="theme-panel hv-lift relative overflow-hidden p-7 sm:p-8 h-full" style={{ background: panel.bg, borderTop: `1px solid ${INK}` }}>
+                    <span aria-hidden="true" className="theme-num num-fill absolute select-none" style={{ right: 18, top: -14, fontFamily: display, fontWeight: 800, fontSize: 140, lineHeight: 1 }}>{th.n}</span>
                     <p className="m-0 mb-2 uppercase relative" style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", color: panel.k }}>Theme {th.n}</p>
                     <h4 className="m-0 mb-5 relative" style={{ fontFamily: display, fontWeight: 700, fontSize: "clamp(21px, 2.1vw, 25px)", lineHeight: 1.25, color: panel.h }}>{th.t}</h4>
                     <ol className="m-0 p-0 list-none relative">
                       {th.subs.map((s, j) => (
-                        <li key={s} className="grid grid-cols-[38px_1fr] gap-2 py-2.5" style={{ fontFamily: serif, fontSize: 15.5, color: panel.b, borderTop: `1px solid ${panel.r}`, lineHeight: 1.5 }}>
-                          <span style={{ fontFamily: display, fontWeight: 700, color: panel.k }}>{th.n}.{j + 1}</span><span>{s}</span>
+                        <li key={s} className="sub-row grid grid-cols-[38px_1fr] gap-2 py-2.5" style={{ fontFamily: serif, fontSize: 15.5, color: panel.b, borderTop: `1px solid ${panel.r}`, lineHeight: 1.5 }}>
+                          <span className="sub-num" style={{ fontFamily: display, fontWeight: 700, color: panel.k }}>{th.n}.{j + 1}</span><span>{s}</span>
                         </li>
                       ))}
                     </ol>
@@ -561,34 +566,44 @@ export default function OnePage() {
                 { k: "Draft", t: "Themes and framework written up from the interviews" },
                 { k: "Review", t: "Committee members read the drafts and responded" },
                 { k: "Final", t: "The framework and the 24-page tool the school uses" },
-              ]} render={(s, i) => <ToneStep k={s.k} t={s.t} tone={[0, 1, 3][i]} />} />
+              ]} render={(s, i) => (
+                <div className="hv flex-1 pt-5 pb-1" style={{ borderTop: `${i === 2 ? 3 : 1}px solid ${i === 2 ? RED : INK}` }}>
+                  <p className="m-0 mb-2 flex items-center gap-2" style={{ fontFamily: sans, fontSize: 12.5, fontWeight: 600, color: i === 2 ? RED : MUTED }}>
+                    <span aria-hidden="true" className="inline-block rounded-full" style={{ width: 10, height: 10, border: `2px solid ${RED}`, background: i === 2 ? RED : "transparent" }} />{s.k}
+                  </p>
+                  <p className="hv-title m-0" style={{ fontFamily: serif, fontSize: 17, color: INK, lineHeight: 1.55 }}>{s.t}</p>
+                </div>
+              )} />
             </div>
 
             <FadeIn><StepHead n="05" title="What it became" lede="The four themes became the SALMON tool: ten areas educators reflect on, four lifecycle stages that describe growth, and three columns on every page for self-evaluation, administrator feedback and goals set together. Accountability runs both ways: the last area is teachers evaluating their administrators." /></FadeIn>
           </div>
         </Section>
 
-        {/* ===== PHOTOGRAPHS: a composed pair, apart, staggered, captioned. Shown whole, no text on them. ===== */}
+        {/* ===== PHOTOGRAPHS: everyday school life, stills from the school film (Jason Bruce). Shown whole,
+             set apart with clear gutters, staggered, each captioned. No text on photos. ===== */}
         <section className="px-4 sm:px-6 py-16 sm:py-20" style={{ backgroundColor: SLATE }}>
-          <div className="max-w-[1180px] mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] gap-8 md:gap-8 items-start">
-            <FadeIn>
-              <figure className="m-0">
-                <div className="overflow-hidden"><img src={`${R2_BASE}/site/booklet-photos/img-014-125.jpg`} alt="Students drumming and singing outdoors at Seabird Island" width={986} height={853} loading="lazy" className="photo-zoom block w-full h-auto" /></div>
-                <figcaption className="mt-3 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.5 }}>
-                  <span aria-hidden="true" style={{ display: "inline-block", width: 24, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
-                  Students drumming and singing outdoors at Seabird Island. From the SALMON tool.
-                </figcaption>
-              </figure>
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <figure className="m-0 md:mt-28">
-                <div className="overflow-hidden"><img src={`${R2_BASE}/site/booklet-photos/img-018-174.jpg`} alt="Students in regalia with drums in the Seabird Island Community School gym" width={986} height={853} loading="lazy" className="photo-zoom block w-full h-auto" /></div>
-                <figcaption className="mt-3 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.5 }}>
-                  <span aria-hidden="true" style={{ display: "inline-block", width: 24, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
-                  A drum group in the school gym, in regalia. From the SALMON tool.
-                </figcaption>
-              </figure>
-            </FadeIn>
+          <div className="max-w-[1180px] mx-auto">
+            <FadeIn><H2 className="mb-10">A school day at Seabird Island</H2></FadeIn>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-x-7 gap-y-10 items-start">
+              {[
+                { src: "lesson-table", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table.", span: "md:col-span-7" },
+                { src: "be-the-change", alt: "Students raising their hands in a classroom, a hand drum in the foreground", cap: "Hands up in a classroom, a hand drum close by.", span: "md:col-span-5 md:mt-24" },
+                { src: "classroom-morning", alt: "Students and staff gathering at the start of a class", cap: "The start of a class.", span: "md:col-span-4" },
+                { src: "sewing", alt: "Hands guiding fabric through a sewing machine", cap: "Making, by hand.", span: "md:col-span-4 md:mt-12" },
+                { src: "school-path", alt: "Students running along the path into the school, past carved posts", cap: "The path into school.", span: "md:col-span-4" },
+              ].map((ph, i) => (
+                <FadeIn key={ph.src} delay={(i % 2) * 0.08} className={ph.span}>
+                  <figure className="m-0">
+                    <div className="overflow-hidden"><img src={`${R2_BASE}/stills/${ph.src}.jpg`} alt={ph.alt} width={1600} height={900} loading="lazy" className="photo-zoom block w-full h-auto" /></div>
+                    <figcaption className="mt-3 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.5 }}>
+                      <span aria-hidden="true" style={{ display: "inline-block", width: 24, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
+                      <span>{ph.cap} <span style={{ color: "#4d5a55" }}>Still from the school film.</span></span>
+                    </figcaption>
+                  </figure>
+                </FadeIn>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -628,6 +643,11 @@ export default function OnePage() {
           </FadeIn>
           <Lifecycle bg={WARM} />
         </Section>
+
+        {/* ===== LAND: a full-bleed still, shown whole, no text on it ===== */}
+        <figure className="m-0" style={{ backgroundColor: "#1d1714" }}>
+          <img src={`${R2_BASE}/stills/swings-mountains.jpg`} alt="Children on the school swings beneath the mountains" width={1600} height={900} loading="lazy" className="block w-full h-auto mx-auto" style={{ maxWidth: 1600 }} />
+        </figure>
 
         {/* ===== THE TOOL ===== */}
         <Section id="tool" bg={DEEP}>

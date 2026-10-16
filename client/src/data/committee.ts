@@ -10,6 +10,6 @@ export const R2_BASE = "https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev";
 export const COMMITTEE: { name: string; role: string; photo: string }[] = [
   { name: "Kweláxtelot (Karla) Kay", role: "Language Vitalist", photo: `${R2_BASE}/committee/dianna-and-karla-kay.jpg` },
   { name: "Siyámíya (Dianna) Kay", role: "Language Curriculum Developer", photo: `${R2_BASE}/committee/dianna-and-karla-kay.jpg` },
-  { name: "Saylesh Wesley", role: "First Nations Resource Enhancement Teacher", photo: "" },
-  { name: "Camielle Laslo", role: "Halq'eméylem Teacher", photo: "" },
+  { name: "Saylesh Wesley", role: "First Nations Resource Enhancement Teacher", photo: `${R2_BASE}/committee/saylesh-wesley.jpg` },
+  { name: "Camielle Laslo", role: "Halq'eméylem Teacher", photo: `${R2_BASE}/committee/camielle-laslo.jpg` },
 ];
