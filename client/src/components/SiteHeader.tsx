@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 
 const navLinks = [
-  { label: "The Research", href: "/research" },
+  { label: "The Research", href: "/#process" },
   { label: "The Tool", href: "/tool" },
-  { label: "Growth Journey", href: "/journey" },
-  { label: "Reflect", href: "/reflect" },
-  { label: "Resources", href: "/resources" },
+  { label: "Growth Cycle", href: "/#cycle" },
+  { label: "Questions", href: "/#questions" },
+  { label: "Learn More", href: "/#learn" },
 ];
 
 export default function SiteHeader() {

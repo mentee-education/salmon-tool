@@ -7,7 +7,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 
-const PAGES = Array.from({ length: 24 }, (_, i) => `/booklet/p${String(i + 1).padStart(2, "0")}.jpg`);
+const PAGES = Array.from({ length: 24 }, (_, i) => `https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/site/booklet/p${String(i + 1).padStart(2, "0")}.jpg`);
 
 export default function ReadTool() {
   const [page, setPage] = useState(0);
@@ -58,7 +58,7 @@ export default function ReadTool() {
               <p className="m-0 mt-3 max-w-[640px]" style={{ fontFamily: "'Source Serif 4', serif", fontSize: 16, lineHeight: 1.7, color: "rgba(253,252,249,0.82)" }}>
                 The 24-page tool the research produced. Every area pairs guiding questions with three columns:
                 self-evaluation, administrator feedback and goals set together.{" "}
-                <a href="/research" style={{ color: "#f0c4ca", textDecoration: "underline", textUnderlineOffset: 3 }}>See how it was built</a>
+                <a href="/#process" style={{ color: "#f0c4ca", textDecoration: "underline", textUnderlineOffset: 3 }}>See how it was built</a>
               </p>
             </div>
             <a
