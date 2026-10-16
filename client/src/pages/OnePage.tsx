@@ -292,7 +292,7 @@ function FillNum({ children, size, className = "", style }: { children: React.Re
 function GalleryImage({ src, alt, cap }: { src: string; alt: string; cap: string }) {
   return (
     <figure className="m-0">
-      <div className="overflow-hidden" style={{ aspectRatio: "16 / 9" }}><img src={`${R2_BASE}/stills/${src}-1920.jpg`} alt={alt} width={1920} height={1080} loading="lazy" decoding="async" className="photo-zoom block w-full h-full object-cover" /></div>
+      <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}><img src={`${R2_BASE}/stills/${src}-1920.jpg`} alt={alt} width={1440} height={1080} loading="lazy" decoding="async" className="photo-zoom block w-full h-full object-cover" /></div>
       <figcaption className="mt-2.5 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.45 }}>
         <span aria-hidden="true" style={{ display: "inline-block", width: 20, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
         <span>{cap}</span>
@@ -617,16 +617,15 @@ export default function OnePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-3 items-end mb-8">
                 <div className="lg:col-span-7"><H2 className="mb-0">A School Day at Seabird Island</H2></div>
                 <p className="lg:col-span-5 m-0" style={{ fontFamily: serif, fontSize: 17, color: "#33403b", lineHeight: 1.65 }}>
-                  The school and the community the framework was built for. Photographs from the SALMON tool.
+                  The school and the community the framework was built for.
                 </p>
               </div>
             </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto" style={{ maxWidth: 1224 }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 mx-auto" style={{ maxWidth: 1224 }}>
               {[
-                { src: "pdf-building", alt: "Seabird Island Community School, its timber-framed entrance and long sloping roof", cap: "Seabird Island Community School." },
-                { src: "pdf-roof-mountains", alt: "The school's shingled roofline with the valley and mountains behind", cap: "The roofline, the valley and the mountains beyond." },
-                { src: "pdf-entrance", alt: "Carved wooden posts on the grounds in front of the school buildings", cap: "Carved posts on the school grounds." },
-                { src: "pdf-drumming", alt: "Students in red headbands drumming outdoors while family and staff look on", cap: "Students drumming, with family and staff close by." },
+                { src: "g3-lesson", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table." },
+                { src: "g3-drumming", alt: "Students in red headbands drumming outdoors while family and staff look on", cap: "Students drumming, with family and staff close by." },
+                { src: "g3-posts", alt: "Carved wooden posts on the grounds in front of the school, with the mountains behind", cap: "Carved posts on the school grounds." },
               ].map((ph, i) => (
                 <FadeIn key={ph.src} delay={(i % 2) * 0.06}><GalleryImage {...ph} /></FadeIn>
               ))}
