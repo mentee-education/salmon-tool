@@ -141,7 +141,7 @@ function CommitteeGrid() {
                     <span aria-hidden="true" className="flex items-center justify-center" style={{ width: 112, height: 112, borderRadius: "50%", border: `1px solid ${PINK}`, fontFamily: display, fontWeight: 700, fontSize: 52, color: PINK }}>{c.members[0].name.charAt(0)}</span>
                   </div>
                 )}
-                <figcaption className={`p-5 grid gap-4 min-h-[104px] content-start ${pair ? "sm:grid-cols-2" : ""}`}>
+                <figcaption className={`p-5 grid gap-4 min-h-[118px] content-start ${pair ? "sm:grid-cols-2" : ""}`}>
                   {c.members.map((m) => (
                     <span key={m.name} className="block">
                       <span className="block mb-1" style={{ fontFamily: display, fontWeight: 700, fontSize: 19, color: INK, lineHeight: 1.3 }}>{m.name}</span>

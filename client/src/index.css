@@ -316,3 +316,6 @@ html { scroll-behavior: smooth; }
 .sub-row .sub-num { display: inline-block; transition: transform .25s ease-out; }
 .sub-row:hover .sub-num { transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) { .theme-num, .sub-row::before, .sub-row .sub-num { transition: none !important; } .theme-panel:is(:hover, :focus-within) .theme-num { transform: none; } }
+
+/* every section anchor clears the sticky bar: compact nav (60px) plus 16px */
+[id] { scroll-margin-top: 76px !important; }
