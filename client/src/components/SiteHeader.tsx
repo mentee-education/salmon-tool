@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 
 const navLinks = [
-  { label: "The Course", href: "/course" },
-  { label: "Read the Tool", href: "/tool" },
-  { label: "Reflect", href: "/reflect" },
-  { label: "Resources", href: "/resources" },
-  { label: "Our Process", href: "/process" },
+  { label: "The Research", href: "/#process" },
+  { label: "The Tool", href: "/tool" },
+  { label: "Growth Cycle", href: "/#cycle" },
+  { label: "Questions", href: "/#questions" },
+  { label: "Learn More", href: "/#learn" },
 ];
 
 export default function SiteHeader() {
@@ -40,16 +40,17 @@ export default function SiteHeader() {
         }}
       >
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.25rem", height: "100%", display: "flex", alignItems: "center" }}>
-          <Link href="/" style={{ display: "flex", alignItems: "baseline", gap: 8, textDecoration: "none", flexShrink: 0 }}>
-            <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "1.35rem", color: "#9B2335", letterSpacing: "0.01em" }}>SALMON</span>
-            <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.62rem", color: "#8a8a82", letterSpacing: "0.14em", textTransform: "uppercase" }}>Seabird Island</span>
+          <Link href="/" aria-label="SALMON research project, home" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
+            <img src="https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/brand/salmon-mark.png" alt="" width={40} height={40} style={{ width: 40, height: 40, borderRadius: "50%", display: "block", boxShadow: "0 0 0 1px #e2ddd5" }} />
+            <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
+              <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "1.2rem", color: "#9B2335", letterSpacing: "0.02em" }}>SALMON</span>
+              <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6rem", color: "#5f5f58", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 3 }}>Seabird Island Community School</span>
+            </span>
           </Link>
 
-          <div className="hidden lg:flex" style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: "1.5rem" }}>
+          <div className="hidden lg:flex" style={{ flex: 1, justifyContent: "flex-start", alignItems: "center", gap: "1.6rem", marginLeft: "2.75rem" }}>
             {navLinks.map((link) => {
-              const isActive = link.href === "/course"
-                ? location.startsWith("/course") || location.startsWith("/lessons")
-                : location === link.href || location.startsWith(link.href);
+              const isActive = location === link.href || location.startsWith(link.href) || (link.href === "/research" && location.startsWith("/process"));
               return (
                 <Link
                   key={link.href}
