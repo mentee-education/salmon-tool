@@ -617,16 +617,16 @@ export default function OnePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-3 items-end mb-8">
                 <div className="lg:col-span-7"><H2 className="mb-0">A School Day at Seabird Island</H2></div>
                 <p className="lg:col-span-5 m-0" style={{ fontFamily: serif, fontSize: 17, color: "#33403b", lineHeight: 1.65 }}>
-                  Everyday school life, the setting the framework was built for. Stills from the school film.
+                  The school and the community the framework was built for. Photographs from the SALMON tool.
                 </p>
               </div>
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto" style={{ maxWidth: 1224 }}>
               {[
-                { src: "lesson-table", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table." },
-                { src: "classroom-morning", alt: "Students and staff gathering at the start of a class", cap: "The start of a class." },
-                { src: "swings-mountains", alt: "Children on the school swings beneath the mountains", cap: "Recess beneath the mountains." },
-                { src: "school-path", alt: "Students running along the path into the school, past carved posts", cap: "The path into school." },
+                { src: "pdf-building", alt: "Seabird Island Community School, its timber-framed entrance and long sloping roof", cap: "Seabird Island Community School." },
+                { src: "pdf-roof-mountains", alt: "The school's shingled roofline with the valley and mountains behind", cap: "The roofline, the valley and the mountains beyond." },
+                { src: "pdf-entrance", alt: "Carved wooden posts on the grounds in front of the school buildings", cap: "Carved posts on the school grounds." },
+                { src: "pdf-drumming", alt: "Students in red headbands drumming outdoors while family and staff look on", cap: "Students drumming, with family and staff close by." },
               ].map((ph, i) => (
                 <FadeIn key={ph.src} delay={(i % 2) * 0.06}><GalleryImage {...ph} /></FadeIn>
               ))}
