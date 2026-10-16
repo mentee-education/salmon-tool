@@ -292,7 +292,7 @@ function FillNum({ children, size, className = "", style }: { children: React.Re
 function GalleryImage({ src, alt, cap }: { src: string; alt: string; cap: string }) {
   return (
     <figure className="m-0">
-      <div className="overflow-hidden" style={{ aspectRatio: "16 / 9" }}><img src={`${R2_BASE}/stills/${src}.jpg`} alt={alt} width={1600} height={900} loading="lazy" className="photo-zoom block w-full h-full object-cover" /></div>
+      <div className="overflow-hidden" style={{ aspectRatio: "16 / 9" }}><img src={`${R2_BASE}/stills/${src}-1920.jpg`} alt={alt} width={1920} height={1080} loading="lazy" decoding="async" className="photo-zoom block w-full h-full object-cover" /></div>
       <figcaption className="mt-2.5 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.45 }}>
         <span aria-hidden="true" style={{ display: "inline-block", width: 20, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
         <span>{cap}</span>
@@ -621,7 +621,7 @@ export default function OnePage() {
                 </p>
               </div>
             </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto" style={{ maxWidth: 1224 }}>
               {[
                 { src: "lesson-table", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table." },
                 { src: "classroom-morning", alt: "Students and staff gathering at the start of a class", cap: "The start of a class." },
