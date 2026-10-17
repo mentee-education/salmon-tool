@@ -11,14 +11,25 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "salmon-tool.vercel.app"
         }
       ],
-      "destination": "https://salmontool.com/:path*",
+      "destination": "https://salmontool.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "salmon-tool.vercel.app"
+        }
+      ],
+      "destination": "https://salmontool.com/:path+",
       "permanent": true
     }
   ]
