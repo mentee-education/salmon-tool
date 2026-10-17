@@ -4,6 +4,22 @@
   "installCommand": "pnpm install",
   "framework": "vite",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "salmon-tool.vercel.app"
+        }
+      ],
+      "destination": "https://salmontool.com/:path*",
+      "permanent": true
+    }
   ]
 }

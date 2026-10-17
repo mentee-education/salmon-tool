@@ -110,3 +110,4 @@ shared/
 client/public/__manus__/
 client/src/components/ManusDialog.tsx
 .vercel
+vercel.json.bak-*
