@@ -3,7 +3,7 @@
    one shade darker than the footer. Only the colour is SALMON's: a deep oxblood footer. */
 export default function SiteFooter() {
   return (
-    <footer style={{ backgroundColor: "#3a0c14" }}>
+    <footer id="site-footer" style={{ backgroundColor: "#3a0c14" }}>
       <div className="mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-8" style={{ maxWidth: 1180 }}>
         <p className="m-0" style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, color: "#fdfcf9" }}>
           SALMON <span style={{ fontFamily: "'Source Serif 4', serif", fontStyle: "italic", fontSize: 15, color: "rgba(253,252,249,0.78)" }}>&middot; Seabird Island Community School</span>

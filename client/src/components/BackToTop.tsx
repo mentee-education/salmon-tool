@@ -1,18 +1,22 @@
-/* Back to top: appears after about one screen of scrolling, lifts above the footer when the footer is in view,
-   smooth scroll (instant with reduced motion), then focus moves to the page top. */
+/* Back to top: appears after about one screen of scrolling and stays pinned bottom-right. Over the dark site footer
+   it inverts (light fill, dark arrow) so it stays visible. Smooth scroll (instant with reduced motion), then focus moves to the page top. */
 import { useEffect, useState } from "react";
 
 export default function BackToTop() {
   const [show, setShow] = useState(false);
-  const [lift, setLift] = useState(0);
+  const [onDark, setOnDark] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       setShow(window.scrollY > window.innerHeight * 0.9);
-      const footer = document.querySelector("footer");
+      // Invert when the button's centre (about 40px above the viewport bottom) is over the dark site footer.
+      const footer = document.getElementById("site-footer");
       if (footer) {
-        const overlap = window.innerHeight - footer.getBoundingClientRect().top;
-        setLift(overlap > 0 ? overlap : 0);
+        const r = footer.getBoundingClientRect();
+        const y = window.innerHeight - 40;
+        setOnDark(r.top <= y && r.bottom >= y);
+      } else {
+        setOnDark(false);
       }
     };
     onScroll();
@@ -37,8 +41,9 @@ export default function BackToTop() {
       aria-hidden={show ? undefined : true}
       className="to-top fixed z-[800] flex items-center justify-center rounded-full cursor-pointer"
       style={{
-        right: "max(16px, env(safe-area-inset-right))", bottom: `calc(max(16px, env(safe-area-inset-bottom)) + ${lift}px)`,
-        width: 48, height: 48, border: 0, background: "#5d131e", color: "#fdfcf9",
+        right: "max(16px, env(safe-area-inset-right))", bottom: "max(16px, env(safe-area-inset-bottom))",
+        width: 48, height: 48, border: 0, background: onDark ? "#fdfcf9" : "#5d131e", color: onDark ? "#5d131e" : "#fdfcf9",
+        transition: "background-color .2s, color .2s, opacity .3s ease-out, transform .3s ease-out",
         boxShadow: "0 8px 22px rgba(29,23,20,0.28)", opacity: show ? 1 : 0, pointerEvents: show ? "auto" : "none",
         transform: show ? undefined : "translateY(12px)",
       }}
