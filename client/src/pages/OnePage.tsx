@@ -242,11 +242,11 @@ function Interlude({ text }: { text: string }) {
           </div>
         </FadeIn>
         <FadeIn delay={0.12}>
-          <blockquote className="relative m-0 pl-8 sm:pl-10">
+          <blockquote className="relative m-0 pl-14 sm:pl-[76px]">
             <span aria-hidden="true" className="absolute select-none" style={{ left: 0, top: -26, fontFamily: display, fontSize: "clamp(90px, 9vw, 130px)", lineHeight: 1, color: RED }}>&ldquo;</span>
             <p className="m-0" style={{ fontFamily: display, fontStyle: "italic", fontWeight: 500, fontSize: "clamp(26px, 3vw, 38px)", color: INK, lineHeight: 1.28 }}>{text}</p>
           </blockquote>
-          <figcaption className="mt-7 pl-8 sm:pl-10 flex items-center gap-3" style={{ fontFamily: sans, fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>
+          <figcaption className="mt-7 pl-14 sm:pl-[76px] flex items-center gap-3" style={{ fontFamily: sans, fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>
             <span aria-hidden="true" style={{ display: "inline-block", width: 32, height: 2, background: RED }} />
             An educator at the school, interviewed for the research
           </figcaption>
@@ -295,7 +295,7 @@ function GalleryImage({ src, alt, cap }: { src: string; alt: string; cap: string
       <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}><img src={`${R2_BASE}/stills/${src}-1920.jpg`} alt={alt} width={1440} height={1080} loading="lazy" decoding="async" className="photo-zoom block w-full h-full object-cover" /></div>
       <figcaption className="mt-2.5 flex gap-3" style={{ fontFamily: sans, fontSize: 13, color: "#33403b", lineHeight: 1.45 }}>
         <span aria-hidden="true" style={{ display: "inline-block", width: 20, height: 1, background: RED, marginTop: 9, flexShrink: 0 }} />
-        <span>{cap}</span>
+        <span className="lg:whitespace-nowrap">{cap}</span>
       </figcaption>
     </figure>
   );
@@ -553,7 +553,7 @@ export default function OnePage() {
               <People />
             </div>
 
-            <Interlude text="The person's not there judging you; they're there trying to help you get better. Don't you want to get better?" />
+            <Interlude text="The person’s not there judging you; they’re there trying to help you get better. Don’t you want to get better?" />
 
             <div aria-hidden="true" className="step-track" />
             <FadeIn><StepHead n="03" title="Making sense of what people said" lede="Transcribing and coding began while the interviews were still under way, so each conversation informed the next. The codes were mapped visually to see how ideas connected, grouped into fourteen sub-themes, and then into four themes. Every theme can be traced back to the words of the people interviewed." /></FadeIn>
@@ -624,8 +624,8 @@ export default function OnePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 mx-auto" style={{ maxWidth: 1224 }}>
               {[
                 { src: "g3-lesson", alt: "A teacher and students working together at a round table", cap: "A small-group lesson at the round table." },
-                { src: "g3-drumming", alt: "Students in red headbands drumming outdoors while family and staff look on", cap: "Students drumming, with family and staff close by." },
-                { src: "g3-posts", alt: "Carved wooden posts on the grounds in front of the school, with the mountains behind", cap: "Carved posts on the school grounds." },
+                { src: "g3-drumming", alt: "Students in red headbands drumming outdoors while family and staff look on", cap: "Students drumming with family and staff." },
+                { src: "g3-posts", alt: "The grounds between the school buildings at Seabird Island, with mountains behind", cap: "The grounds between the school buildings." },
               ].map((ph, i) => (
                 <FadeIn key={ph.src} delay={(i % 2) * 0.06}><GalleryImage {...ph} /></FadeIn>
               ))}
