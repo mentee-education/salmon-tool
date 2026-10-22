@@ -44,7 +44,7 @@ export default function SiteHeader() {
             <img src="https://pub-0317bbc29b454318b7d27ef0bb324c99.r2.dev/brand/salmon-mark.png" alt="" width={40} height={40} style={{ width: 40, height: 40, borderRadius: "50%", display: "block", boxShadow: "0 0 0 1px #e2ddd5" }} />
             <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
               <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800, fontSize: "1.2rem", color: "#9B2335", letterSpacing: "0.02em" }}>SALMON</span>
-              <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6rem", color: "#5f5f58", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 3 }}>Seabird Island Community School</span>
+              <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6875rem", color: "#5f5f58", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 3 }}>Seabird Island Community School</span>
             </span>
           </Link>
 
@@ -60,7 +60,7 @@ export default function SiteHeader() {
                     color: isActive ? "#9B2335" : "#3d3d39", textDecoration: "none",
                     letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s",
                     borderBottom: isActive ? "2px solid #9B2335" : "2px solid transparent",
-                    paddingBottom: 2, whiteSpace: "nowrap",
+                    paddingTop: 3, marginTop: -3, paddingBottom: 2, whiteSpace: "nowrap",
                   }}
                   onMouseEnter={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "#9B2335"; }}
                   onMouseLeave={(e) => { if (!isActive) (e.target as HTMLElement).style.color = "#3d3d39"; }}
@@ -77,7 +77,7 @@ export default function SiteHeader() {
             rel="noopener noreferrer"
             className="hidden lg:inline-block"
             style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: "0.68rem", fontWeight: 700,
+              fontFamily: "'DM Sans', sans-serif", fontSize: "0.6875rem", fontWeight: 700,
               letterSpacing: "0.1em", textTransform: "uppercase",
               background: "#9B2335", color: "#fff", padding: "9px 16px",
               textDecoration: "none", flexShrink: 0, transition: "background 0.2s",

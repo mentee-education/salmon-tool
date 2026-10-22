@@ -8,7 +8,7 @@ export default function SiteFooter() {
         <p className="m-0" style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, color: "#fdfcf9" }}>
           SALMON <span style={{ fontFamily: "'Source Serif 4', serif", fontStyle: "italic", fontSize: 15, color: "rgba(253,252,249,0.78)" }}>&middot; Seabird Island Community School</span>
         </p>
-        <a href="/SALMON-Tool.pdf" target="_blank" rel="noopener noreferrer" className="link-draw inline-flex items-center gap-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: "#f0c4ca" }}>
+        <a href="/SALMON-Tool.pdf" target="_blank" rel="noopener noreferrer" className="link-draw inline-flex items-center gap-2" style={{ paddingTop: 1, marginTop: -1, fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: "#f0c4ca" }}>
           Download the Tool (PDF)
         </a>
       </div>
